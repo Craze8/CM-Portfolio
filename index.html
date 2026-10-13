@@ -40,7 +40,7 @@
 <!-- Fonts — trimmed to weights actually used -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&family=Martian+Mono:wght@400;500&display=swap" rel="stylesheet">
 
 <!-- LCP hints — swap to .webp once converted -->
 <link rel="preload" as="image" href="/hero-bg.png" fetchpriority="high">
@@ -714,6 +714,247 @@
   }
   .work-stat .lbl{font-size:12px; color:var(--ink-muted); letter-spacing:.03em; line-height:1.5;}
 
+  /* ---------- VIBE CODING — BIG SCREEN + VIDEO CARDS ---------- */
+  .vibe{
+    --mono:'Martian Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+    --rec:#e5533d;
+    position:relative; overflow:hidden; isolation:isolate;
+    background:
+      radial-gradient(55% 45% at 88% 0%, rgba(110,147,112,.18), transparent 70%),
+      radial-gradient(45% 40% at 0% 100%, rgba(110,147,112,.10), transparent 70%),
+      var(--dark);
+    color:var(--cream);
+    border-bottom:1px solid var(--line-dark);
+  }
+  .vibe::before{
+    content:""; position:absolute; inset:0; z-index:-1; opacity:.08; pointer-events:none;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .vibe-ghost{
+    position:absolute; z-index:-1; top:30px; right:-3vw;
+    font-family:var(--serif); font-style:italic; font-size:clamp(140px,24vw,380px); line-height:.8;
+    color:transparent; -webkit-text-stroke:1px rgba(243,237,228,.07);
+    white-space:nowrap; pointer-events:none; user-select:none;
+  }
+  .vibe-head{display:grid; grid-template-columns:1.2fr .8fr; gap:56px; align-items:end; margin-bottom:64px;}
+  .vibe-title{font-size:clamp(42px,6.2vw,84px); line-height:.94; letter-spacing:-.03em;}
+  .vibe-title em{display:block; padding-left:.6em; color:var(--sage-light);}
+  .vibe-intro p{font-size:15px; line-height:1.8; color:var(--paper-muted); max-width:420px;}
+  .vibe-intro p b{color:var(--cream); font-weight:600;}
+  .vibe-facts{display:flex; gap:34px; margin-top:28px; padding-top:22px; border-top:1px solid var(--line-dark);}
+  .vibe-facts div{display:flex; flex-direction:column; gap:8px;}
+  .vibe-facts b{font-family:var(--serif); font-weight:400; font-size:32px; line-height:1; color:var(--cream);}
+  .vibe-facts span{font-family:var(--mono); font-size:9.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--paper-muted);}
+
+  /* big screen */
+  .vibe{padding-bottom:100px;}
+  .vibe-monitor{
+    position:relative; padding:14px; border-radius:20px;
+    background:linear-gradient(180deg,#1c1c17,#0e0e0c);
+    border:1px solid rgba(243,237,228,.1);
+    box-shadow:0 70px 120px -60px rgba(0,0,0,.95), 0 0 0 1px rgba(0,0,0,.6), inset 0 1px 0 rgba(243,237,228,.07);
+  }
+  /* recordings carry ~110px of Chrome toolbar on top: a wider frame + cover + bottom anchoring crops it off */
+  .vibe-screen{position:relative; aspect-ratio:1920 / 922; overflow:hidden; border-radius:9px; background:#050505; cursor:pointer;}
+  .vibe-frame{position:absolute; inset:0;}
+  .vibe-frame video{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:50% 100%; transition:opacity .45s ease;}
+  .vibe-screen.is-loading .vibe-frame video{opacity:.15;}
+  .vibe-screen:fullscreen{width:100vw; height:100vh; aspect-ratio:auto; border-radius:0; display:grid; place-items:center; cursor:default;}
+  .vibe-screen:fullscreen .vibe-frame{position:relative; inset:auto; width:min(100vw, calc(100vh * 2.0824)); aspect-ratio:1920 / 922;}
+  .vibe-screen:-webkit-full-screen{width:100vw; height:100vh; aspect-ratio:auto; border-radius:0; display:grid; place-items:center; cursor:default;}
+  .vibe-screen:-webkit-full-screen .vibe-frame{position:relative; inset:auto; width:min(100vw, calc(100vh * 2.0824)); aspect-ratio:1920 / 922;}
+  .vibe-screen::after{
+    content:""; position:absolute; inset:0; pointer-events:none; z-index:1;
+    background:linear-gradient(180deg, rgba(0,0,0,.5), transparent 20%, transparent 78%, rgba(0,0,0,.6));
+  }
+  .vibe-spin{
+    position:absolute; top:50%; left:50%; z-index:2; width:30px; height:30px; margin:-15px 0 0 -15px;
+    border-radius:50%; border:2px solid rgba(243,237,228,.15); border-top-color:var(--sage-light);
+    opacity:0; transition:opacity .3s ease; animation:vibeSpin .9s linear infinite; pointer-events:none;
+  }
+  .vibe-screen.is-loading .vibe-spin{opacity:1;}
+  .vibe-vf i{position:absolute; z-index:2; width:24px; height:24px; border:1.5px solid rgba(243,237,228,.8); pointer-events:none;}
+  .vibe-vf i:nth-child(1){top:14px; left:14px; border-right:0; border-bottom:0;}
+  .vibe-vf i:nth-child(2){top:14px; right:14px; border-left:0; border-bottom:0;}
+  .vibe-vf i:nth-child(3){bottom:14px; left:14px; border-right:0; border-top:0;}
+  .vibe-vf i:nth-child(4){bottom:14px; right:14px; border-left:0; border-top:0;}
+  .vibe-hud{
+    position:absolute; left:0; right:0; z-index:3;
+    display:flex; align-items:center; justify-content:space-between; gap:10px;
+    padding:0 50px; pointer-events:none;
+    font-family:var(--mono); font-size:11px; letter-spacing:.03em;
+  }
+  .vibe-hud.top{top:22px;}
+  .vibe-hud.bottom{bottom:24px; justify-content:flex-end;}
+  .vibe-pill{
+    display:inline-flex; align-items:center; gap:9px; padding:8px 13px; border-radius:7px;
+    background:rgba(8,8,7,.74); border:1px solid rgba(243,237,228,.14);
+    -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px);
+    color:var(--cream); white-space:nowrap;
+  }
+  .vibe-cmd{min-width:0; max-width:72%; overflow:hidden;}
+  .vibe-cmd .ps{color:var(--sage-light); flex:none;}
+  .vibe-cmd #vibeCmd{overflow:hidden; text-overflow:ellipsis;}
+  .vibe-cmd .caret{flex:none; width:7px; height:13px; background:var(--sage-light); animation:vibeBlink 1s steps(1) infinite;}
+  .vibe-rec::before{content:""; width:7px; height:7px; border-radius:50%; background:var(--rec); animation:vibeBlink 1.2s steps(1) infinite;}
+  .vibe.is-paused .vibe-rec::before{animation:none; background:var(--paper-muted);}
+  .vibe-tc{font-variant-numeric:tabular-nums;}
+  .vibe-btn{
+    pointer-events:auto; flex:none; width:40px; height:40px; border-radius:50%;
+    display:grid; place-items:center; cursor:pointer;
+    background:rgba(8,8,7,.74); color:var(--cream); border:1px solid rgba(243,237,228,.24);
+    -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px);
+    transition:transform .25s ease, background .25s ease, color .25s ease, border-color .25s ease;
+  }
+  .vibe-btn:hover{transform:scale(1.08); background:var(--cream); color:#0c130d; border-color:var(--cream);}
+  .vibe-btn svg{width:15px; height:15px;}
+  .vibe-btn.is-main{background:var(--sage-light); color:#0c130d; border-color:var(--sage-light);}
+  .vibe-btn .i-play{display:none; margin-left:2px;}
+  .vibe.is-paused .vibe-btn .i-play{display:block;}
+  .vibe.is-paused .vibe-btn .i-pause{display:none;}
+  .vibe-sbar{position:absolute; left:0; right:0; bottom:0; z-index:3; height:3px; background:rgba(243,237,228,.14);}
+  .vibe-sbar span{display:block; height:100%; width:100%; transform:scaleX(0); transform-origin:left; background:linear-gradient(90deg, var(--sage-dark), var(--sage-light));}
+  @keyframes vibeSpin{to{transform:rotate(360deg);}}
+  @keyframes vibeBlink{50%{opacity:0;}}
+
+  .vibe-caption{
+    position:relative; z-index:4;
+    display:grid; grid-template-columns:auto minmax(0,1fr) auto; align-items:end; gap:30px;
+    padding-left:34px;
+  }
+  .vibe-num{
+    font-family:var(--serif); font-style:italic; font-weight:400;
+    font-size:clamp(110px,14vw,200px); line-height:.74; letter-spacing:-.05em;
+    color:var(--sage-light); margin-top:-.3em;
+    text-shadow:0 18px 40px rgba(0,0,0,.45);
+  }
+  .vibe-name{display:flex; flex-direction:column; gap:12px; padding-bottom:6px; min-width:0;}
+  .vibe-name .tag{font-family:var(--mono); font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--sage-light);}
+  .vibe-name h3{font-size:clamp(28px,3.5vw,50px); line-height:1; letter-spacing:-.02em;}
+  .vibe-nav{display:flex; gap:10px; padding-bottom:6px;}
+  .vibe-nav button{
+    width:54px; height:54px; border-radius:50%; display:grid; place-items:center;
+    background:transparent; color:var(--cream); border:1px solid rgba(243,237,228,.22); cursor:pointer;
+    transition:background .25s ease, border-color .25s ease, color .25s ease, transform .25s ease;
+  }
+  .vibe-nav button:hover{background:var(--sage-light); border-color:var(--sage-light); color:#0c130d; transform:translateY(-2px);}
+  .vibe-nav svg{width:18px; height:18px;}
+  .vibe-caption.swap .vibe-num, .vibe-caption.swap .vibe-name{animation:vibeIn .6s cubic-bezier(.2,.7,.3,1) both;}
+  .vibe-caption.swap .vibe-name{animation-delay:.07s;}
+  @keyframes vibeIn{from{opacity:0; transform:translateY(18px);} to{opacity:1; transform:none;}}
+
+  /* card grid — light band */
+  .vibe-picks{position:relative; background:var(--cream); color:var(--ink);}
+  .vibe-grid-head{display:flex; align-items:flex-end; justify-content:space-between; gap:24px; margin-bottom:34px;}
+  .vibe-grid-head .eyebrow{margin-bottom:16px;}
+  .vibe-grid-title{font-size:clamp(30px,3.6vw,46px); line-height:1.05;}
+  .vibe-grid-hint{font-size:14px; line-height:1.6; color:var(--ink-muted); max-width:340px; text-align:right;}
+  .vibe-grid{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:24px;}
+  .vibe-card{
+    position:relative; display:flex; flex-direction:column; width:100%;
+    padding:10px; border-radius:16px; text-align:left;
+    font:inherit; color:var(--ink); cursor:pointer;
+    background:#fff; border:1px solid var(--line-light);
+    box-shadow:0 16px 36px -30px rgba(23,22,15,.35);
+    transition:transform .35s cubic-bezier(.2,.7,.3,1), border-color .3s ease, box-shadow .35s ease;
+  }
+  .vibe-card:hover{transform:translateY(-5px); border-color:rgba(110,147,112,.45); box-shadow:0 30px 54px -28px rgba(23,22,15,.3);}
+  .vibe-card.is-active{border-color:var(--sage); box-shadow:0 0 0 1px var(--sage), 0 30px 54px -28px rgba(76,107,78,.38);}
+  .vibe-thumb{position:relative; display:block; aspect-ratio:1920 / 922; border-radius:9px; overflow:hidden; background:var(--dark-2);}
+  .vibe-thumb video{
+    position:absolute; inset:0; width:100%; height:100%;
+    object-fit:cover; object-position:50% 100%;
+    filter:saturate(.8) brightness(.94);
+    transition:filter .45s ease, transform .7s cubic-bezier(.2,.7,.3,1);
+  }
+  .vibe-card:hover .vibe-thumb video, .vibe-card.is-active .vibe-thumb video{filter:none;}
+  .vibe-card:hover .vibe-thumb video{transform:scale(1.035);}
+  .vibe-thumb::after{content:""; position:absolute; inset:0; z-index:1; pointer-events:none; background:linear-gradient(180deg, rgba(0,0,0,.35), transparent 34%);}
+  .vibe-badge{
+    position:absolute; top:10px; left:10px; z-index:3;
+    display:inline-flex; align-items:center; gap:7px; padding:6px 10px; border-radius:6px;
+    background:rgba(11,11,10,.78); border:1px solid rgba(243,237,228,.14);
+    -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px);
+    font-family:'Martian Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size:9.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--cream);
+  }
+  .vibe-badge .now{display:none; align-items:center; gap:7px; color:var(--sage-light);}
+  .vibe-card.is-active .vibe-badge .dur{display:none;}
+  .vibe-card.is-active .vibe-badge .now{display:inline-flex;}
+  .vibe-eq{display:inline-flex; align-items:flex-end; gap:2px; height:10px;}
+  .vibe-eq i{width:2px; height:100%; border-radius:1px; background:currentColor; transform-origin:bottom; animation:vibeEq .9s ease-in-out infinite;}
+  .vibe-eq i:nth-child(2){animation-delay:-.3s;}
+  .vibe-eq i:nth-child(3){animation-delay:-.6s;}
+  .vibe-picks.is-paused .vibe-eq i{animation-play-state:paused;}
+  @keyframes vibeEq{0%,100%{transform:scaleY(.3);} 50%{transform:scaleY(1);}}
+  .vibe-watch{
+    position:absolute; left:50%; top:50%; z-index:3; pointer-events:none;
+    display:inline-flex; align-items:center; gap:8px; padding:11px 18px; border-radius:30px;
+    background:var(--sage-light); color:#0c130d; box-shadow:0 10px 24px -10px rgba(0,0,0,.5);
+    font-size:11px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; white-space:nowrap;
+    opacity:0; transform:translate(-50%,-35%); transition:opacity .3s ease, transform .3s ease;
+  }
+  .vibe-watch svg{width:12px; height:12px;}
+  .vibe-card:hover .vibe-watch, .vibe-card:focus-visible .vibe-watch{opacity:1; transform:translate(-50%,-50%);}
+  .vibe-card.is-active .vibe-watch{display:none;}
+  .vibe-thumb .bar{position:absolute; left:0; right:0; bottom:0; z-index:3; height:3px; background:rgba(255,255,255,.2);}
+  .vibe-thumb .bar::after{content:""; position:absolute; inset:0; background:var(--sage-light); transform:scaleX(var(--p,0)); transform-origin:left;}
+  .vibe-card-body{display:grid; grid-template-columns:auto minmax(0,1fr) auto; align-items:center; column-gap:14px; padding:16px 8px 8px;}
+  .vibe-card .no{font-family:var(--serif); font-style:italic; font-size:30px; line-height:1; min-width:38px; color:rgba(23,22,15,.26); transition:color .3s ease;}
+  .vibe-card.is-active .no, .vibe-card:hover .no{color:var(--sage);}
+  .vibe-card .txt{display:flex; flex-direction:column; gap:5px; min-width:0;}
+  .vibe-card .nm{font-family:var(--serif); font-size:19px; line-height:1.2; color:var(--ink);}
+  .vibe-card .loc{font-size:12.5px; line-height:1.45; color:var(--ink-muted);}
+  .vibe-card .go{
+    width:38px; height:38px; border-radius:50%; display:grid; place-items:center;
+    border:1px solid var(--line-light); color:var(--ink);
+    transition:background .3s ease, border-color .3s ease, color .3s ease;
+  }
+  .vibe-card .go svg{width:14px; height:14px; margin-left:2px;}
+  .vibe-card:hover .go, .vibe-card.is-active .go{background:var(--sage); border-color:var(--sage); color:#0c130d;}
+
+  .vibe-cta{
+    display:flex; align-items:center; justify-content:space-between; gap:24px;
+    margin-top:72px; padding-top:34px; border-top:1px solid var(--line-light);
+  }
+  .vibe-cta p{font-family:var(--serif); font-size:clamp(24px,2.6vw,36px); line-height:1.1;}
+
+  @media (max-width:980px){
+    .vibe-head{grid-template-columns:1fr; gap:30px; margin-bottom:48px;}
+    .vibe-monitor{padding:10px; border-radius:16px;}
+    .vibe-hud{padding:0 40px;}
+    .vibe-caption{padding-left:18px; gap:20px;}
+    .vibe-nav button{width:46px; height:46px;}
+    .vibe-grid{grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px;}
+  }
+  @media (max-width:640px){
+    .vibe-grid-head{flex-direction:column; align-items:flex-start; gap:10px;}
+    .vibe-grid-hint{text-align:left;}
+    .vibe-grid{grid-template-columns:minmax(0,1fr);}
+    .vibe-cta{flex-direction:column; align-items:flex-start;}
+  }
+  @media (max-width:560px){
+    .vibe-facts{gap:22px;}
+    .vibe-facts b{font-size:26px;}
+    .vibe{padding-bottom:72px;}
+    .vibe-vf, .vibe-rec{display:none;}
+    .vibe-hud{padding:0 10px; font-size:9px;}
+    .vibe-hud.top{top:10px;}
+    .vibe-hud.bottom{bottom:12px; gap:6px;}
+    .vibe-pill{padding:6px 9px; gap:7px;}
+    .vibe-cmd{max-width:100%;}
+    .vibe-btn{width:32px; height:32px;}
+    .vibe-btn svg{width:13px; height:13px;}
+    .vibe-caption{grid-template-columns:auto minmax(0,1fr); padding-left:8px; gap:14px;}
+    .vibe-num{font-size:92px;}
+    .vibe-name h3{font-size:26px;}
+    .vibe-nav{grid-column:1 / -1; padding-bottom:0;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .vibe-cmd .caret, .vibe-rec::before, .vibe-spin, .vibe-eq i{animation:none;}
+    .vibe-caption.swap .vibe-num, .vibe-caption.swap .vibe-name{animation:none;}
+  }
+
   /* ---------- ABOUT ---------- */
   .about{
     background:
@@ -1221,6 +1462,159 @@
     </div>
   </section>
 
+  <!-- VIBE CODING — BIG SCREEN + VIDEO CARDS -->
+  <section class="vibe is-paused" id="vibe-coding" aria-labelledby="vibeTitle">
+    <span class="vibe-ghost" aria-hidden="true">vibe</span>
+    <div class="wrap">
+      <div class="vibe-head">
+        <div class="reveal">
+          <p class="eyebrow light">Selected Work — Vibe Coding</p>
+          <h2 class="vibe-title" id="vibeTitle">Coded with AI.<em>Finished by hand.</em></h2>
+        </div>
+        <div class="vibe-intro reveal" style="transition-delay:.12s">
+          <p><b>Vibe coding</b> means directing AI to write a site&#8217;s code, then reviewing and polishing every page by hand. No page builder and no template, just custom code. Each video below is a real screen recording of the finished site.</p>
+          <div class="vibe-facts">
+            <div><b>06</b><span>Websites</span></div>
+            <div><b>02:31</b><span>Total watch time</span></div>
+            <div><b>0</b><span>Templates used</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="vibe-stage reveal" id="vibeStage">
+        <div class="vibe-monitor">
+          <div class="vibe-screen" id="vibeScreen">
+            <div class="vibe-frame"><video id="vibeVideo" muted playsinline preload="none" aria-label="Renzo Gracie Des Moines website screen recording"></video></div>
+            <span class="vibe-spin" aria-hidden="true"></span>
+            <span class="vibe-vf" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+            <div class="vibe-hud top" aria-hidden="true">
+              <span class="vibe-pill vibe-cmd"><span class="ps">$ ship</span><span id="vibeCmd">renzo-gracie-des-moines</span><span class="caret"></span></span>
+              <span class="vibe-pill vibe-rec">REC</span>
+            </div>
+            <div class="vibe-hud bottom">
+              <span class="vibe-pill vibe-tc" id="vibeTc" aria-hidden="true">00:00 / 00:27</span>
+              <button class="vibe-btn" id="vibeFs" type="button" aria-label="Full screen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+              <button class="vibe-btn is-main" id="vibeToggle" type="button" aria-label="Play video">
+                <svg class="i-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+                <svg class="i-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
+              </button>
+            </div>
+            <span class="vibe-sbar" aria-hidden="true"><span id="vibeBar"></span></span>
+          </div>
+        </div>
+        <div class="vibe-caption" id="vibeCaption">
+          <span class="vibe-num" id="vibeNum" aria-hidden="true">01</span>
+          <div class="vibe-name">
+            <span class="tag" id="vibeTag">Brazilian Jiu-Jitsu · Des Moines, IA</span>
+            <h3 id="vibeName">Renzo Gracie Des Moines</h3>
+          </div>
+          <div class="vibe-nav">
+            <button type="button" id="vibePrev" aria-label="Previous website"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button>
+            <button type="button" id="vibeNext" aria-label="Next website"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VIBE CODING — BUILD CARDS (light) -->
+  <section class="vibe-picks is-paused" id="vibe-builds" aria-labelledby="vibeGridTitle">
+    <div class="wrap">
+      <div class="vibe-grid-head reveal">
+        <div>
+          <p class="eyebrow">Custom web design</p>
+          <h3 class="vibe-grid-title" id="vibeGridTitle">Six brands, <em>six original designs.</em></h3>
+        </div>
+        <p class="vibe-grid-hint">Built for jiu-jitsu academies, an MMA gym and a yoga studio. Click any card to play it on the big screen.</p>
+      </div>
+      <div class="vibe-grid" id="vibeGrid">
+        <button class="vibe-card reveal" type="button" aria-pressed="true" style="transition-delay:0.00s" data-name="Renzo Gracie Des Moines" data-sector="Brazilian Jiu-Jitsu · Des Moines, IA" data-slug="renzo-gracie-des-moines" data-dur="27.26" data-src="Brazilian%20Jiu-Jitsu%20in%20Des%20Moines%2C%20IA%20_%20Renzo%20Gracie%20Des%20Moines%20-%20Google%20Chrome%202026-10-13%2000-11-08.mp4" aria-label="Play the Renzo Gracie Des Moines walkthrough on the big screen, 0:27">
+          <span class="vibe-thumb">
+            <video muted playsinline loop preload="none" tabindex="-1" aria-hidden="true" data-src="Brazilian%20Jiu-Jitsu%20in%20Des%20Moines%2C%20IA%20_%20Renzo%20Gracie%20Des%20Moines%20-%20Google%20Chrome%202026-10-13%2000-11-08.mp4"></video>
+            <span class="vibe-badge"><span class="dur">0:27</span><span class="now"><span class="vibe-eq"><i></i><i></i><i></i></span>On screen</span></span>
+            <span class="vibe-watch"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Play on big screen</span>
+            <span class="bar"></span>
+          </span>
+          <span class="vibe-card-body">
+            <span class="no" aria-hidden="true">01</span>
+            <span class="txt"><span class="nm">Renzo Gracie Des Moines</span><span class="loc">Brazilian Jiu-Jitsu · Des Moines, IA</span></span>
+            <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
+          </span>
+        </button>
+        <button class="vibe-card reveal" type="button" aria-pressed="false" style="transition-delay:0.07s" data-name="American Top Team Winter Garden" data-sector="BJJ, Muay Thai &amp; MMA · Winter Garden, FL" data-slug="american-top-team-winter-garden" data-dur="20.69" data-src="American%20Top%20Team%20Winter%20Garden%20_%20Brazilian%20Jiu-Jitsu%2C%20Muay%20Thai%20%26%20MMA%20in%20Winter%20Garden%2C%20FL%20-%20Google%20Chrome%202026-10-13%2000-22-05.mp4" aria-label="Play the American Top Team Winter Garden walkthrough on the big screen, 0:21">
+          <span class="vibe-thumb">
+            <video muted playsinline loop preload="none" tabindex="-1" aria-hidden="true" data-src="American%20Top%20Team%20Winter%20Garden%20_%20Brazilian%20Jiu-Jitsu%2C%20Muay%20Thai%20%26%20MMA%20in%20Winter%20Garden%2C%20FL%20-%20Google%20Chrome%202026-10-13%2000-22-05.mp4"></video>
+            <span class="vibe-badge"><span class="dur">0:21</span><span class="now"><span class="vibe-eq"><i></i><i></i><i></i></span>On screen</span></span>
+            <span class="vibe-watch"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Play on big screen</span>
+            <span class="bar"></span>
+          </span>
+          <span class="vibe-card-body">
+            <span class="no" aria-hidden="true">02</span>
+            <span class="txt"><span class="nm">American Top Team Winter Garden</span><span class="loc">BJJ, Muay Thai &amp; MMA · Winter Garden, FL</span></span>
+            <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
+          </span>
+        </button>
+        <button class="vibe-card reveal" type="button" aria-pressed="false" style="transition-delay:0.14s" data-name="Clayton Phillips Jiu Jitsu" data-sector="Jiu Jitsu · Norfolk, VA" data-slug="clayton-phillips-jiu-jitsu" data-dur="34.97" data-src="Jiu%20Jitsu%20in%20Norfolk%2C%20VA%20_%20Clayton%20Phillips%20Jiu%20Jitsu%20-%20Google%20Chrome%202026-10-13%2000-08-35.mp4" aria-label="Play the Clayton Phillips Jiu Jitsu walkthrough on the big screen, 0:35">
+          <span class="vibe-thumb">
+            <video muted playsinline loop preload="none" tabindex="-1" aria-hidden="true" data-src="Jiu%20Jitsu%20in%20Norfolk%2C%20VA%20_%20Clayton%20Phillips%20Jiu%20Jitsu%20-%20Google%20Chrome%202026-10-13%2000-08-35.mp4"></video>
+            <span class="vibe-badge"><span class="dur">0:35</span><span class="now"><span class="vibe-eq"><i></i><i></i><i></i></span>On screen</span></span>
+            <span class="vibe-watch"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Play on big screen</span>
+            <span class="bar"></span>
+          </span>
+          <span class="vibe-card-body">
+            <span class="no" aria-hidden="true">03</span>
+            <span class="txt"><span class="nm">Clayton Phillips Jiu Jitsu</span><span class="loc">Jiu Jitsu · Norfolk, VA</span></span>
+            <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
+          </span>
+        </button>
+        <button class="vibe-card reveal" type="button" aria-pressed="false" style="transition-delay:0.00s" data-name="Espiritu Jiu-Jitsu" data-sector="Brazilian Jiu-Jitsu · Oxnard, CA" data-slug="espiritu-jiu-jitsu" data-dur="21.42" data-src="Espiritu%20Jiu-Jitsu%20_%20Brazilian%20Jiu-Jitsu%20in%20Oxnard%2C%20CA%20-%20Google%20Chrome%202026-10-13%2000-14-48.mp4" aria-label="Play the Espiritu Jiu-Jitsu walkthrough on the big screen, 0:21">
+          <span class="vibe-thumb">
+            <video muted playsinline loop preload="none" tabindex="-1" aria-hidden="true" data-src="Espiritu%20Jiu-Jitsu%20_%20Brazilian%20Jiu-Jitsu%20in%20Oxnard%2C%20CA%20-%20Google%20Chrome%202026-10-13%2000-14-48.mp4"></video>
+            <span class="vibe-badge"><span class="dur">0:21</span><span class="now"><span class="vibe-eq"><i></i><i></i><i></i></span>On screen</span></span>
+            <span class="vibe-watch"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Play on big screen</span>
+            <span class="bar"></span>
+          </span>
+          <span class="vibe-card-body">
+            <span class="no" aria-hidden="true">04</span>
+            <span class="txt"><span class="nm">Espiritu Jiu-Jitsu</span><span class="loc">Brazilian Jiu-Jitsu · Oxnard, CA</span></span>
+            <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
+          </span>
+        </button>
+        <button class="vibe-card reveal" type="button" aria-pressed="false" style="transition-delay:0.07s" data-name="Sentry Jiu-Jitsu" data-sector="Brazilian Jiu-Jitsu · Gilbertsville, PA" data-slug="sentry-jiu-jitsu" data-dur="21.22" data-src="Brazilian%20Jiu-Jitsu%20in%20Gilbertsville%2C%20PA%20_%20Sentry%20Jiu-Jitsu%20-%20Google%20Chrome%202026-10-13%2000-19-45.mp4" aria-label="Play the Sentry Jiu-Jitsu walkthrough on the big screen, 0:21">
+          <span class="vibe-thumb">
+            <video muted playsinline loop preload="none" tabindex="-1" aria-hidden="true" data-src="Brazilian%20Jiu-Jitsu%20in%20Gilbertsville%2C%20PA%20_%20Sentry%20Jiu-Jitsu%20-%20Google%20Chrome%202026-10-13%2000-19-45.mp4"></video>
+            <span class="vibe-badge"><span class="dur">0:21</span><span class="now"><span class="vibe-eq"><i></i><i></i><i></i></span>On screen</span></span>
+            <span class="vibe-watch"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Play on big screen</span>
+            <span class="bar"></span>
+          </span>
+          <span class="vibe-card-body">
+            <span class="no" aria-hidden="true">05</span>
+            <span class="txt"><span class="nm">Sentry Jiu-Jitsu</span><span class="loc">Brazilian Jiu-Jitsu · Gilbertsville, PA</span></span>
+            <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
+          </span>
+        </button>
+        <button class="vibe-card reveal" type="button" aria-pressed="false" style="transition-delay:0.14s" data-name="Palm Yoga" data-sector="Yoga Studio · Carrollwood, Tampa, FL" data-slug="palm-yoga" data-dur="25.76" data-src="Palm%20Yoga%20_%20Alignment-First%20Yoga%20Studio%20in%20Carrollwood%2C%20Tampa%20FL%20-%20Google%20Chrome%202026-10-13%2000-09-27.mp4" aria-label="Play the Palm Yoga walkthrough on the big screen, 0:26">
+          <span class="vibe-thumb">
+            <video muted playsinline loop preload="none" tabindex="-1" aria-hidden="true" data-src="Palm%20Yoga%20_%20Alignment-First%20Yoga%20Studio%20in%20Carrollwood%2C%20Tampa%20FL%20-%20Google%20Chrome%202026-10-13%2000-09-27.mp4"></video>
+            <span class="vibe-badge"><span class="dur">0:26</span><span class="now"><span class="vibe-eq"><i></i><i></i><i></i></span>On screen</span></span>
+            <span class="vibe-watch"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Play on big screen</span>
+            <span class="bar"></span>
+          </span>
+          <span class="vibe-card-body">
+            <span class="no" aria-hidden="true">06</span>
+            <span class="txt"><span class="nm">Palm Yoga</span><span class="loc">Yoga Studio · Carrollwood, Tampa, FL</span></span>
+            <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
+          </span>
+        </button>
+      </div>
+
+      <div class="vibe-cta reveal">
+        <p>Want a custom-coded site <em>like these?</em></p>
+        <a href="#contact" class="btn btn-solid">Start a Project <span class="arrow">&#8594;</span></a>
+      </div>
+    </div>
+  </section>
+
   <!-- ABOUT -->
   <section class="about" id="about">
     <div class="wrap about-grid">
@@ -1689,6 +2083,126 @@
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
   }, { threshold: 0.12 });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+<script>
+/* vibe-coding: big screen plays the selected card; cards show a still frame and preview on hover */
+(() => {
+  const $ = (id) => document.getElementById(id);
+  const sec = $('vibe-coding'), picks = $('vibe-builds'), grid = $('vibeGrid'), stage = $('vibeStage');
+  if (!sec || !grid || !stage) return;
+  const video = $('vibeVideo'), screen = $('vibeScreen'), toggle = $('vibeToggle'), fsBtn = $('vibeFs');
+  const bar = $('vibeBar'), tc = $('vibeTc'), cmd = $('vibeCmd'), num = $('vibeNum'), nameEl = $('vibeName'), tagEl = $('vibeTag'), cap = $('vibeCaption');
+  const cards = Array.from(grid.querySelectorAll('.vibe-card'));
+  const thumbs = cards.map((c) => c.querySelector('video'));
+  const n = cards.length;
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  const pad = (x) => String(x).padStart(2, '0');
+  const fmt = (s) => { s = Math.max(0, Math.floor(s || 0)); return pad(Math.floor(s / 60)) + ':' + pad(s % 60); };
+  let current = -1, inView = false, userPaused = reduce, raf = 0, typeT = 0, hoverT = 0;
+  video.muted = true;
+
+  const setPaused = (p) => { sec.classList.toggle('is-paused', p); if (picks) picks.classList.toggle('is-paused', p); toggle.setAttribute('aria-label', p ? 'Play video' : 'Pause video'); };
+  const paint = () => {
+    const c = cards[current]; if (!c) return;
+    const d = video.duration || +c.dataset.dur || 0, p = d ? Math.min(video.currentTime / d, 1) : 0;
+    bar.style.transform = 'scaleX(' + p + ')';
+    tc.textContent = fmt(video.currentTime) + ' / ' + fmt(d);
+    c.style.setProperty('--p', p);
+  };
+  const tick = () => { paint(); raf = requestAnimationFrame(tick); };
+  const type = (text) => {
+    clearInterval(typeT);
+    if (reduce) { cmd.textContent = text; return; }
+    let i = 0; cmd.textContent = '';
+    typeT = setInterval(() => { cmd.textContent = text.slice(0, ++i); if (i >= text.length) clearInterval(typeT); }, 24);
+  };
+  const tryPlay = () => {
+    if (userPaused || !inView) return;
+    const pr = video.play();
+    if (pr && pr.catch) pr.catch(() => { screen.classList.remove('is-loading'); setPaused(true); });
+  };
+  const attachThumbs = () => thumbs.forEach((v) => {
+    if (!v.getAttribute('src')) { v.muted = true; v.preload = 'metadata'; v.src = v.dataset.src + '#t=0.1'; }
+  });
+  const stopPreview = (i) => { const v = thumbs[i]; if (!v) return; v.pause(); try { v.currentTime = 0.1; } catch (e) {} };
+
+  const load = (i) => {
+    i = (i + n) % n;
+    cards.forEach((c, k) => { c.classList.toggle('is-active', k === i); c.setAttribute('aria-pressed', k === i ? 'true' : 'false'); c.style.setProperty('--p', 0); });
+    stopPreview(i);
+    current = i;
+    const c = cards[i];
+    num.textContent = pad(i + 1);
+    nameEl.textContent = c.dataset.name;
+    tagEl.textContent = c.dataset.sector;
+    cap.classList.remove('swap'); void cap.offsetWidth; cap.classList.add('swap');
+    type(c.dataset.slug);
+    video.setAttribute('aria-label', c.dataset.name + ' website screen recording');
+    video.preload = 'auto';
+    video.src = c.dataset.src;
+    if (!userPaused && inView) screen.classList.add('is-loading');
+    paint();
+    tryPlay();
+  };
+  const showStage = () => {
+    const r = screen.getBoundingClientRect(), vh = window.innerHeight;
+    if (r.top >= 70 && r.bottom <= vh) return;
+    window.scrollTo({ top: window.scrollY + r.top - Math.max(90, (vh - r.height) / 2), behavior: reduce ? 'auto' : 'smooth' });
+  };
+
+  video.addEventListener('loadeddata', () => { screen.classList.remove('is-loading'); paint(); });
+  video.addEventListener('error', () => screen.classList.remove('is-loading'));
+  video.addEventListener('play', () => { setPaused(false); cancelAnimationFrame(raf); raf = requestAnimationFrame(tick); });
+  video.addEventListener('pause', () => { setPaused(true); cancelAnimationFrame(raf); paint(); });
+  video.addEventListener('ended', () => load(current + 1));
+
+  const togglePlay = () => {
+    inView = true;
+    if (current < 0) { userPaused = false; load(0); return; }
+    if (video.paused) { userPaused = false; tryPlay(); }
+    else { userPaused = true; video.pause(); }
+  };
+  const go = (i) => { userPaused = false; inView = true; load(i); };
+  toggle.addEventListener('click', (e) => { e.stopPropagation(); togglePlay(); });
+  screen.addEventListener('click', togglePlay);
+  $('vibePrev').addEventListener('click', () => go(current - 1));
+  $('vibeNext').addEventListener('click', () => go(current + 1));
+
+  const fsEl = () => document.fullscreenElement || document.webkitFullscreenElement;
+  fsBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (fsEl()) { (document.exitFullscreen || document.webkitExitFullscreen).call(document); return; }
+    if (screen.requestFullscreen) screen.requestFullscreen();
+    else if (screen.webkitRequestFullscreen) screen.webkitRequestFullscreen();
+    else if (video.webkitEnterFullscreen) video.webkitEnterFullscreen();
+  });
+
+  cards.forEach((c, i) => {
+    c.addEventListener('click', () => {
+      clearTimeout(hoverT); stopPreview(i);
+      if (i === current) { userPaused = false; inView = true; tryPlay(); }
+      else go(i);
+      showStage();
+    });
+    if (canHover && !reduce) {
+      c.addEventListener('mouseenter', () => {
+        clearTimeout(hoverT);
+        if (i === current) return;
+        hoverT = setTimeout(() => { attachThumbs(); const pr = thumbs[i].play(); if (pr && pr.catch) pr.catch(() => {}); }, 150);
+      });
+      c.addEventListener('mouseleave', () => { clearTimeout(hoverT); stopPreview(i); });
+    }
+  });
+
+  new IntersectionObserver(([e]) => { if (e.isIntersecting) attachThumbs(); }, { rootMargin: '600px 0px' }).observe(grid);
+  new IntersectionObserver(([e]) => {
+    inView = e.isIntersecting;
+    if (inView) { if (current < 0) load(0); else tryPlay(); }
+    else if (!video.paused) video.pause();
+  }, { threshold: 0.35 }).observe(screen);
+})();
 </script>
 
 </body>
