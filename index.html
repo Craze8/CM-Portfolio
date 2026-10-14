@@ -423,20 +423,34 @@
   /* iris-reveal full-screen mobile overlay */
   .mobile-menu{
     position:fixed; inset:0; z-index:120; pointer-events:auto;
-    background:
-      radial-gradient(ellipse 700px 420px at 85% 0%, rgba(110,147,112,.16), transparent 60%),
-      var(--dark);
     display:flex; flex-direction:column; justify-content:flex-start; overflow-y:auto;
+    overscroll-behavior:contain; isolation:isolate;
     padding:118px 32px 40px;
-    --ix:calc(100% - 46px); --iy:40px; --ir:0px;
-    clip-path:circle(var(--ir) at var(--ix) var(--iy));
+    --ix:calc(100vw - 46px); --iy:40px; --is:60;
     visibility:hidden;
-    transition:clip-path .6s cubic-bezier(.65,0,.35,1), visibility 0s linear .6s;
+    transition:visibility 0s linear .55s;
   }
-  .mobile-menu.open{
-    visibility:visible;
-    transition:clip-path .6s cubic-bezier(.65,0,.35,1), visibility 0s linear 0s;
+  /* the iris: a small circle scaled up on the GPU (an animated clip-path repaints the whole screen every frame on phones) */
+  .mobile-menu::before{
+    content:""; position:fixed; z-index:-2; pointer-events:none;
+    left:var(--ix); top:var(--iy); width:40px; height:40px; margin:-20px 0 0 -20px;
+    border-radius:50%; background:var(--dark);
+    transform:scale(0); transition:transform .55s cubic-bezier(.65,0,.35,1);
   }
+  .mobile-menu::after{
+    content:""; position:fixed; inset:0; z-index:-1; pointer-events:none;
+    background:radial-gradient(ellipse 700px 420px at 85% 0%, rgba(110,147,112,.16), transparent 60%);
+    opacity:0; transition:opacity .3s ease;
+  }
+  .mobile-menu.open{visibility:visible; transition:visibility 0s linear 0s;}
+  .mobile-menu.open::before{transform:scale(var(--is));}
+  .mobile-menu.open::after{opacity:1; transition:opacity .5s ease .2s;}
+  /* while the menu is open: no header blur to recompute, and nothing animating behind it */
+  html.menu-open .navbar{-webkit-backdrop-filter:none; backdrop-filter:none; background:rgba(14,15,12,.94);}
+  html.menu-open .hero-badges, html.menu-open .hero-orbit, html.menu-open .hero-orbit-spin,
+  html.menu-open .badge-avail .dot::after, html.menu-open .orbit-core::before,
+  html.menu-open .ticker-track, html.menu-open .vibe-eq i, html.menu-open .vibe-cmd .caret,
+  html.menu-open .vibe-rec::before{animation-play-state:paused;}
   .mm-top{
     display:flex; align-items:center; justify-content:space-between; gap:16px;
     margin-bottom:22px;
@@ -1952,10 +1966,14 @@
       const radius = Math.hypot(Math.max(cx, window.innerWidth - cx), Math.max(cy, window.innerHeight - cy));
       mobileMenu.style.setProperty('--ix', cx + 'px');
       mobileMenu.style.setProperty('--iy', cy + 'px');
-      mobileMenu.style.setProperty('--ir', radius + 'px');
-    } else {
-      mobileMenu.style.setProperty('--ir', '0px');
+      mobileMenu.style.setProperty('--is', Math.ceil(radius / 20) + 1);   // 40px circle scaled to cover the screen
     }
+    document.documentElement.classList.toggle('menu-open', open);
+    // pause any video playing behind the menu; resume it when the menu closes
+    document.querySelectorAll('video').forEach((v) => {
+      if (open && !v.paused) { v.dataset.menuPaused = '1'; v.pause(); }
+      else if (!open && v.dataset.menuPaused) { delete v.dataset.menuPaused; const pr = v.play(); if (pr && pr.catch) pr.catch(() => {}); }
+    });
     burger.classList.toggle('open', open);
     mobileMenu.classList.toggle('open', open);
     burger.setAttribute('aria-expanded', open);
