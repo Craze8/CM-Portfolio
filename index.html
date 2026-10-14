@@ -45,8 +45,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&family=Martian+Mono:wght@400;500&display=swap" rel="stylesheet">
 
 <!-- LCP hints — swap to .webp once converted -->
-<link rel="preload" as="image" href="/hero-bg.png" fetchpriority="high">
-<link rel="preload" as="image" href="/portrait.png" fetchpriority="high">
+<link rel="preload" as="image" href="hero-bg.webp" type="image/webp" fetchpriority="high">
+<link rel="preload" as="image" href="portrait.webp" type="image/webp" fetchpriority="high">
 
 <!-- ===== Structured data (@graph: Person + Service entity + WebSite + FAQPage + portfolio) ===== -->
 <script type="application/ld+json">
@@ -58,7 +58,7 @@
       "@id": "https://cportfolio2.vercel.app/#carl",
       "name": "Carl Madelo",
       "url": "https://cportfolio2.vercel.app/",
-      "image": "https://cportfolio2.vercel.app/portrait.png",
+      "image": "https://cportfolio2.vercel.app/portrait.webp",
       "jobTitle": "Duda Web Designer & Developer",
       "email": "carlflorencemadelo@gmail.com",
       "knowsAbout": [
@@ -516,7 +516,7 @@
   .hero{
     background:
       linear-gradient(rgba(11,11,10,.38), rgba(11,11,10,.80)),
-      url('/hero-bg.png') center/cover no-repeat,
+      url('hero-bg.webp') center/cover no-repeat,
       var(--dark);
     color:var(--cream); position:relative; overflow:hidden;
     display:flex; flex-direction:column;
@@ -961,7 +961,7 @@
   .about{
     background:
       linear-gradient(rgba(17,17,16,.30), rgba(17,17,16,.22)),
-      url('/about-bg.png') center/cover no-repeat,
+      url('about-bg.webp') center/cover no-repeat,
       var(--dark-2);
     color:var(--cream); position:relative;
   }
@@ -1187,7 +1187,7 @@
   .cta{
     background:
       linear-gradient(rgba(11,11,10,.10), rgba(11,11,10,.45)),
-      url('/cta-bg.png') center/cover no-repeat,
+      url('cta-bg.webp') center/cover no-repeat,
       var(--dark);
     color:var(--cream); position:relative; overflow:hidden;
   }
@@ -1369,7 +1369,7 @@
   <section class="hero" id="home" style="padding-bottom:0;">
     <div class="hero-portrait">
       <img class="portrait-img"
-           src="/portrait.png"
+           src="portrait.webp"
            alt="Carl Madelo, Certified Duda Professional and web developer"
            width="1200" height="1500"
            fetchpriority="high" decoding="async">
@@ -1423,7 +1423,7 @@
       <div class="work-grid" id="workGrid">
         <article class="work-card reveal">
           <a class="work-thumb fit-whole" href="https://www.drivewaysbicester.co.uk/" target="_blank" rel="noopener" aria-label="View the Driveways Bicester website (opens in a new tab)">
-            <img class="work-shot" src="/drivewaysbicester.png" alt="Driveways Bicester Duda website homepage" loading="lazy" decoding="async">
+            <img class="work-shot" src="drivewaysbicester.webp" alt="Driveways Bicester Duda website homepage" loading="lazy" decoding="async">
             <span class="work-view"><span>View Live Site &#8594;</span></span>
           </a>
           <div class="work-body">
@@ -1434,7 +1434,7 @@
 
         <article class="work-card reveal">
           <a class="work-thumb" href="https://www.cube21.co.uk/" target="_blank" rel="noopener" aria-label="View the Cube 21 website (opens in a new tab)">
-            <img class="work-shot" src="/cube21.png" alt="Cube 21 Duda website homepage" loading="lazy" decoding="async">
+            <img class="work-shot" src="cube21.webp" alt="Cube 21 Duda website homepage" loading="lazy" decoding="async">
             <span class="work-view"><span>View Live Site &#8594;</span></span>
           </a>
           <div class="work-body">
@@ -1445,7 +1445,7 @@
 
         <article class="work-card reveal">
           <a class="work-thumb" href="https://www.szclassichomes.com/" target="_blank" rel="noopener" aria-label="View the SZ Classic Homes website (opens in a new tab)">
-            <img class="work-shot" src="/szclassic.png" alt="SZ Classic Homes Duda website homepage" loading="lazy" decoding="async">
+            <img class="work-shot" src="szclassic.webp" alt="SZ Classic Homes Duda website homepage" loading="lazy" decoding="async">
             <span class="work-view"><span>View Live Site &#8594;</span></span>
           </a>
           <div class="work-body">
@@ -1486,15 +1486,15 @@
       <div class="vibe-stage reveal" id="vibeStage">
         <div class="vibe-monitor">
           <div class="vibe-screen" id="vibeScreen">
-            <div class="vibe-frame"><video id="vibeVideo" muted playsinline preload="none" aria-label="Renzo Gracie Des Moines website screen recording"></video></div>
+            <div class="vibe-frame"><video id="vibeVideo" muted playsinline preload="none" poster="clayton-phillips-jiu-jitsu.webp" aria-label="Clayton Phillips Jiu Jitsu website screen recording"></video></div>
             <span class="vibe-spin" aria-hidden="true"></span>
             <span class="vibe-vf" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
             <div class="vibe-hud top" aria-hidden="true">
-              <span class="vibe-pill vibe-cmd"><span class="ps">$ ship</span><span id="vibeCmd">renzo-gracie-des-moines</span><span class="caret"></span></span>
+              <span class="vibe-pill vibe-cmd"><span class="ps">$ ship</span><span id="vibeCmd">clayton-phillips-jiu-jitsu</span><span class="caret"></span></span>
               <span class="vibe-pill vibe-rec">REC</span>
             </div>
             <div class="vibe-hud bottom">
-              <span class="vibe-pill vibe-tc" id="vibeTc" aria-hidden="true">00:00 / 00:27</span>
+              <span class="vibe-pill vibe-tc" id="vibeTc" aria-hidden="true">00:00 / 00:35</span>
               <button class="vibe-btn" id="vibeFs" type="button" aria-label="Full screen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
               <button class="vibe-btn is-main" id="vibeToggle" type="button" aria-label="Play video">
                 <svg class="i-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
@@ -1507,8 +1507,8 @@
         <div class="vibe-caption" id="vibeCaption">
           <span class="vibe-num" id="vibeNum" aria-hidden="true">01</span>
           <div class="vibe-name">
-            <span class="tag" id="vibeTag">Brazilian Jiu-Jitsu · Des Moines, IA</span>
-            <h3 id="vibeName">Renzo Gracie Des Moines</h3>
+            <span class="tag" id="vibeTag">Jiu Jitsu · Norfolk, VA</span>
+            <h3 id="vibeName">Clayton Phillips Jiu Jitsu</h3>
           </div>
           <div class="vibe-nav">
             <button type="button" id="vibePrev" aria-label="Previous website"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button>
@@ -1530,48 +1530,48 @@
         <p class="vibe-grid-hint">Built for jiu-jitsu academies, an MMA gym and a yoga studio. Click any card to play it on the big screen.</p>
       </div>
       <div class="vibe-grid" id="vibeGrid">
-        <button class="vibe-card reveal" type="button" aria-pressed="true" style="transition-delay:0.00s" data-name="Renzo Gracie Des Moines" data-sector="Brazilian Jiu-Jitsu · Des Moines, IA" data-slug="renzo-gracie-des-moines" data-dur="27.26" data-src="Brazilian%20Jiu-Jitsu%20in%20Des%20Moines%2C%20IA%20_%20Renzo%20Gracie%20Des%20Moines%20-%20Google%20Chrome%202026-10-13%2000-11-08.mp4" aria-label="Play the Renzo Gracie Des Moines walkthrough on the big screen, 0:27">
+        <button class="vibe-card reveal" type="button" aria-pressed="true" style="transition-delay:0.00s" data-name="Clayton Phillips Jiu Jitsu" data-sector="Jiu Jitsu · Norfolk, VA" data-slug="clayton-phillips-jiu-jitsu" data-dur="34.97" data-src="clayton-phillips-jiu-jitsu.mp4" data-poster="clayton-phillips-jiu-jitsu.webp" aria-label="Play the Clayton Phillips Jiu Jitsu walkthrough on the big screen, 0:35">
           <span class="vibe-thumb">
-            <video muted playsinline loop preload="none" tabindex="-1" aria-hidden="true" data-src="Brazilian%20Jiu-Jitsu%20in%20Des%20Moines%2C%20IA%20_%20Renzo%20Gracie%20Des%20Moines%20-%20Google%20Chrome%202026-10-13%2000-11-08.mp4"></video>
-            <span class="vibe-badge"><span class="dur">0:27</span><span class="now"><span class="vibe-eq"><i></i><i></i><i></i></span>On screen</span></span>
-            <span class="vibe-watch"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Play on big screen</span>
-            <span class="bar"></span>
-          </span>
-          <span class="vibe-card-body">
-            <span class="no" aria-hidden="true">01</span>
-            <span class="txt"><span class="nm">Renzo Gracie Des Moines</span><span class="loc">Brazilian Jiu-Jitsu · Des Moines, IA</span></span>
-            <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
-          </span>
-        </button>
-        <button class="vibe-card reveal" type="button" aria-pressed="false" style="transition-delay:0.07s" data-name="American Top Team Winter Garden" data-sector="BJJ, Muay Thai &amp; MMA · Winter Garden, FL" data-slug="american-top-team-winter-garden" data-dur="20.69" data-src="American%20Top%20Team%20Winter%20Garden%20_%20Brazilian%20Jiu-Jitsu%2C%20Muay%20Thai%20%26%20MMA%20in%20Winter%20Garden%2C%20FL%20-%20Google%20Chrome%202026-10-13%2000-22-05.mp4" aria-label="Play the American Top Team Winter Garden walkthrough on the big screen, 0:21">
-          <span class="vibe-thumb">
-            <video muted playsinline loop preload="none" tabindex="-1" aria-hidden="true" data-src="American%20Top%20Team%20Winter%20Garden%20_%20Brazilian%20Jiu-Jitsu%2C%20Muay%20Thai%20%26%20MMA%20in%20Winter%20Garden%2C%20FL%20-%20Google%20Chrome%202026-10-13%2000-22-05.mp4"></video>
-            <span class="vibe-badge"><span class="dur">0:21</span><span class="now"><span class="vibe-eq"><i></i><i></i><i></i></span>On screen</span></span>
-            <span class="vibe-watch"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Play on big screen</span>
-            <span class="bar"></span>
-          </span>
-          <span class="vibe-card-body">
-            <span class="no" aria-hidden="true">02</span>
-            <span class="txt"><span class="nm">American Top Team Winter Garden</span><span class="loc">BJJ, Muay Thai &amp; MMA · Winter Garden, FL</span></span>
-            <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
-          </span>
-        </button>
-        <button class="vibe-card reveal" type="button" aria-pressed="false" style="transition-delay:0.14s" data-name="Clayton Phillips Jiu Jitsu" data-sector="Jiu Jitsu · Norfolk, VA" data-slug="clayton-phillips-jiu-jitsu" data-dur="34.97" data-src="Jiu%20Jitsu%20in%20Norfolk%2C%20VA%20_%20Clayton%20Phillips%20Jiu%20Jitsu%20-%20Google%20Chrome%202026-10-13%2000-08-35.mp4" aria-label="Play the Clayton Phillips Jiu Jitsu walkthrough on the big screen, 0:35">
-          <span class="vibe-thumb">
-            <video muted playsinline loop preload="none" tabindex="-1" aria-hidden="true" data-src="Jiu%20Jitsu%20in%20Norfolk%2C%20VA%20_%20Clayton%20Phillips%20Jiu%20Jitsu%20-%20Google%20Chrome%202026-10-13%2000-08-35.mp4"></video>
+            <video muted playsinline loop preload="none" tabindex="-1" aria-hidden="true" poster="clayton-phillips-jiu-jitsu.webp" data-src="clayton-phillips-jiu-jitsu.mp4"></video>
             <span class="vibe-badge"><span class="dur">0:35</span><span class="now"><span class="vibe-eq"><i></i><i></i><i></i></span>On screen</span></span>
             <span class="vibe-watch"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Play on big screen</span>
             <span class="bar"></span>
           </span>
           <span class="vibe-card-body">
-            <span class="no" aria-hidden="true">03</span>
+            <span class="no" aria-hidden="true">01</span>
             <span class="txt"><span class="nm">Clayton Phillips Jiu Jitsu</span><span class="loc">Jiu Jitsu · Norfolk, VA</span></span>
             <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
           </span>
         </button>
-        <button class="vibe-card reveal" type="button" aria-pressed="false" style="transition-delay:0.00s" data-name="Espiritu Jiu-Jitsu" data-sector="Brazilian Jiu-Jitsu · Oxnard, CA" data-slug="espiritu-jiu-jitsu" data-dur="21.42" data-src="Espiritu%20Jiu-Jitsu%20_%20Brazilian%20Jiu-Jitsu%20in%20Oxnard%2C%20CA%20-%20Google%20Chrome%202026-10-13%2000-14-48.mp4" aria-label="Play the Espiritu Jiu-Jitsu walkthrough on the big screen, 0:21">
+        <button class="vibe-card reveal" type="button" aria-pressed="false" style="transition-delay:0.07s" data-name="Renzo Gracie Des Moines" data-sector="Brazilian Jiu-Jitsu · Des Moines, IA" data-slug="renzo-gracie-des-moines" data-dur="27.26" data-src="renzo-gracie-des-moines.mp4" data-poster="renzo-gracie-des-moines.webp" aria-label="Play the Renzo Gracie Des Moines walkthrough on the big screen, 0:27">
           <span class="vibe-thumb">
-            <video muted playsinline loop preload="none" tabindex="-1" aria-hidden="true" data-src="Espiritu%20Jiu-Jitsu%20_%20Brazilian%20Jiu-Jitsu%20in%20Oxnard%2C%20CA%20-%20Google%20Chrome%202026-10-13%2000-14-48.mp4"></video>
+            <video muted playsinline loop preload="none" tabindex="-1" aria-hidden="true" poster="renzo-gracie-des-moines.webp" data-src="renzo-gracie-des-moines.mp4"></video>
+            <span class="vibe-badge"><span class="dur">0:27</span><span class="now"><span class="vibe-eq"><i></i><i></i><i></i></span>On screen</span></span>
+            <span class="vibe-watch"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Play on big screen</span>
+            <span class="bar"></span>
+          </span>
+          <span class="vibe-card-body">
+            <span class="no" aria-hidden="true">02</span>
+            <span class="txt"><span class="nm">Renzo Gracie Des Moines</span><span class="loc">Brazilian Jiu-Jitsu · Des Moines, IA</span></span>
+            <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
+          </span>
+        </button>
+        <button class="vibe-card reveal" type="button" aria-pressed="false" style="transition-delay:0.14s" data-name="American Top Team Winter Garden" data-sector="BJJ, Muay Thai &amp; MMA · Winter Garden, FL" data-slug="american-top-team-winter-garden" data-dur="20.69" data-src="american-top-team-winter-garden.mp4" data-poster="american-top-team-winter-garden.webp" aria-label="Play the American Top Team Winter Garden walkthrough on the big screen, 0:21">
+          <span class="vibe-thumb">
+            <video muted playsinline loop preload="none" tabindex="-1" aria-hidden="true" poster="american-top-team-winter-garden.webp" data-src="american-top-team-winter-garden.mp4"></video>
+            <span class="vibe-badge"><span class="dur">0:21</span><span class="now"><span class="vibe-eq"><i></i><i></i><i></i></span>On screen</span></span>
+            <span class="vibe-watch"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Play on big screen</span>
+            <span class="bar"></span>
+          </span>
+          <span class="vibe-card-body">
+            <span class="no" aria-hidden="true">03</span>
+            <span class="txt"><span class="nm">American Top Team Winter Garden</span><span class="loc">BJJ, Muay Thai &amp; MMA · Winter Garden, FL</span></span>
+            <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
+          </span>
+        </button>
+        <button class="vibe-card reveal" type="button" aria-pressed="false" style="transition-delay:0.00s" data-name="Espiritu Jiu-Jitsu" data-sector="Brazilian Jiu-Jitsu · Oxnard, CA" data-slug="espiritu-jiu-jitsu" data-dur="21.42" data-src="espiritu-jiu-jitsu.mp4" data-poster="espiritu-jiu-jitsu.webp" aria-label="Play the Espiritu Jiu-Jitsu walkthrough on the big screen, 0:21">
+          <span class="vibe-thumb">
+            <video muted playsinline loop preload="none" tabindex="-1" aria-hidden="true" poster="espiritu-jiu-jitsu.webp" data-src="espiritu-jiu-jitsu.mp4"></video>
             <span class="vibe-badge"><span class="dur">0:21</span><span class="now"><span class="vibe-eq"><i></i><i></i><i></i></span>On screen</span></span>
             <span class="vibe-watch"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Play on big screen</span>
             <span class="bar"></span>
@@ -1582,9 +1582,9 @@
             <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
           </span>
         </button>
-        <button class="vibe-card reveal" type="button" aria-pressed="false" style="transition-delay:0.07s" data-name="Sentry Jiu-Jitsu" data-sector="Brazilian Jiu-Jitsu · Gilbertsville, PA" data-slug="sentry-jiu-jitsu" data-dur="21.22" data-src="Brazilian%20Jiu-Jitsu%20in%20Gilbertsville%2C%20PA%20_%20Sentry%20Jiu-Jitsu%20-%20Google%20Chrome%202026-10-13%2000-19-45.mp4" aria-label="Play the Sentry Jiu-Jitsu walkthrough on the big screen, 0:21">
+        <button class="vibe-card reveal" type="button" aria-pressed="false" style="transition-delay:0.07s" data-name="Sentry Jiu-Jitsu" data-sector="Brazilian Jiu-Jitsu · Gilbertsville, PA" data-slug="sentry-jiu-jitsu" data-dur="21.22" data-src="sentry-jiu-jitsu.mp4" data-poster="sentry-jiu-jitsu.webp" aria-label="Play the Sentry Jiu-Jitsu walkthrough on the big screen, 0:21">
           <span class="vibe-thumb">
-            <video muted playsinline loop preload="none" tabindex="-1" aria-hidden="true" data-src="Brazilian%20Jiu-Jitsu%20in%20Gilbertsville%2C%20PA%20_%20Sentry%20Jiu-Jitsu%20-%20Google%20Chrome%202026-10-13%2000-19-45.mp4"></video>
+            <video muted playsinline loop preload="none" tabindex="-1" aria-hidden="true" poster="sentry-jiu-jitsu.webp" data-src="sentry-jiu-jitsu.mp4"></video>
             <span class="vibe-badge"><span class="dur">0:21</span><span class="now"><span class="vibe-eq"><i></i><i></i><i></i></span>On screen</span></span>
             <span class="vibe-watch"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Play on big screen</span>
             <span class="bar"></span>
@@ -1595,9 +1595,9 @@
             <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
           </span>
         </button>
-        <button class="vibe-card reveal" type="button" aria-pressed="false" style="transition-delay:0.14s" data-name="Palm Yoga" data-sector="Yoga Studio · Carrollwood, Tampa, FL" data-slug="palm-yoga" data-dur="25.76" data-src="Palm%20Yoga%20_%20Alignment-First%20Yoga%20Studio%20in%20Carrollwood%2C%20Tampa%20FL%20-%20Google%20Chrome%202026-10-13%2000-09-27.mp4" aria-label="Play the Palm Yoga walkthrough on the big screen, 0:26">
+        <button class="vibe-card reveal" type="button" aria-pressed="false" style="transition-delay:0.14s" data-name="Palm Yoga" data-sector="Yoga Studio · Carrollwood, Tampa, FL" data-slug="palm-yoga" data-dur="25.76" data-src="palm-yoga.mp4" data-poster="palm-yoga.webp" aria-label="Play the Palm Yoga walkthrough on the big screen, 0:26">
           <span class="vibe-thumb">
-            <video muted playsinline loop preload="none" tabindex="-1" aria-hidden="true" data-src="Palm%20Yoga%20_%20Alignment-First%20Yoga%20Studio%20in%20Carrollwood%2C%20Tampa%20FL%20-%20Google%20Chrome%202026-10-13%2000-09-27.mp4"></video>
+            <video muted playsinline loop preload="none" tabindex="-1" aria-hidden="true" poster="palm-yoga.webp" data-src="palm-yoga.mp4"></video>
             <span class="vibe-badge"><span class="dur">0:26</span><span class="now"><span class="vibe-eq"><i></i><i></i><i></i></span>On screen</span></span>
             <span class="vibe-watch"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Play on big screen</span>
             <span class="bar"></span>
@@ -2125,10 +2125,8 @@
     const pr = video.play();
     if (pr && pr.catch) pr.catch(() => { screen.classList.remove('is-loading'); setPaused(true); });
   };
-  const attachThumbs = () => thumbs.forEach((v) => {
-    if (!v.getAttribute('src')) { v.muted = true; v.preload = 'metadata'; v.src = v.dataset.src + '#t=0.1'; }
-  });
-  const stopPreview = (i) => { const v = thumbs[i]; if (!v) return; v.pause(); try { v.currentTime = 0.1; } catch (e) {} };
+  const attachThumb = (i) => { const v = thumbs[i]; if (v && !v.getAttribute('src')) { v.muted = true; v.preload = 'auto'; v.src = v.dataset.src; } };
+  const stopPreview = (i) => { const v = thumbs[i]; if (!v || !v.getAttribute('src')) return; v.pause(); try { v.currentTime = 0; } catch (e) {} };
 
   const load = (i) => {
     i = (i + n) % n;
@@ -2142,6 +2140,7 @@
     cap.classList.remove('swap'); void cap.offsetWidth; cap.classList.add('swap');
     type(c.dataset.slug);
     video.setAttribute('aria-label', c.dataset.name + ' website screen recording');
+    if (c.dataset.poster) video.poster = c.dataset.poster;
     video.preload = 'auto';
     video.src = c.dataset.src;
     if (!userPaused && inView) screen.classList.add('is-loading');
@@ -2192,13 +2191,12 @@
       c.addEventListener('mouseenter', () => {
         clearTimeout(hoverT);
         if (i === current) return;
-        hoverT = setTimeout(() => { attachThumbs(); const pr = thumbs[i].play(); if (pr && pr.catch) pr.catch(() => {}); }, 150);
+        hoverT = setTimeout(() => { attachThumb(i); const pr = thumbs[i].play(); if (pr && pr.catch) pr.catch(() => {}); }, 150);
       });
       c.addEventListener('mouseleave', () => { clearTimeout(hoverT); stopPreview(i); });
     }
   });
 
-  new IntersectionObserver(([e]) => { if (e.isIntersecting) attachThumbs(); }, { rootMargin: '600px 0px' }).observe(grid);
   new IntersectionObserver(([e]) => {
     inView = e.isIntersecting;
     if (inView) { if (current < 0) load(0); else tryPlay(); }
