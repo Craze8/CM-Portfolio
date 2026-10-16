@@ -39,14 +39,13 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
 
-<!-- Fonts — trimmed to weights actually used -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&family=Martian+Mono:wght@400;500&display=swap" rel="stylesheet">
+<!-- Fonts — self-hosted (same files Google Fonts serves; no extra server connections before first paint) -->
+<link rel="preload" href="fonts/fraunces-latin-opsz-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 
-<!-- LCP hints — swap to .webp once converted -->
+<!-- LCP hints -->
 <link rel="preload" as="image" href="hero-bg.webp" type="image/webp" fetchpriority="high">
-<link rel="preload" as="image" href="portrait.webp" type="image/webp" fetchpriority="high">
+<link rel="preload" as="image" href="portrait.webp" imagesrcset="portrait-760.webp 760w, portrait.webp 1046w" imagesizes="(max-width: 980px) 100vw, 52vw" type="image/webp" fetchpriority="high">
 
 <!-- ===== Structured data (@graph: Person + Service entity + WebSite + FAQPage + portfolio) ===== -->
 <script type="application/ld+json">
@@ -238,6 +237,11 @@
 </script>
 
 <style>
+  @font-face{font-family:'Fraunces'; font-style:normal; font-weight:100 900; font-display:swap; src:url(fonts/fraunces-latin-opsz-normal.woff2) format('woff2'); unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+  @font-face{font-family:'Fraunces'; font-style:italic; font-weight:100 900; font-display:swap; src:url(fonts/fraunces-latin-opsz-italic.woff2) format('woff2'); unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+  @font-face{font-family:'Inter'; font-style:normal; font-weight:100 900; font-display:swap; src:url(fonts/inter-latin-wght-normal.woff2) format('woff2'); unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+  @font-face{font-family:'Martian Mono'; font-style:normal; font-weight:400; font-display:swap; src:url(fonts/martian-mono-latin-400-normal.woff2) format('woff2'); unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+  @font-face{font-family:'Martian Mono'; font-style:normal; font-weight:500; font-display:swap; src:url(fonts/martian-mono-latin-500-normal.woff2) format('woff2'); unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
   :root{
     --dark:#0b0b0a;
     --dark-2:#111110;
@@ -847,14 +851,35 @@
   .vibe-name{display:flex; flex-direction:column; gap:12px; padding-bottom:6px; min-width:0;}
   .vibe-name .tag{font-family:var(--mono); font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--sage-light);}
   .vibe-name h3{font-size:clamp(28px,3.5vw,50px); line-height:1; letter-spacing:-.02em;}
-  .vibe-nav{display:flex; gap:10px; padding-bottom:6px;}
-  .vibe-nav button{
-    width:54px; height:54px; border-radius:50%; display:grid; place-items:center;
-    background:transparent; color:var(--cream); border:1px solid rgba(243,237,228,.22); cursor:pointer;
-    transition:background .25s ease, border-color .25s ease, color .25s ease, transform .25s ease;
+  .vibe-nav{display:flex; gap:10px; padding-bottom:6px; align-items:stretch;}
+  .vibe-navbtn{
+    position:relative; overflow:hidden; display:inline-flex; align-items:center; gap:12px;
+    height:58px; padding:0 22px; border-radius:999px; cursor:pointer;
+    font:inherit; color:var(--cream); background:transparent; border:1px solid rgba(243,237,228,.22);
+    transition:border-color .3s ease, background .3s ease, transform .2s ease;
   }
-  .vibe-nav button:hover{background:var(--sage-light); border-color:var(--sage-light); color:#0c130d; transform:translateY(-2px);}
-  .vibe-nav svg{width:18px; height:18px;}
+  .vibe-navbtn > *{position:relative; z-index:1;}
+  .vibe-navbtn .tx{font-size:11px; font-weight:700; letter-spacing:.16em; text-transform:uppercase; white-space:nowrap;}
+  .vibe-navbtn .ar{display:grid; place-items:center; flex:none; transition:transform .35s cubic-bezier(.2,.7,.3,1), background .3s ease;}
+  .vibe-navbtn svg{width:18px; height:18px;}
+  .vibe-navbtn:hover{border-color:var(--sage-light); background:rgba(168,196,172,.08);}
+  .vibe-navbtn:active{transform:scale(.97);}
+  #vibePrev:hover .ar{transform:translateX(-4px);}
+  .vibe-navbtn.is-next{min-width:250px; max-width:340px; padding:0 8px 0 22px; border-color:rgba(168,196,172,.35); background:rgba(168,196,172,.08);}
+  .vibe-navbtn.is-next .tx{display:flex; flex-direction:column; align-items:flex-start; gap:5px; flex:1; min-width:0; text-align:left;}
+  .vibe-navbtn.is-next .k{font-size:9.5px; letter-spacing:.18em; color:var(--sage-light);}
+  .vibe-navbtn.is-next .nx{
+    max-width:100%; overflow:hidden; text-overflow:ellipsis;
+    font-family:var(--serif); font-size:16px; font-weight:400; letter-spacing:0; text-transform:none; color:var(--cream);
+  }
+  .vibe-navbtn.is-next .ar{width:42px; height:42px; border-radius:50%; background:var(--sage-light); color:#0c130d;}
+  .vibe-navbtn.is-next:hover .ar{transform:translateX(4px); background:var(--cream);}
+  /* fills up while the current video plays = time until it moves on to the next site */
+  .vibe-navbtn .fill{
+    position:absolute; inset:0; z-index:0; pointer-events:none;
+    background:linear-gradient(90deg, rgba(110,147,112,.30), rgba(168,196,172,.22));
+    transform:scaleX(var(--p,0)); transform-origin:left;
+  }
   .vibe-caption.swap .vibe-num, .vibe-caption.swap .vibe-name{animation:vibeIn .6s cubic-bezier(.2,.7,.3,1) both;}
   .vibe-caption.swap .vibe-name{animation-delay:.07s;}
   @keyframes vibeIn{from{opacity:0; transform:translateY(18px);} to{opacity:1; transform:none;}}
@@ -894,9 +919,6 @@
     font-family:'Martian Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
     font-size:9.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--cream);
   }
-  .vibe-badge .now{display:none; align-items:center; gap:7px; color:var(--sage-light);}
-  .vibe-card.is-active .vibe-badge .dur{display:none;}
-  .vibe-card.is-active .vibe-badge .now{display:inline-flex;}
   .vibe-eq{display:inline-flex; align-items:flex-end; gap:2px; height:10px;}
   .vibe-eq i{width:2px; height:100%; border-radius:1px; background:currentColor; transform-origin:bottom; animation:vibeEq .9s ease-in-out infinite;}
   .vibe-eq i:nth-child(2){animation-delay:-.3s;}
@@ -922,12 +944,35 @@
   .vibe-card .nm{font-family:var(--serif); font-size:19px; line-height:1.2; color:var(--ink);}
   .vibe-card .loc{font-size:12.5px; line-height:1.45; color:var(--ink-muted);}
   .vibe-card .go{
-    width:38px; height:38px; border-radius:50%; display:grid; place-items:center;
-    border:1px solid var(--line-light); color:var(--ink);
+    position:relative; overflow:hidden; display:inline-flex; align-items:center; gap:8px;
+    height:38px; padding:0 14px 0 16px; border-radius:999px; white-space:nowrap;
+    border:1px solid var(--line-light); color:var(--ink); background:transparent;
+    font-size:10.5px; font-weight:700; letter-spacing:.14em; text-transform:uppercase;
     transition:background .3s ease, border-color .3s ease, color .3s ease;
   }
-  .vibe-card .go svg{width:14px; height:14px; margin-left:2px;}
-  .vibe-card:hover .go, .vibe-card.is-active .go{background:var(--sage); border-color:var(--sage); color:#0c130d;}
+  .vibe-card .go svg{width:10px; height:10px; transition:transform .35s cubic-bezier(.2,.7,.3,1);}
+  .vibe-card .go .g-now, .vibe-card .go .vibe-eq{display:none;}
+  .vibe-card:hover .go{background:var(--sage); border-color:var(--sage); color:#0c130d;}
+  .vibe-card:hover .go svg{transform:translateX(3px) scale(1.2);}
+  .vibe-card.is-active .go{background:var(--ink); border-color:var(--ink); color:var(--cream);}
+  .vibe-card.is-active .go .g-watch, .vibe-card.is-active .go svg{display:none;}
+  .vibe-card.is-active .go .g-now{display:inline;}
+  .vibe-card.is-active .go .vibe-eq{display:inline-flex; color:var(--sage-light);}
+
+  /* closing call-to-action */
+  .vibe-cta-btn{position:relative; overflow:hidden; gap:14px; padding:18px 30px;}
+  .vibe-cta-btn > span{position:relative; z-index:1;}
+  .vibe-cta-btn::after{
+    content:""; position:absolute; top:0; bottom:0; left:-70%; width:55%; pointer-events:none;
+    background:linear-gradient(100deg, transparent, rgba(255,255,255,.5), transparent);
+    transform:skewX(-20deg);
+  }
+  .vibe-cta-btn:hover::after, .vibe-cta-btn:focus-visible::after{animation:vibeSheen .9s ease;}
+  .vibe-cta.in .vibe-cta-btn::after{animation:vibeSheen 1.1s ease .7s;}   /* one sweep when it scrolls into view (phones have no hover) */
+  @keyframes vibeSheen{from{transform:skewX(-20deg) translateX(0);} to{transform:skewX(-20deg) translateX(420%);}}
+  .vibe-cta-btn .arrow{display:inline-block; transition:transform .35s cubic-bezier(.2,.7,.3,1);}
+  .vibe-cta-btn:hover .arrow{transform:translateX(6px);}
+  .vibe-cta-btn:active{transform:scale(.97);}
 
   .vibe-cta{
     display:flex; align-items:center; justify-content:space-between; gap:24px;
@@ -940,7 +985,9 @@
     .vibe-monitor{padding:10px; border-radius:16px;}
     .vibe-hud{padding:0 40px;}
     .vibe-caption{padding-left:18px; gap:20px;}
-    .vibe-nav button{width:46px; height:46px;}
+    .vibe-caption{grid-template-columns:auto minmax(0,1fr);}
+    .vibe-nav{grid-column:1 / -1; width:100%; padding-bottom:0;}
+    .vibe-navbtn.is-next{flex:1; max-width:none; min-width:0;}
     .vibe-grid{grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px;}
   }
   @media (max-width:640px){
@@ -954,21 +1001,30 @@
     .vibe-facts b{font-size:26px;}
     .vibe{padding-bottom:72px;}
     .vibe-vf, .vibe-rec{display:none;}
+    /* phones: simple rounded video, slightly wider than the text column, whole recording visible (no crop) */
+    .vibe-monitor{margin:0 -10px; padding:0; border:0; border-radius:12px; background:none; box-shadow:0 24px 50px -30px rgba(0,0,0,.9);}
+    .vibe-screen{aspect-ratio:1280 / 614; border-radius:12px;}
     .vibe-hud{padding:0 10px; font-size:9px;}
-    .vibe-hud.top{top:10px;}
+    .vibe-hud.top{display:none;}   /* phones: the site name is shown right under the screen, so keep the video clear */
     .vibe-hud.bottom{bottom:12px; gap:6px;}
     .vibe-pill{padding:6px 9px; gap:7px;}
     .vibe-cmd{max-width:100%;}
     .vibe-btn{width:32px; height:32px;}
     .vibe-btn svg{width:13px; height:13px;}
     .vibe-caption{grid-template-columns:auto minmax(0,1fr); padding-left:8px; gap:14px;}
-    .vibe-num{font-size:92px;}
+    .vibe-num{font-size:84px; margin-top:0;}
+    .vibe-caption{margin-top:18px; align-items:center;}
     .vibe-name h3{font-size:26px;}
     .vibe-nav{grid-column:1 / -1; padding-bottom:0;}
+    .vibe-navbtn{height:54px; padding:0 18px;}
+    .vibe-navbtn.is-next{padding:0 6px 0 18px;}
+    #vibePrev{width:54px; padding:0; justify-content:center; flex:none;}
+    #vibePrev .tx{display:none;}
   }
   @media (prefers-reduced-motion: reduce){
     .vibe-cmd .caret, .vibe-rec::before, .vibe-spin, .vibe-eq i{animation:none;}
     .vibe-caption.swap .vibe-num, .vibe-caption.swap .vibe-name{animation:none;}
+    .vibe-cta-btn::after, .vibe-cta.in .vibe-cta-btn::after, .vibe-cta-btn:hover::after{animation:none;}
   }
 
   /* ---------- ABOUT ---------- */
@@ -1383,7 +1439,7 @@
   <section class="hero" id="home" style="padding-bottom:0;">
     <div class="hero-portrait">
       <img class="portrait-img"
-           src="portrait.webp"
+           src="portrait.webp" srcset="portrait-760.webp 760w, portrait.webp 1046w" sizes="(max-width: 980px) 100vw, 52vw"
            alt="Carl Madelo, Certified Duda Professional and web developer"
            width="1200" height="1500"
            fetchpriority="high" decoding="async">
@@ -1500,7 +1556,7 @@
       <div class="vibe-stage reveal" id="vibeStage">
         <div class="vibe-monitor">
           <div class="vibe-screen" id="vibeScreen">
-            <div class="vibe-frame"><video id="vibeVideo" muted playsinline preload="none" poster="clayton-phillips-jiu-jitsu.webp" aria-label="Clayton Phillips Jiu Jitsu website screen recording"></video></div>
+            <div class="vibe-frame"><video id="vibeVideo" muted playsinline preload="none" aria-label="Clayton Phillips Jiu Jitsu website screen recording"></video></div>
             <span class="vibe-spin" aria-hidden="true"></span>
             <span class="vibe-vf" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
             <div class="vibe-hud top" aria-hidden="true">
@@ -1525,8 +1581,8 @@
             <h3 id="vibeName">Clayton Phillips Jiu Jitsu</h3>
           </div>
           <div class="vibe-nav">
-            <button type="button" id="vibePrev" aria-label="Previous website"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button>
-            <button type="button" id="vibeNext" aria-label="Next website"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+            <button type="button" class="vibe-navbtn" id="vibePrev" aria-label="Previous website"><span class="ar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></span><span class="tx">Prev</span></button>
+            <button type="button" class="vibe-navbtn is-next" id="vibeNext"><span class="fill" id="vibeNextFill" aria-hidden="true"></span><span class="tx"><span class="k">Up next</span><span class="nx" id="vibeNextName">Renzo Gracie Des Moines</span></span><span class="ar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
           </div>
         </div>
       </div>
@@ -1546,87 +1602,87 @@
       <div class="vibe-grid" id="vibeGrid">
         <button class="vibe-card reveal" type="button" aria-pressed="true" style="transition-delay:0.00s" data-name="Clayton Phillips Jiu Jitsu" data-sector="Jiu Jitsu · Norfolk, VA" data-slug="clayton-phillips-jiu-jitsu" data-dur="34.97" data-src="clayton-phillips-jiu-jitsu.mp4" data-poster="clayton-phillips-jiu-jitsu.webp" aria-label="Play the Clayton Phillips Jiu Jitsu walkthrough on the big screen, 0:35">
           <span class="vibe-thumb">
-            <video muted playsinline loop preload="none" tabindex="-1" aria-hidden="true" poster="clayton-phillips-jiu-jitsu.webp" data-src="clayton-phillips-jiu-jitsu.mp4"></video>
-            <span class="vibe-badge"><span class="dur">0:35</span><span class="now"><span class="vibe-eq"><i></i><i></i><i></i></span>On screen</span></span>
+            <video muted playsinline loop preload="none" tabindex="-1" aria-hidden="true" data-src="clayton-phillips-jiu-jitsu.mp4"></video>
+            <span class="vibe-badge"><span class="dur">0:35</span></span>
             <span class="vibe-watch"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Play on big screen</span>
             <span class="bar"></span>
           </span>
           <span class="vibe-card-body">
             <span class="no" aria-hidden="true">01</span>
             <span class="txt"><span class="nm">Clayton Phillips Jiu Jitsu</span><span class="loc">Jiu Jitsu · Norfolk, VA</span></span>
-            <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
+            <span class="go" aria-hidden="true"><span class="vibe-eq"><i></i><i></i><i></i></span><span class="g-watch">Watch</span><span class="g-now">Playing</span><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
           </span>
         </button>
         <button class="vibe-card reveal" type="button" aria-pressed="false" style="transition-delay:0.07s" data-name="Renzo Gracie Des Moines" data-sector="Brazilian Jiu-Jitsu · Des Moines, IA" data-slug="renzo-gracie-des-moines" data-dur="27.26" data-src="renzo-gracie-des-moines.mp4" data-poster="renzo-gracie-des-moines.webp" aria-label="Play the Renzo Gracie Des Moines walkthrough on the big screen, 0:27">
           <span class="vibe-thumb">
-            <video muted playsinline loop preload="none" tabindex="-1" aria-hidden="true" poster="renzo-gracie-des-moines.webp" data-src="renzo-gracie-des-moines.mp4"></video>
-            <span class="vibe-badge"><span class="dur">0:27</span><span class="now"><span class="vibe-eq"><i></i><i></i><i></i></span>On screen</span></span>
+            <video muted playsinline loop preload="none" tabindex="-1" aria-hidden="true" data-src="renzo-gracie-des-moines.mp4"></video>
+            <span class="vibe-badge"><span class="dur">0:27</span></span>
             <span class="vibe-watch"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Play on big screen</span>
             <span class="bar"></span>
           </span>
           <span class="vibe-card-body">
             <span class="no" aria-hidden="true">02</span>
             <span class="txt"><span class="nm">Renzo Gracie Des Moines</span><span class="loc">Brazilian Jiu-Jitsu · Des Moines, IA</span></span>
-            <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
+            <span class="go" aria-hidden="true"><span class="vibe-eq"><i></i><i></i><i></i></span><span class="g-watch">Watch</span><span class="g-now">Playing</span><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
           </span>
         </button>
         <button class="vibe-card reveal" type="button" aria-pressed="false" style="transition-delay:0.14s" data-name="American Top Team Winter Garden" data-sector="BJJ, Muay Thai &amp; MMA · Winter Garden, FL" data-slug="american-top-team-winter-garden" data-dur="20.69" data-src="american-top-team-winter-garden.mp4" data-poster="american-top-team-winter-garden.webp" aria-label="Play the American Top Team Winter Garden walkthrough on the big screen, 0:21">
           <span class="vibe-thumb">
-            <video muted playsinline loop preload="none" tabindex="-1" aria-hidden="true" poster="american-top-team-winter-garden.webp" data-src="american-top-team-winter-garden.mp4"></video>
-            <span class="vibe-badge"><span class="dur">0:21</span><span class="now"><span class="vibe-eq"><i></i><i></i><i></i></span>On screen</span></span>
+            <video muted playsinline loop preload="none" tabindex="-1" aria-hidden="true" data-src="american-top-team-winter-garden.mp4"></video>
+            <span class="vibe-badge"><span class="dur">0:21</span></span>
             <span class="vibe-watch"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Play on big screen</span>
             <span class="bar"></span>
           </span>
           <span class="vibe-card-body">
             <span class="no" aria-hidden="true">03</span>
             <span class="txt"><span class="nm">American Top Team Winter Garden</span><span class="loc">BJJ, Muay Thai &amp; MMA · Winter Garden, FL</span></span>
-            <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
+            <span class="go" aria-hidden="true"><span class="vibe-eq"><i></i><i></i><i></i></span><span class="g-watch">Watch</span><span class="g-now">Playing</span><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
           </span>
         </button>
         <button class="vibe-card reveal" type="button" aria-pressed="false" style="transition-delay:0.00s" data-name="Espiritu Jiu-Jitsu" data-sector="Brazilian Jiu-Jitsu · Oxnard, CA" data-slug="espiritu-jiu-jitsu" data-dur="21.42" data-src="espiritu-jiu-jitsu.mp4" data-poster="espiritu-jiu-jitsu.webp" aria-label="Play the Espiritu Jiu-Jitsu walkthrough on the big screen, 0:21">
           <span class="vibe-thumb">
-            <video muted playsinline loop preload="none" tabindex="-1" aria-hidden="true" poster="espiritu-jiu-jitsu.webp" data-src="espiritu-jiu-jitsu.mp4"></video>
-            <span class="vibe-badge"><span class="dur">0:21</span><span class="now"><span class="vibe-eq"><i></i><i></i><i></i></span>On screen</span></span>
+            <video muted playsinline loop preload="none" tabindex="-1" aria-hidden="true" data-src="espiritu-jiu-jitsu.mp4"></video>
+            <span class="vibe-badge"><span class="dur">0:21</span></span>
             <span class="vibe-watch"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Play on big screen</span>
             <span class="bar"></span>
           </span>
           <span class="vibe-card-body">
             <span class="no" aria-hidden="true">04</span>
             <span class="txt"><span class="nm">Espiritu Jiu-Jitsu</span><span class="loc">Brazilian Jiu-Jitsu · Oxnard, CA</span></span>
-            <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
+            <span class="go" aria-hidden="true"><span class="vibe-eq"><i></i><i></i><i></i></span><span class="g-watch">Watch</span><span class="g-now">Playing</span><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
           </span>
         </button>
         <button class="vibe-card reveal" type="button" aria-pressed="false" style="transition-delay:0.07s" data-name="Sentry Jiu-Jitsu" data-sector="Brazilian Jiu-Jitsu · Gilbertsville, PA" data-slug="sentry-jiu-jitsu" data-dur="21.22" data-src="sentry-jiu-jitsu.mp4" data-poster="sentry-jiu-jitsu.webp" aria-label="Play the Sentry Jiu-Jitsu walkthrough on the big screen, 0:21">
           <span class="vibe-thumb">
-            <video muted playsinline loop preload="none" tabindex="-1" aria-hidden="true" poster="sentry-jiu-jitsu.webp" data-src="sentry-jiu-jitsu.mp4"></video>
-            <span class="vibe-badge"><span class="dur">0:21</span><span class="now"><span class="vibe-eq"><i></i><i></i><i></i></span>On screen</span></span>
+            <video muted playsinline loop preload="none" tabindex="-1" aria-hidden="true" data-src="sentry-jiu-jitsu.mp4"></video>
+            <span class="vibe-badge"><span class="dur">0:21</span></span>
             <span class="vibe-watch"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Play on big screen</span>
             <span class="bar"></span>
           </span>
           <span class="vibe-card-body">
             <span class="no" aria-hidden="true">05</span>
             <span class="txt"><span class="nm">Sentry Jiu-Jitsu</span><span class="loc">Brazilian Jiu-Jitsu · Gilbertsville, PA</span></span>
-            <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
+            <span class="go" aria-hidden="true"><span class="vibe-eq"><i></i><i></i><i></i></span><span class="g-watch">Watch</span><span class="g-now">Playing</span><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
           </span>
         </button>
         <button class="vibe-card reveal" type="button" aria-pressed="false" style="transition-delay:0.14s" data-name="Palm Yoga" data-sector="Yoga Studio · Carrollwood, Tampa, FL" data-slug="palm-yoga" data-dur="25.76" data-src="palm-yoga.mp4" data-poster="palm-yoga.webp" aria-label="Play the Palm Yoga walkthrough on the big screen, 0:26">
           <span class="vibe-thumb">
-            <video muted playsinline loop preload="none" tabindex="-1" aria-hidden="true" poster="palm-yoga.webp" data-src="palm-yoga.mp4"></video>
-            <span class="vibe-badge"><span class="dur">0:26</span><span class="now"><span class="vibe-eq"><i></i><i></i><i></i></span>On screen</span></span>
+            <video muted playsinline loop preload="none" tabindex="-1" aria-hidden="true" data-src="palm-yoga.mp4"></video>
+            <span class="vibe-badge"><span class="dur">0:26</span></span>
             <span class="vibe-watch"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Play on big screen</span>
             <span class="bar"></span>
           </span>
           <span class="vibe-card-body">
             <span class="no" aria-hidden="true">06</span>
             <span class="txt"><span class="nm">Palm Yoga</span><span class="loc">Yoga Studio · Carrollwood, Tampa, FL</span></span>
-            <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
+            <span class="go" aria-hidden="true"><span class="vibe-eq"><i></i><i></i><i></i></span><span class="g-watch">Watch</span><span class="g-now">Playing</span><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
           </span>
         </button>
       </div>
 
       <div class="vibe-cta reveal">
         <p>Want a custom-coded site <em>like these?</em></p>
-        <a href="#contact" class="btn btn-solid">Start a Project <span class="arrow">&#8594;</span></a>
+        <a href="#contact" class="btn btn-solid vibe-cta-btn"><span>Let&#8217;s build yours</span><span class="arrow" aria-hidden="true">&#8594;</span></a>
       </div>
     </div>
   </section>
@@ -2112,6 +2168,7 @@
   const sec = $('vibe-coding'), picks = $('vibe-builds'), grid = $('vibeGrid'), stage = $('vibeStage');
   if (!sec || !grid || !stage) return;
   const video = $('vibeVideo'), screen = $('vibeScreen'), toggle = $('vibeToggle'), fsBtn = $('vibeFs');
+  const nextFill = $('vibeNextFill'), nextName = $('vibeNextName');
   const bar = $('vibeBar'), tc = $('vibeTc'), cmd = $('vibeCmd'), num = $('vibeNum'), nameEl = $('vibeName'), tagEl = $('vibeTag'), cap = $('vibeCaption');
   const cards = Array.from(grid.querySelectorAll('.vibe-card'));
   const thumbs = cards.map((c) => c.querySelector('video'));
@@ -2130,6 +2187,7 @@
     bar.style.transform = 'scaleX(' + p + ')';
     tc.textContent = fmt(video.currentTime) + ' / ' + fmt(d);
     c.style.setProperty('--p', p);
+    if (nextFill) nextFill.style.setProperty('--p', p);
   };
   const tick = () => { paint(); raf = requestAnimationFrame(tick); };
   const type = (text) => {
@@ -2154,6 +2212,8 @@
     const c = cards[i];
     num.textContent = pad(i + 1);
     nameEl.textContent = c.dataset.name;
+    if (nextName) nextName.textContent = cards[(i + 1) % n].dataset.name;
+    if (nextFill) nextFill.style.setProperty('--p', 0);
     tagEl.textContent = c.dataset.sector;
     cap.classList.remove('swap'); void cap.offsetWidth; cap.classList.add('swap');
     type(c.dataset.slug);
@@ -2214,6 +2274,15 @@
       c.addEventListener('mouseleave', () => { clearTimeout(hoverT); stopPreview(i); });
     }
   });
+
+  // still frames are attached only when the section gets close (keeps them off the first page load)
+  const posterIO = new IntersectionObserver((entries) => {
+    if (!entries.some((e) => e.isIntersecting)) return;
+    thumbs.forEach((v, k) => { if (!v.getAttribute('poster')) v.poster = cards[k].dataset.poster; });
+    if (!video.getAttribute('poster')) video.poster = cards[current < 0 ? 0 : current].dataset.poster;
+    posterIO.disconnect();
+  }, { rootMargin: '900px 0px' });
+  posterIO.observe(stage); posterIO.observe(grid);
 
   new IntersectionObserver(([e]) => {
     inView = e.isIntersecting;
