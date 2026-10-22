@@ -34,10 +34,8 @@
 <meta name="twitter:image:alt" content="Carl Madelo — Duda Web Designer, Developer &amp; AI-Assisted Coder">
 
 <!-- Icons -->
-<link rel="icon" href="/favicon.ico" sizes="any">
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="manifest" href="/site.webmanifest">
+<link rel="icon" href="favicon.png" type="image/png" sizes="64x64">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 
 <!-- Fonts — self-hosted (same files Google Fonts serves; no extra server connections before first paint) -->
 <link rel="preload" href="fonts/fraunces-latin-opsz-normal.woff2" as="font" type="font/woff2" crossorigin>
@@ -355,13 +353,8 @@
   }
 
   .brand{display:flex; align-items:center; gap:10px; position:relative; z-index:1;}
-  .brand-mark{
-    width:32px; height:32px; min-width:32px; border-radius:50%;
-    border:1px solid var(--line-dark); display:flex; align-items:center; justify-content:center;
-    font-family:var(--serif); font-style:italic; font-size:13px; color:var(--sage-light);
-    transition:border-color .3s ease, background .3s ease, transform .45s cubic-bezier(.34,1.56,.64,1);
-  }
-  .brand:hover .brand-mark{border-color:var(--sage); background:var(--sage); color:#0c130d; transform:rotate(-160deg);}
+  .brand-logo{display:block; height:30px; width:auto; transition:transform .5s cubic-bezier(.34,1.56,.64,1), filter .3s ease;}
+  .brand:hover .brand-logo{transform:rotate(-8deg) scale(1.08); filter:brightness(1.15);}
   .logo{font-family:var(--serif); font-size:16.5px; letter-spacing:.08em; color:var(--cream); text-transform:uppercase;}
 
   .nav-links{
@@ -890,35 +883,43 @@
   .vibe-grid-head .eyebrow{margin-bottom:16px;}
   .vibe-grid-title{font-size:clamp(30px,3.6vw,46px); line-height:1.05;}
   .vibe-grid-hint{font-size:14px; line-height:1.6; color:var(--ink-muted); max-width:340px; text-align:right;}
-  .vibe-grid{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:24px;}
+  .vibe-grid{display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); gap:24px;}
+  .vibe-grid > .vibe-card{grid-column:span 2;}
+  @media (min-width:981px){
+    .vibe-grid > .vibe-card:last-child:nth-child(3n+1){grid-column:3 / span 2;}
+    .vibe-grid > .vibe-card:nth-last-child(2):nth-child(3n+1){grid-column:2 / span 2;}
+  }
+  @media (min-width:641px) and (max-width:980px){
+    .vibe-grid > .vibe-card:last-child:nth-child(2n+1){grid-column:2 / span 2;}
+  }
   .vibe-card{
     position:relative; display:flex; flex-direction:column; width:100%;
     padding:10px; border-radius:16px; text-align:left;
+    --acc:var(--sage);
     font:inherit; color:var(--ink); cursor:pointer;
     background:#fff; border:1px solid var(--line-light);
     box-shadow:0 16px 36px -30px rgba(23,22,15,.35);
     transition:transform .35s cubic-bezier(.2,.7,.3,1), border-color .3s ease, box-shadow .35s ease;
   }
-  .vibe-card:hover{transform:translateY(-5px); border-color:rgba(110,147,112,.45); box-shadow:0 30px 54px -28px rgba(23,22,15,.3);}
-  .vibe-card.is-active{border-color:var(--sage); box-shadow:0 0 0 1px var(--sage), 0 30px 54px -28px rgba(76,107,78,.38);}
-  .vibe-thumb{position:relative; display:block; aspect-ratio:1920 / 922; border-radius:9px; overflow:hidden; background:var(--dark-2);}
+  .vibe-card:hover{transform:translateY(-5px); border-color:rgba(23,22,15,.22); border-color:color-mix(in srgb, var(--acc) 55%, transparent); box-shadow:0 30px 54px -28px rgba(23,22,15,.3);}
+  .vibe-card.is-active{border-color:var(--acc); box-shadow:0 0 0 1px var(--acc), 0 30px 54px -28px rgba(23,22,15,.32);}
+  .vc-frame{position:relative; display:block; border-radius:10px; overflow:hidden; background:#151512; box-shadow:0 0 0 1px rgba(23,22,15,.08);}
+  .vc-chrome{display:flex; align-items:center; gap:5px; height:26px; padding:0 11px; background:#1d1d19; border-bottom:1px solid rgba(243,237,228,.06);}
+  .vc-chrome i{width:7px; height:7px; border-radius:50%; background:rgba(243,237,228,.18); transition:background .3s ease;}
+  .vibe-card:hover .vc-chrome i:nth-child(1), .vibe-card.is-active .vc-chrome i:nth-child(1){background:#ff5f57;}
+  .vibe-card:hover .vc-chrome i:nth-child(2), .vibe-card.is-active .vc-chrome i:nth-child(2){background:#febc2e;}
+  .vibe-card:hover .vc-chrome i:nth-child(3), .vibe-card.is-active .vc-chrome i:nth-child(3){background:#28c840;}
+  .vc-url{flex:0 1 42%; height:12px; margin-left:10px; border-radius:6px; background:rgba(243,237,228,.07);}
+  .vc-chrome .dur{margin-left:auto; font-family:'Martian Mono', ui-monospace, SFMono-Regular, Menlo, monospace; font-size:9.5px; letter-spacing:.08em; color:rgba(243,237,228,.62);}
+  .vibe-thumb{position:relative; display:block; aspect-ratio:1920 / 922; overflow:hidden; background:var(--dark-2);}
   .vibe-thumb video{
     position:absolute; inset:0; width:100%; height:100%;
     object-fit:cover; object-position:50% 100%;
-    filter:saturate(.8) brightness(.94);
+    filter:saturate(.85) brightness(.95);
     transition:filter .45s ease, transform .7s cubic-bezier(.2,.7,.3,1);
   }
   .vibe-card:hover .vibe-thumb video, .vibe-card.is-active .vibe-thumb video{filter:none;}
   .vibe-card:hover .vibe-thumb video{transform:scale(1.035);}
-  .vibe-thumb::after{content:""; position:absolute; inset:0; z-index:1; pointer-events:none; background:linear-gradient(180deg, rgba(0,0,0,.35), transparent 34%);}
-  .vibe-badge{
-    position:absolute; top:10px; left:10px; z-index:3;
-    display:inline-flex; align-items:center; gap:7px; padding:6px 10px; border-radius:6px;
-    background:rgba(11,11,10,.78); border:1px solid rgba(243,237,228,.14);
-    -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px);
-    font-family:'Martian Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
-    font-size:9.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--cream);
-  }
   .vibe-eq{display:inline-flex; align-items:flex-end; gap:2px; height:10px;}
   .vibe-eq i{width:2px; height:100%; border-radius:1px; background:currentColor; transform-origin:bottom; animation:vibeEq .9s ease-in-out infinite;}
   .vibe-eq i:nth-child(2){animation-delay:-.3s;}
@@ -936,28 +937,32 @@
   .vibe-card:hover .vibe-watch, .vibe-card:focus-visible .vibe-watch{opacity:1; transform:translate(-50%,-50%);}
   .vibe-card.is-active .vibe-watch{display:none;}
   .vibe-thumb .bar{position:absolute; left:0; right:0; bottom:0; z-index:3; height:3px; background:rgba(255,255,255,.2);}
-  .vibe-thumb .bar::after{content:""; position:absolute; inset:0; background:var(--sage-light); transform:scaleX(var(--p,0)); transform-origin:left;}
-  .vibe-card-body{display:grid; grid-template-columns:auto minmax(0,1fr) auto; align-items:center; column-gap:14px; padding:16px 8px 8px;}
-  .vibe-card .no{font-family:var(--serif); font-style:italic; font-size:30px; line-height:1; min-width:38px; color:rgba(23,22,15,.26); transition:color .3s ease;}
-  .vibe-card.is-active .no, .vibe-card:hover .no{color:var(--sage);}
-  .vibe-card .txt{display:flex; flex-direction:column; gap:5px; min-width:0;}
-  .vibe-card .nm{font-family:var(--serif); font-size:19px; line-height:1.2; color:var(--ink);}
-  .vibe-card .loc{font-size:12.5px; line-height:1.45; color:var(--ink-muted);}
+  .vibe-thumb .bar::after{content:""; position:absolute; inset:0; background:var(--acc); transform:scaleX(var(--p,0)); transform-origin:left;}
+  .vibe-card-body{display:flex; flex-direction:column; flex:1; padding:18px 8px 2px;}
+  .vc-meta{display:flex; align-items:center; gap:12px;}
+  .vibe-card .no{font-family:'Martian Mono', ui-monospace, SFMono-Regular, Menlo, monospace; font-size:10.5px; letter-spacing:.08em; color:var(--ink-muted); transition:color .3s ease;}
+  .vc-meta .ln{flex:1; height:1px; background:var(--line-light);}
+  .vc-tag{display:inline-flex; align-items:center; gap:7px; padding:5px 10px; border-radius:999px; background:var(--cream); border:1px solid rgba(23,22,15,.08); font-family:'Martian Mono', ui-monospace, SFMono-Regular, Menlo, monospace; font-size:9px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink); white-space:nowrap;}
+  .vc-tag::before{content:""; width:6px; height:6px; border-radius:50%; background:var(--acc);}
+  .vibe-card .nm{margin-top:16px; font-family:var(--serif); font-size:23px; line-height:1.12; letter-spacing:-.01em; color:var(--ink); text-wrap:balance;}
+  .vibe-card .loc{display:flex; align-items:center; gap:6px; margin:8px 0 20px; font-size:13px; line-height:1.4; color:var(--ink-muted);}
+  .vibe-card .loc svg{width:12px; height:12px; flex:none; color:var(--acc);}
   .vibe-card .go{
-    position:relative; overflow:hidden; display:inline-flex; align-items:center; gap:8px;
-    height:38px; padding:0 14px 0 16px; border-radius:999px; white-space:nowrap;
-    border:1px solid var(--line-light); color:var(--ink); background:transparent;
+    display:flex; align-items:center; gap:12px; margin-top:auto; padding:14px 0 6px;
+    border-top:1px solid var(--line-light); white-space:nowrap; color:var(--ink);
     font-size:10.5px; font-weight:700; letter-spacing:.14em; text-transform:uppercase;
-    transition:background .3s ease, border-color .3s ease, color .3s ease;
   }
-  .vibe-card .go svg{width:10px; height:10px; transition:transform .35s cubic-bezier(.2,.7,.3,1);}
-  .vibe-card .go .g-now, .vibe-card .go .vibe-eq{display:none;}
-  .vibe-card:hover .go{background:var(--sage); border-color:var(--sage); color:#0c130d;}
-  .vibe-card:hover .go svg{transform:translateX(3px) scale(1.2);}
-  .vibe-card.is-active .go{background:var(--ink); border-color:var(--ink); color:var(--cream);}
-  .vibe-card.is-active .go .g-watch, .vibe-card.is-active .go svg{display:none;}
-  .vibe-card.is-active .go .g-now{display:inline;}
-  .vibe-card.is-active .go .vibe-eq{display:inline-flex; color:var(--sage-light);}
+  .g-ico{display:grid; place-items:center; flex:none; width:32px; height:32px; border-radius:50%; border:1px solid var(--line-light); color:var(--ink); transition:background .3s ease, border-color .3s ease, color .3s ease, transform .35s cubic-bezier(.2,.7,.3,1);}
+  .g-ico svg{width:11px; height:11px; margin-left:1px;}
+  .g-arr{width:15px; height:15px; margin-left:auto; color:var(--ink-muted); transition:transform .35s cubic-bezier(.2,.7,.3,1), color .3s ease, opacity .3s ease;}
+  .vibe-card:hover .g-ico, .vibe-card.is-active .g-ico{background:var(--ink); border-color:var(--ink); color:var(--acc);}
+  .vibe-card:hover .g-ico{transform:scale(1.07);}
+  .vibe-card:hover .g-arr{transform:translateX(4px); color:var(--ink);}
+  .vibe-card .g-now, .vibe-card .g-ico .vibe-eq{display:none;}
+  .vibe-card.is-active .g-ico svg, .vibe-card.is-active .g-watch, .vibe-card.is-active .g-arr{display:none;}
+  .vibe-card.is-active .g-ico .vibe-eq{display:inline-flex;}
+  .vibe-card.is-active .g-now{display:inline;}
+  .vibe-card.is-active .no{color:var(--ink);}
 
   /* closing call-to-action */
   .vibe-cta-btn{position:relative; overflow:hidden; gap:14px; padding:18px 30px;}
@@ -988,12 +993,13 @@
     .vibe-caption{grid-template-columns:auto minmax(0,1fr);}
     .vibe-nav{grid-column:1 / -1; width:100%; padding-bottom:0;}
     .vibe-navbtn.is-next{flex:1; max-width:none; min-width:0;}
-    .vibe-grid{grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px;}
+    .vibe-grid{grid-template-columns:repeat(4,minmax(0,1fr)); gap:16px;}
   }
   @media (max-width:640px){
     .vibe-grid-head{flex-direction:column; align-items:flex-start; gap:10px;}
     .vibe-grid-hint{text-align:left;}
     .vibe-grid{grid-template-columns:minmax(0,1fr);}
+    .vibe-grid > .vibe-card{grid-column:auto;}
     .vibe-cta{flex-direction:column; align-items:flex-start;}
   }
   @media (max-width:560px){
@@ -1048,6 +1054,163 @@
     margin-bottom:16px;
   }
   .tag-row{display:flex; flex-wrap:wrap; gap:10px;}
+  /* ---------- CASE STUDIES (dark panels inside the Work section) ---------- */
+  .featured{
+    position:relative; overflow:hidden; isolation:isolate;
+    display:grid; grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr); gap:56px; align-items:center;
+    margin-bottom:28px; padding:64px 60px; border-radius:22px; color:var(--cream);
+    background:radial-gradient(55% 75% at 78% 55%, rgba(110,147,112,.20), transparent 70%), var(--dark);
+    box-shadow:0 40px 80px -50px rgba(23,22,15,.6);
+  }
+  .featured.is-flip{grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr); background:radial-gradient(55% 75% at 22% 55%, rgba(110,147,112,.20), transparent 70%), var(--dark);}
+  .featured.is-flip .fx-copy{order:2;}
+  .fx-copy .eyebrow{margin-bottom:20px;}
+  .fx-title{font-family:var(--serif); font-weight:400; font-size:clamp(34px,4vw,54px); line-height:1.02; letter-spacing:-.02em; margin-bottom:18px;}
+  .fx-lede{font-size:15px; line-height:1.75; color:var(--paper-muted); max-width:430px; margin-bottom:24px;}
+  .fx-meta{list-style:none; display:flex; flex-wrap:wrap; gap:8px; margin-bottom:32px;}
+  .fx-meta li{font-size:10.5px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; padding:8px 13px; border:1px solid var(--line-dark); border-radius:30px; color:var(--cream);}
+  .fx-cta{gap:12px;}
+  .fx-cta .arrow{display:inline-block; transition:transform .35s cubic-bezier(.2,.7,.3,1);}
+  .fx-cta:hover .arrow{transform:translateX(5px);}
+
+  /* laptop: the screen takes the screenshot's own proportions (--ar), so the whole page shows with no cropping */
+  .fx-devices{position:relative; padding:0 5%;}
+  .fx-laptop{position:relative; width:100%;}
+  /* lid: black glass bezel, fine aluminium rim, camera dot */
+  .fx-lid{
+    position:relative; container-type:inline-size;
+    padding:3% 2.4% 2.6%; border-radius:clamp(10px,1.6vw,18px) clamp(10px,1.6vw,18px) 3px 3px;
+    background:linear-gradient(180deg,#141416,#0b0b0c);
+    box-shadow:inset 0 0 0 1px #4a4b50, inset 0 0 0 2.5px #0e0e10, 0 50px 80px -40px rgba(0,0,0,.95);
+  }
+  .fx-cam{
+    position:absolute; top:calc(1.5cqw - 2.5px); left:50%; width:5px; height:5px; margin-left:-2.5px; border-radius:50%;
+    background:radial-gradient(circle at 35% 35%, #3d5266 0%, #10161c 55%, #050505 100%);
+    box-shadow:0 0 0 1px #1d1e21;
+  }
+  .fx-screen{position:relative; aspect-ratio:var(--ar,16 / 10); overflow:hidden; border-radius:3px; background:#000;}
+  .fx-screen img{display:block; width:100%; height:100%; object-fit:cover; object-position:top center; transition:transform 1.2s cubic-bezier(.2,.7,.3,1);}
+  .fx-screen::after{   /* faint glass reflection */
+    content:""; position:absolute; inset:0; pointer-events:none;
+    background:linear-gradient(115deg, rgba(255,255,255,.09) 0%, rgba(255,255,255,.025) 30%, transparent 44%);
+  }
+  /* base: thin space-grey aluminium deck, wider than the lid, with hinge + thumb notch */
+  .fx-base{
+    position:relative; margin:0 -7%; aspect-ratio:100 / 3;
+    border-radius:2px 2px 50% 50% / 2px 2px 100% 100%;
+    background:linear-gradient(180deg, #a3a5aa 0%, #6c6e73 18%, #45464b 55%, #26272a 100%);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.35), 0 18px 22px -14px rgba(0,0,0,.85);
+  }
+  .fx-base::before{   /* thumb notch */
+    content:""; position:absolute; top:0; left:50%; width:15%; height:40%; transform:translateX(-50%);
+    border-radius:0 0 10px 10px / 0 0 8px 8px;
+    background:linear-gradient(180deg, #3a3b3f, #5d5f64);
+  }
+  .fx-base::after{   /* hinge between lid and deck */
+    content:""; position:absolute; left:6.25%; right:6.25%; top:-4px; height:4px;
+    border-radius:0 0 3px 3px; background:linear-gradient(180deg, #050505, #2a2b2e);
+  }
+  .fx-laptop::after{   /* contact shadow on the "desk" */
+    content:""; position:absolute; left:-4%; right:-4%; bottom:-16px; height:26px; z-index:-1;
+    border-radius:50%; background:radial-gradient(closest-side, rgba(0,0,0,.65), transparent); filter:blur(3px);
+  }
+
+
+  /* --- colour per project (--acc on each panel) --- */
+  .featured{
+    --acc:var(--sage-light);
+    background:
+      radial-gradient(55% 75% at 78% 55%, color-mix(in srgb, var(--acc) 24%, transparent), transparent 70%),
+      linear-gradient(140deg, color-mix(in srgb, var(--acc) 16%, #0b0b0a) 0%, #0b0b0a 58%);
+    border:1px solid color-mix(in srgb, var(--acc) 22%, transparent);
+  }
+  .featured.is-flip{
+    background:
+      radial-gradient(55% 75% at 22% 55%, color-mix(in srgb, var(--acc) 24%, transparent), transparent 70%),
+      linear-gradient(220deg, color-mix(in srgb, var(--acc) 16%, #0b0b0a) 0%, #0b0b0a 58%);
+  }
+  .featured .eyebrow{color:var(--acc);}
+  .featured .eyebrow::before{background:var(--acc);}
+  .featured .fx-meta li{border-color:color-mix(in srgb, var(--acc) 45%, transparent); background:color-mix(in srgb, var(--acc) 8%, transparent);}
+  .featured .fx-meta li:first-child{background:var(--acc); border-color:var(--acc); color:#0c0c0a;}
+  .featured .fx-cta{background:var(--acc); color:#0c0c0a;}
+  .featured .fx-cta:hover{background:color-mix(in srgb, var(--acc) 70%, #fff);}
+  .fx-num{
+    position:absolute; z-index:-1; top:-.12em; right:.06em; pointer-events:none; user-select:none;
+    font-family:var(--serif); font-style:italic; font-size:clamp(150px,17vw,250px); line-height:1;
+    color:transparent; -webkit-text-stroke:1px color-mix(in srgb, var(--acc) 40%, transparent);
+  }
+  .featured.is-flip .fx-num{right:auto; left:.06em;}
+  .fx-devices::before{
+    content:""; position:absolute; left:10%; right:10%; bottom:-8%; height:40%; z-index:-1; border-radius:50%;
+    background:radial-gradient(closest-side, color-mix(in srgb, var(--acc) 35%, transparent), transparent);
+    filter:blur(18px);
+  }
+
+  /* --- stacking reveal: each panel sticks, the next slides over it --- */
+  .cases{position:relative;}
+  .cases .featured{
+    position:sticky; top:calc(108px + var(--i,0) * 16px);
+    transform-origin:50% 0; scale:calc(1 - var(--stack,0) * .06);
+  }
+  .cases .featured::after{
+    content:""; position:absolute; inset:0; z-index:5; border-radius:inherit; pointer-events:none;
+    background:#050505; opacity:calc(var(--stack,0) * .5);
+  }
+  .cases .featured.no-stick{position:relative; top:auto;}
+  @media (max-width:980px){ .cases .featured{top:calc(90px + var(--i,0) * 12px);} }
+  /* entrance + hover */
+  .featured .fx-laptop{opacity:0; transform:translateY(30px); transition:opacity .8s ease .15s, transform 1s cubic-bezier(.2,.7,.3,1) .15s;}
+  .featured.in .fx-laptop{opacity:1; transform:none;}
+  .featured.in .fx-devices:hover .fx-laptop{transform:translateY(-6px); transition-delay:0s;}
+  .fx-devices:hover .fx-screen img{transform:scale(1.025);}
+  @media (max-width:980px){
+    .featured, .featured.is-flip{grid-template-columns:1fr; gap:40px; padding:48px 32px; margin-bottom:22px;}
+    .featured.is-flip .fx-copy{order:0;}
+    .fx-devices{padding:0 4%;}
+  }
+  @media (max-width:560px){
+    .featured, .featured.is-flip{padding:36px 20px 34px; border-radius:16px; gap:30px;}
+    .fx-title{font-size:36px;}
+    .fx-devices{padding:0 6px;}
+  }
+  /* ---------- DUDA CERTIFICATIONS (compact strip at the end of the Work section) ---------- */
+  .work-certs{
+    display:grid; grid-template-columns:minmax(0,.7fr) minmax(0,2.3fr); gap:40px; align-items:center;
+    margin-top:56px; padding-top:44px; border-top:1px solid var(--line-light);
+  }
+  .wc-k{display:block; font-size:12px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:var(--sage-dark); margin-bottom:10px;}
+  .wc-t{display:block; font-family:var(--serif); font-size:clamp(20px,2vw,26px); line-height:1.2; color:var(--ink);}
+  .wc-t em{color:var(--sage);}
+  .certs-grid{list-style:none; display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:24px;}
+  .cert{display:flex; flex-direction:column; align-items:center; text-align:center; gap:6px;}
+  .cert-medal{position:relative; display:block; width:100%; max-width:108px; aspect-ratio:1; margin:12px 0 14px;}
+  .cert-medal::before{
+    content:""; position:absolute; inset:-11%; border-radius:50%;
+    border:2px dotted rgba(23,22,15,.4);
+    transition:transform 1s cubic-bezier(.2,.7,.3,1), border-color .4s ease;
+  }
+  .cert-medal img{
+    position:relative; display:block; width:100%; height:100%; object-fit:contain;
+    filter:drop-shadow(0 12px 20px rgba(23,22,15,.16));
+    transition:transform .5s cubic-bezier(.2,.7,.3,1);
+  }
+  .cert:hover .cert-medal::before{transform:rotate(70deg); border-color:var(--sage);}
+  .cert:hover .cert-medal img{transform:translateY(-5px) scale(1.05);}
+  .cert-name{font-family:var(--serif); font-size:16px; line-height:1.2; color:var(--ink);}
+  .cert-tag{display:inline-flex; align-items:center; gap:6px; font-size:9.5px; font-weight:700; letter-spacing:.16em; text-transform:uppercase; color:var(--sage-dark);}
+  .cert-tag::before{content:""; width:5px; height:5px; border-radius:50%; background:var(--sage); box-shadow:0 0 0 3px rgba(110,147,112,.18);}
+  /* staggered entrance once the strip scrolls into view */
+  .work-certs .cert{opacity:0; transform:translateY(14px) scale(.96); transition:opacity .6s ease var(--d,0s), transform .8s cubic-bezier(.2,.7,.3,1) var(--d,0s);}
+  .work-certs.in .cert{opacity:1; transform:none;}
+  @media (max-width:980px){
+    .work-certs{grid-template-columns:1fr; gap:26px; margin-top:44px; padding-top:36px;}
+  }
+  @media (max-width:560px){
+    .certs-grid{grid-template-columns:repeat(2,minmax(0,1fr)); gap:28px 14px;}
+    .cert-medal{max-width:96px;}
+    .cert-name{font-size:15px;}
+  }
   .tag-row span{
     font-size:11px; letter-spacing:.06em; text-transform:uppercase; padding:9px 16px;
     border:1px solid var(--line-dark); border-radius:30px; color:var(--paper-muted);
@@ -1271,6 +1434,7 @@
   /* ---------- FOOTER (light) ---------- */
   footer{background:var(--cream); border-top:1px solid var(--line-light); padding:78px 0 34px; position:relative; overflow:hidden; color:var(--ink-muted);}
   .footer-top{display:grid; grid-template-columns:1.4fr .7fr .7fr .7fr; gap:44px; padding-bottom:52px; position:relative; z-index:1;}
+  .footer-brand .f-mark{display:block; height:48px; width:auto; margin-bottom:16px;}
   .footer-brand .f-logo{font-family:var(--serif); font-size:26px; color:var(--ink); letter-spacing:.06em; text-transform:uppercase; margin-bottom:18px; display:block;}
   .footer-brand p{font-size:14px; line-height:1.75; max-width:330px; margin-bottom:24px;}
   .footer-avail{display:inline-flex; align-items:center; gap:9px; font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--sage-dark); border:1px solid var(--line-light); padding:8px 15px; border-radius:30px;}
@@ -1300,6 +1464,11 @@
   /* ---------- REVEAL ---------- */
   .reveal{opacity:0; transform:translateY(24px); transition:opacity .7s ease, transform .7s ease;}
   .reveal.in{opacity:1; transform:none;}
+  /* case-study panels stay solid while they slide in, so the one underneath never shows through; only their content fades */
+  .cases .featured.reveal{opacity:1;}
+  .cases .featured.reveal > *{opacity:0; transition:opacity .7s ease .1s;}
+  .cases .featured.reveal.in > *{opacity:1;}
+  @media (prefers-reduced-motion:reduce){ .cases .featured.reveal > *{opacity:1; transition:none;} }
 
   a:focus-visible, button:focus-visible{outline:2px solid var(--sage); outline-offset:3px; border-radius:2px;}
 
@@ -1372,9 +1541,192 @@
     .mobile-links a{font-size:25px; padding:12px 0;}
     .mm-footer{gap:14px;}
   }
+
+  /* ---------- PRELOADER: a website builds itself in a browser window ---------- */
+  html.pl-lock{overflow:hidden;}
+  .pl{position:fixed; inset:0; z-index:9999; display:grid; place-items:center; color:var(--cream); transition:visibility 0s linear .85s;}
+  .pl-half{position:absolute; left:0; right:0; height:50.2%; background:var(--dark); transition:transform .85s cubic-bezier(.76,0,.24,1);}
+  .pl-half.top{top:0; background:radial-gradient(70% 90% at 50% 100%, rgba(110,147,112,.16), transparent 70%), var(--dark);}
+  .pl-half.bottom{bottom:0; background:radial-gradient(70% 90% at 50% 0%, rgba(110,147,112,.16), transparent 70%), var(--dark);}
+  .pl-half.top::after, .pl-half.bottom::after{content:""; position:absolute; left:0; right:0; height:2px; background:var(--sage-light); opacity:0; transition:opacity .2s ease;}
+  .pl-half.top::after{bottom:0;} .pl-half.bottom::after{top:0;}
+  .pl.done{visibility:hidden;}
+  .pl.done .pl-half.top{transform:translateY(-100%);}
+  .pl.done .pl-half.bottom{transform:translateY(100%);}
+  .pl.done .pl-half::after{opacity:1;}
+  .pl-stage{position:relative; z-index:2; transition:transform .8s cubic-bezier(.76,0,.24,1), opacity .45s ease;}
+  .pl.done .pl-stage{transform:scale(1.14); opacity:0;}
+  .pl-sign, .pl-count{z-index:2; transition:opacity .35s ease;}
+  .pl.done .pl-sign, .pl.done .pl-count{opacity:0;}
+
+  /* browser window */
+  .pl-win{
+    position:relative; width:min(440px, 84vw); border-radius:12px; overflow:hidden;
+    background:#121210; border:1px solid rgba(243,237,228,.12);
+    box-shadow:0 50px 90px -40px rgba(0,0,0,.9);
+    animation:plWinIn .7s cubic-bezier(.2,.7,.3,1) both;
+    transition:border-color .5s ease, box-shadow .5s ease;
+  }
+  .pl-win-bar{display:flex; align-items:center; gap:6px; height:32px; padding:0 12px; border-bottom:1px solid rgba(243,237,228,.08); background:#161614;}
+  .pl-win-bar > i{width:9px; height:9px; border-radius:50%; background:#34342f; transition:background .3s ease;}
+  .pl-url{
+    display:flex; align-items:center; gap:7px; flex:1; height:18px; margin-left:10px; padding:0 10px; border-radius:9px;
+    background:rgba(243,237,228,.06); font-family:'Martian Mono', ui-monospace, monospace; font-size:9px; letter-spacing:.06em; color:var(--paper-muted);
+  }
+  .pl-url .dot{width:6px; height:6px; border-radius:50%; background:var(--sage-light); animation:plBlink 1s steps(1) infinite;}
+  .pl-url #plStage{display:inline-block;}
+  .pl-url #plStage.swap{animation:plSwap .35s ease both;}
+  .pl-win-body{padding:16px 16px 18px;}
+  .pl .blk{
+    display:block; border:1px dashed rgba(243,237,228,.32); border-radius:4px; background-color:transparent;
+    transform:scaleX(0); transform-origin:left center; opacity:0;
+    transition:transform .45s cubic-bezier(.2,.7,.3,1) calc(var(--d,0s) * .65), opacity .25s ease calc(var(--d,0s) * .65), background-color .4s ease calc(var(--d,0s) * .4), border-color .4s ease calc(var(--d,0s) * .4), box-shadow .3s ease;
+  }
+  .pl.p1 .blk{transform:none; opacity:1;}
+  .pl-nav{display:flex; align-items:center; gap:8px;}
+  .pl-nav .logo{width:16px; height:16px; border-radius:50%;}
+  .pl-nav .ln{width:26px; height:5px;}
+  .pl-nav .ln:first-of-type{margin-left:auto;}
+  .pl-nav .cta{width:46px; height:13px; border-radius:7px; margin-left:6px;}
+  .pl-hero{display:grid; grid-template-columns:1.1fr .9fr; gap:14px; align-items:center; margin-top:18px;}
+  .pl-copy{display:flex; flex-direction:column; gap:7px;}
+  .pl-copy .h1{width:92%; height:13px;}
+  .pl-copy .h2{width:68%; height:13px;}
+  .pl-copy .tx{width:84%; height:5px; margin-top:4px;}
+  .pl-copy .tx2{width:62%; height:5px;}
+  .pl-btns{display:flex; gap:8px; margin-top:8px;}
+  .pl-btns .b1{width:62px; height:16px; border-radius:3px;}
+  .pl-btns .b2{width:50px; height:16px; border-radius:3px;}
+  .pl-img{position:relative; aspect-ratio:4 / 3; border-radius:6px !important; overflow:hidden;}
+  .pl-img::before, .pl-img::after{content:""; position:absolute; opacity:0; transition:opacity .5s ease .2s;}
+  .pl-img::before{top:16%; right:18%; width:16%; aspect-ratio:1; border-radius:50%; background:var(--cream);}
+  .pl-img::after{inset:0; background:var(--sage-light); clip-path:polygon(0 100%, 0 78%, 30% 46%, 52% 70%, 72% 44%, 100% 76%, 100% 100%);}
+  .pl-cards{display:grid; grid-template-columns:repeat(3,1fr); gap:9px; margin-top:16px;}
+  .pl-cards .blk{height:38px; border-radius:5px;}
+  /* phase 2: design (colours) */
+  .pl.p2 .blk{border-color:transparent;}
+  .pl.p2 .logo{background-color:var(--sage);}
+  .pl.p2 .ln{background-color:rgba(243,237,228,.28);}
+  .pl.p2 .cta{background-color:var(--sage-light);}
+  .pl.p2 .h1, .pl.p2 .h2{background-color:var(--cream);}
+  .pl.p2 .tx, .pl.p2 .tx2{background-color:rgba(243,237,228,.3);}
+  .pl.p2 .b1{background-color:var(--sage);}
+  .pl.p2 .b2{border:1px solid rgba(243,237,228,.6);}
+  .pl.p2 .pl-img{background-color:#2a3a2c;}
+  .pl.p2 .pl-img::before, .pl.p2 .pl-img::after{opacity:1;}
+  .pl.p2 .pl-cards .blk{background-color:rgba(168,196,172,.16);}
+  /* phase 3: build (shimmer + cursor heads for the button) */
+  .pl.p3 .pl-img, .pl.p3 .pl-cards .blk, .pl.p3 .h1, .pl.p3 .h2{
+    background-image:linear-gradient(100deg, transparent 30%, rgba(255,255,255,.18) 50%, transparent 70%);
+    background-size:220% 100%; animation:plShim 1.1s linear infinite;
+  }
+  .pl-cursor{position:absolute; z-index:3; width:18px; height:18px; left:86%; top:94%; opacity:0; pointer-events:none;
+    transition:left .55s cubic-bezier(.6,0,.2,1), top .55s cubic-bezier(.6,0,.2,1), opacity .25s ease, transform .15s ease;}
+  .pl.p3 .pl-cursor{opacity:1;}
+  /* phase 4: launch (click, button pulse, window lights up) */
+  .pl.p4 .pl-cursor{transform:scale(.8);}
+  .pl.p4 .b1{box-shadow:0 0 0 5px rgba(168,196,172,.28); background-color:var(--sage-light);}
+  .pl.p4 .pl-win{border-color:rgba(168,196,172,.55); box-shadow:0 0 0 1px rgba(168,196,172,.25), 0 40px 90px -30px rgba(110,147,112,.55);}
+  .pl.p4 .pl-win-bar > i:nth-child(1){background:#e5533d;}
+  .pl.p4 .pl-win-bar > i:nth-child(2){background:#f2c12e;}
+  .pl.p4 .pl-win-bar > i:nth-child(3){background:#6e9370;}
+
+  /* corners */
+  .pl-sign{position:absolute; left:5vw; bottom:5vh; display:flex; flex-direction:column; gap:6px;}
+  .pl-sign .pl-logo{display:block; align-self:flex-start; height:38px; width:auto; margin-bottom:8px; animation:plWinIn .7s cubic-bezier(.2,.7,.3,1) .15s both;}
+  .pl-sign b{font-family:var(--serif); font-weight:400; font-size:20px;}
+  .pl-sign span{font-size:10px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:var(--paper-muted);}
+  .pl-count{
+    position:absolute; right:5vw; bottom:3vh; font-family:var(--serif); font-style:italic; font-weight:400;
+    font-size:clamp(84px,15vw,210px); line-height:.8; letter-spacing:-.04em; color:var(--sage-light); font-variant-numeric:tabular-nums;
+  }
+  .pl-count small{font-size:.28em; letter-spacing:0; color:var(--paper-muted); margin-left:.08em;}
+  @keyframes plWinIn{from{opacity:0; transform:translateY(24px) scale(.96);} to{opacity:1; transform:none;}}
+  @keyframes plShim{from{background-position:120% 0;} to{background-position:-120% 0;}}
+  @keyframes plBlink{50%{opacity:.2;}}
+  @keyframes plSwap{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;}}
+  @media (max-width:560px){
+    .pl-win-body{padding:13px 13px 15px;}
+    .pl-sign{left:22px; bottom:4vh;}
+    .pl-sign b{font-size:17px;}
+    .pl-count{right:18px; bottom:calc(4vh + 46px); font-size:24vw;}
+  }
 </style>
+<noscript><style>.pl{display:none!important}</style></noscript>
 </head>
 <body>
+<!-- Preloader: a website builds itself (first visit per session only, ~2.3s, max 3.2s) -->
+<div class="pl" id="preloader" aria-hidden="true">
+  <div class="pl-half top"></div><div class="pl-half bottom"></div>
+  <div class="pl-stage">
+    <div class="pl-win" id="plWin">
+      <div class="pl-win-bar"><i></i><i></i><i></i><span class="pl-url"><span class="dot"></span><span id="plStage">wireframing&#8230;</span></span></div>
+      <div class="pl-win-body">
+        <div class="pl-nav"><span class="blk logo" style="--d:0s"></span><span class="blk ln" style="--d:.06s"></span><span class="blk ln" style="--d:.12s"></span><span class="blk ln" style="--d:.18s"></span><span class="blk cta" style="--d:.24s"></span></div>
+        <div class="pl-hero">
+          <div class="pl-copy">
+            <span class="blk h1" style="--d:.3s"></span><span class="blk h2" style="--d:.38s"></span>
+            <span class="blk tx" style="--d:.46s"></span><span class="blk tx2" style="--d:.52s"></span>
+            <div class="pl-btns"><span class="blk b1" id="plBtn" style="--d:.6s"></span><span class="blk b2" style="--d:.66s"></span></div>
+          </div>
+          <span class="blk pl-img" style="--d:.36s"></span>
+        </div>
+        <div class="pl-cards"><span class="blk" style="--d:.72s"></span><span class="blk" style="--d:.8s"></span><span class="blk" style="--d:.88s"></span></div>
+      </div>
+      <svg class="pl-cursor" id="plCursor" viewBox="0 0 24 24"><path d="M5 3l14 8.2-6.1 1.5-3.2 5.8z" fill="#f3ede4" stroke="#0b0b0a" stroke-width="1.3" stroke-linejoin="round"/></svg>
+    </div>
+  </div>
+  <div class="pl-sign"><img class="pl-logo" src="logo.webp" alt="" width="216" height="159"><b>Carl Madelo</b><span>Duda web designer &amp; developer</span></div>
+  <div class="pl-count"><span id="plCount">00</span><small>%</small></div>
+</div>
+<script>
+(function () {
+  var pl = document.getElementById('preloader');
+  if (!pl) return;
+  var seen = false;
+  try { seen = sessionStorage.getItem('cm-preloader') === '1'; sessionStorage.setItem('cm-preloader', '1'); } catch (e) {}
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (seen || reduce) { pl.parentNode.removeChild(pl); return; }
+  var root = document.documentElement; root.classList.add('pl-lock');
+  var count = document.getElementById('plCount'), stage = document.getElementById('plStage');
+  var win = document.getElementById('plWin'), btn = document.getElementById('plBtn'), cursor = document.getElementById('plCursor');
+  var LEN = 2000, MAX = 3200, start = performance.now(), ready = false, shown = 0, phase = 0, finished = false;
+  var labels = ['', 'wireframing', 'designing', 'building', 'launching'];
+  function setPhase(n) {
+    if (n <= phase) return;
+    for (var k = phase + 1; k <= n; k++) pl.classList.add('p' + k);
+    phase = n;
+    stage.textContent = labels[n] + '\u2026'; stage.classList.remove('swap'); void stage.offsetWidth; stage.classList.add('swap');
+    if (n === 3 && win && btn && cursor) {   // send the cursor to the main button
+      var w = win.getBoundingClientRect(), b = btn.getBoundingClientRect();
+      cursor.style.left = (b.left - w.left + b.width * 0.55) + 'px';
+      cursor.style.top = (b.top - w.top + b.height * 0.35) + 'px';
+    }
+  }
+  function finish() {
+    if (finished) return; finished = true;
+    pl.classList.add('done'); root.classList.remove('pl-lock');
+    setTimeout(function () { if (pl.parentNode) pl.parentNode.removeChild(pl); }, 950);
+  }
+  function tick(now) {
+    var t = now - start;
+    if (t >= MAX) { count.textContent = '100'; setPhase(4); setTimeout(finish, 250); return; }
+    var target = Math.min(ready ? 100 : 90, (t / LEN) * 100);
+    shown += (target - shown) * 0.24;
+    if (target === 100 && shown > 99.4) shown = 100;
+    var n = Math.round(shown); count.textContent = n < 10 ? '0' + n : String(n);
+    setPhase(shown < 1 ? 1 : shown < 30 ? 1 : shown < 58 ? 2 : shown < 86 ? 3 : 4);
+    if (shown >= 100) { setTimeout(finish, 300); return; }
+    requestAnimationFrame(tick);
+  }
+  setPhase(1);
+  requestAnimationFrame(tick);
+  document.addEventListener('DOMContentLoaded', function () {
+    var fonts = (document.fonts && document.fonts.ready) ? document.fonts.ready : Promise.resolve();
+    Promise.race([fonts, new Promise(function (r) { setTimeout(r, 1200); })]).then(function () { ready = true; });
+  });
+})();
+</script>
 
 <a href="#main" class="skip-link">Skip to content</a>
 
@@ -1383,7 +1735,7 @@
 <header id="siteHeader">
   <nav class="navbar" aria-label="Primary">
     <a href="/" class="brand">
-      <span class="brand-mark" aria-hidden="true">CM</span>
+      <img class="brand-logo" src="logo.webp" alt="" width="216" height="159" aria-hidden="true" decoding="async">
       <span class="logo">Carl Madelo</span>
     </a>
     <div class="nav-links" id="navLinks">
@@ -1490,39 +1842,73 @@
         <p class="note">Live client projects across construction, home services and property — every one designed and built on Duda.</p>
       </div>
 
-      <div class="work-grid" id="workGrid">
-        <article class="work-card reveal">
-          <a class="work-thumb fit-whole" href="https://www.drivewaysbicester.co.uk/" target="_blank" rel="noopener" aria-label="View the Driveways Bicester website (opens in a new tab)">
-            <img class="work-shot" src="drivewaysbicester.webp" alt="Driveways Bicester Duda website homepage" loading="lazy" decoding="async">
-            <span class="work-view"><span>View Live Site &#8594;</span></span>
-          </a>
-          <div class="work-body">
-            <span class="work-sector">Driveways &amp; Paving — Oxfordshire, UK</span>
-            <h3 class="work-title">Driveways Bicester</h3>
+      <div class="cases">
+      <article class="featured reveal" style="--i:0; --acc:#caa56b" aria-labelledby="fxTitle1">
+        <span class="fx-num" aria-hidden="true">01</span>
+        <div class="fx-copy">
+          <p class="eyebrow light">Case study &#8212; 01</p>
+          <h3 class="fx-title" id="fxTitle1">SZ Classic Homes</h3>
+          <p class="fx-lede">A full migration from WordPress to Duda for a custom home builder in Northern &amp; Central New Jersey. The site was rebuilt on Duda to showcase their craftsmanship, build trust and turn visitors into enquiries.</p>
+          <ul class="fx-meta"><li>WordPress &#8594; Duda migration</li><li>Custom home building</li><li>Northern &amp; Central NJ</li></ul>
+          <a href="https://www.szclassichomes.com/" class="btn btn-solid fx-cta" target="_blank" rel="noopener">View live site <span class="arrow" aria-hidden="true">&#8594;</span><span class="sr-only"> (opens in a new tab)</span></a>
+        </div>
+        <div class="fx-devices">
+          <div class="fx-laptop">
+            <div class="fx-lid"><span class="fx-cam" aria-hidden="true"></span><div class="fx-screen" style="--ar:900 / 551"><img src="szclassic.webp" alt="SZ Classic Homes Duda website homepage" width="900" height="551" loading="lazy" decoding="async"></div></div>
+            <div class="fx-base"></div>
           </div>
-        </article>
+        </div>
+      </article>
 
-        <article class="work-card reveal">
-          <a class="work-thumb" href="https://www.cube21.co.uk/" target="_blank" rel="noopener" aria-label="View the Cube 21 website (opens in a new tab)">
-            <img class="work-shot" src="cube21.webp" alt="Cube 21 Duda website homepage" loading="lazy" decoding="async">
-            <span class="work-view"><span>View Live Site &#8594;</span></span>
-          </a>
-          <div class="work-body">
-            <span class="work-sector">Architecture &amp; Construction — UK</span>
-            <h3 class="work-title">Cube 21</h3>
+      <article class="featured is-flip reveal" style="--i:1; --acc:#f2c12e" aria-labelledby="fxTitle2">
+        <span class="fx-num" aria-hidden="true">02</span>
+        <div class="fx-copy">
+          <p class="eyebrow light">Case study &#8212; 02</p>
+          <h3 class="fx-title" id="fxTitle2">Driveways Bicester</h3>
+          <p class="fx-lede">A landing page redesign on Duda for a local driveway and paving contractor in Bicester, rebuilt to answer homeowners&#8217; questions up front and turn local searches into callback requests.</p>
+          <ul class="fx-meta"><li>Landing page redesign</li><li>Driveways &amp; paving</li><li>Oxfordshire, UK</li></ul>
+          <a href="https://www.drivewaysbicester.co.uk/" class="btn btn-solid fx-cta" target="_blank" rel="noopener">View live site <span class="arrow" aria-hidden="true">&#8594;</span><span class="sr-only"> (opens in a new tab)</span></a>
+        </div>
+        <div class="fx-devices">
+          <div class="fx-laptop">
+            <div class="fx-lid"><span class="fx-cam" aria-hidden="true"></span><div class="fx-screen" style="--ar:900 / 480"><img src="drivewaysbicester.webp" alt="Driveways Bicester Duda website homepage" width="900" height="480" loading="lazy" decoding="async"></div></div>
+            <div class="fx-base"></div>
           </div>
-        </article>
+        </div>
+      </article>
 
-        <article class="work-card reveal">
-          <a class="work-thumb" href="https://www.szclassichomes.com/" target="_blank" rel="noopener" aria-label="View the SZ Classic Homes website (opens in a new tab)">
-            <img class="work-shot" src="szclassic.webp" alt="SZ Classic Homes Duda website homepage" loading="lazy" decoding="async">
-            <span class="work-view"><span>View Live Site &#8594;</span></span>
-          </a>
-          <div class="work-body">
-            <span class="work-sector">Custom Home Building</span>
-            <h3 class="work-title">SZ Classic Homes</h3>
+      <article class="featured reveal" style="--i:2; --acc:#22b8b2" aria-labelledby="fxTitle3">
+        <span class="fx-num" aria-hidden="true">03</span>
+        <div class="fx-copy">
+          <p class="eyebrow light">Case study &#8212; 03</p>
+          <h3 class="fx-title" id="fxTitle3">Cube 21</h3>
+          <p class="fx-lede">A complete website redesign on Duda for a commercial fit-out and furniture specialist, presenting their service from creation to installation and making it easy to request a consultation.</p>
+          <ul class="fx-meta"><li>Full website redesign</li><li>Commercial fit-out</li><li>Oxfordshire, UK</li></ul>
+          <a href="https://www.cube21.co.uk/" class="btn btn-solid fx-cta" target="_blank" rel="noopener">View live site <span class="arrow" aria-hidden="true">&#8594;</span><span class="sr-only"> (opens in a new tab)</span></a>
+        </div>
+        <div class="fx-devices">
+          <div class="fx-laptop">
+            <div class="fx-lid"><span class="fx-cam" aria-hidden="true"></span><div class="fx-screen" style="--ar:900 / 611"><img src="cube21.webp" alt="Cube 21 Duda website homepage" width="900" height="611" loading="lazy" decoding="async"></div></div>
+            <div class="fx-base"></div>
           </div>
-        </article>
+        </div>
+      </article>
+      <article class="featured is-flip reveal" style="--i:3; --acc:#718162" aria-labelledby="fxTitle4">
+        <span class="fx-num" aria-hidden="true">04</span>
+        <div class="fx-copy">
+          <p class="eyebrow light">Case study &#8212; 04</p>
+          <h3 class="fx-title" id="fxTitle4">Boostcamp</h3>
+          <p class="fx-lede">A brand-new website designed from scratch on Duda for an outdoor bootcamp in the Achterhoek, built around a bold black-and-moss look that shows off the training and turns visitors into sign-ups.</p>
+          <ul class="fx-meta"><li>Website design from scratch</li><li>Outdoor bootcamp</li><li>Achterhoek, NL</li></ul>
+          <a href="https://preview.duda.co/preview/67d8eae4?t=1792675504113&amp;preview_auth=1ntYKTPluOaMvQTjr9NNvjnzzJRcMuk6&amp;device=all" class="btn btn-solid fx-cta" target="_blank" rel="noopener">View site preview <span class="arrow" aria-hidden="true">&#8594;</span><span class="sr-only"> (opens in a new tab)</span></a>
+        </div>
+        <div class="fx-devices">
+          <div class="fx-laptop">
+            <div class="fx-lid"><span class="fx-cam" aria-hidden="true"></span><div class="fx-screen" style="--ar:900 / 590"><img src="boostcamp.webp" alt="Boostcamp Duda website homepage" width="900" height="590" loading="lazy" decoding="async"></div></div>
+            <div class="fx-base"></div>
+          </div>
+        </div>
+      </article>
       </div>
 
       <div class="work-stats reveal">
@@ -1530,6 +1916,35 @@
         <div class="work-stat"><span class="num">100%</span><span class="lbl">Built &amp; launched on Duda</span></div>
         <div class="work-stat"><span class="num">40%</span><span class="lbl">Avg. increase in lead requests</span></div>
         <div class="work-stat"><span class="num">3</span><span class="lbl">Industries served, and growing</span></div>
+      </div>
+
+      <div class="work-certs reveal" aria-labelledby="certsTitle">
+        <div class="work-certs-label">
+          <span class="wc-k">Duda certified</span>
+          <h3 class="wc-t" id="certsTitle">Certified in design, editing <em>and the Duda platform.</em></h3>
+        </div>
+        <ul class="certs-grid">
+          <li class="cert" style="--d:0.0s">
+            <span class="cert-medal"><img src="duda-editor-2.webp" alt="Duda Editor 2.0 certified badge" width="360" height="360" loading="lazy" decoding="async"></span>
+            <span class="cert-name">Editor 2.0</span>
+            <span class="cert-tag">Certified</span>
+          </li>
+          <li class="cert" style="--d:0.1s">
+            <span class="cert-medal"><img src="duda-web-design.webp" alt="Duda Web Design certified badge" width="360" height="360" loading="lazy" decoding="async"></span>
+            <span class="cert-name">Web Design</span>
+            <span class="cert-tag">Certified</span>
+          </li>
+          <li class="cert" style="--d:0.2s">
+            <span class="cert-medal"><img src="duda-platform-specialist.webp" alt="Duda Platform Specialist certified badge" width="360" height="360" loading="lazy" decoding="async"></span>
+            <span class="cert-name">Platform Specialist</span>
+            <span class="cert-tag">Certified</span>
+          </li>
+          <li class="cert" style="--d:0.3s">
+            <span class="cert-medal"><img src="duda-platform-professional.webp" alt="Duda Platform Professional certified badge" width="360" height="360" loading="lazy" decoding="async"></span>
+            <span class="cert-name">Platform Professional</span>
+            <span class="cert-tag">Certified</span>
+          </li>
+        </ul>
       </div>
     </div>
   </section>
@@ -1547,7 +1962,7 @@
           <p><b>Vibe coding</b> means directing AI to write a site&#8217;s code, then reviewing and polishing every page by hand. No page builder and no template, just custom code. Each video below is a real screen recording of the finished site.</p>
           <div class="vibe-facts">
             <div><b>06</b><span>Websites</span></div>
-            <div><b>02:31</b><span>Total watch time</span></div>
+            <div><b>02:22</b><span>Total watch time</span></div>
             <div><b>0</b><span>Templates used</span></div>
           </div>
         </div>
@@ -1582,7 +1997,7 @@
           </div>
           <div class="vibe-nav">
             <button type="button" class="vibe-navbtn" id="vibePrev" aria-label="Previous website"><span class="ar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></span><span class="tx">Prev</span></button>
-            <button type="button" class="vibe-navbtn is-next" id="vibeNext"><span class="fill" id="vibeNextFill" aria-hidden="true"></span><span class="tx"><span class="k">Up next</span><span class="nx" id="vibeNextName">Renzo Gracie Des Moines</span></span><span class="ar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
+            <button type="button" class="vibe-navbtn is-next" id="vibeNext"><span class="fill" id="vibeNextFill" aria-hidden="true"></span><span class="tx"><span class="k">Up next</span><span class="nx" id="vibeNextName">Espiritu Jiu-Jitsu</span></span><span class="ar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
           </div>
         </div>
       </div>
@@ -1597,85 +2012,103 @@
           <p class="eyebrow">Custom web design</p>
           <h3 class="vibe-grid-title" id="vibeGridTitle">Six brands, <em>six original designs.</em></h3>
         </div>
-        <p class="vibe-grid-hint">Built for jiu-jitsu academies, an MMA gym and a yoga studio. Click any card to play it on the big screen.</p>
+        <p class="vibe-grid-hint">Built for jiu-jitsu academies and a yoga studio. Click any card to play it on the big screen.</p>
       </div>
       <div class="vibe-grid" id="vibeGrid">
-        <button class="vibe-card reveal" type="button" aria-pressed="true" style="transition-delay:0.00s" data-name="Clayton Phillips Jiu Jitsu" data-sector="Jiu Jitsu · Norfolk, VA" data-slug="clayton-phillips-jiu-jitsu" data-dur="34.97" data-src="clayton-phillips-jiu-jitsu.mp4" data-poster="clayton-phillips-jiu-jitsu.webp" aria-label="Play the Clayton Phillips Jiu Jitsu walkthrough on the big screen, 0:35">
-          <span class="vibe-thumb">
-            <video muted playsinline loop preload="none" tabindex="-1" aria-hidden="true" data-src="clayton-phillips-jiu-jitsu.mp4"></video>
-            <span class="vibe-badge"><span class="dur">0:35</span></span>
-            <span class="vibe-watch"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Play on big screen</span>
-            <span class="bar"></span>
+        <button class="vibe-card reveal" type="button" aria-pressed="true" style="transition-delay:0.00s; --acc:#e5398f" data-name="Clayton Phillips Jiu Jitsu" data-sector="Jiu Jitsu · Norfolk, VA" data-slug="clayton-phillips-jiu-jitsu" data-dur="34.97" data-src="clayton-phillips-jiu-jitsu.mp4" data-poster="clayton-phillips-jiu-jitsu.webp" aria-label="Play the Clayton Phillips Jiu Jitsu walkthrough on the big screen, 0:35">
+          <span class="vc-frame">
+            <span class="vc-chrome" aria-hidden="true"><i></i><i></i><i></i><span class="vc-url"></span><span class="dur">0:35</span></span>
+            <span class="vibe-thumb">
+              <video muted playsinline loop preload="none" tabindex="-1" aria-hidden="true" data-src="clayton-phillips-jiu-jitsu.mp4"></video>
+              <span class="vibe-watch"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Play on big screen</span>
+              <span class="bar"></span>
+            </span>
           </span>
           <span class="vibe-card-body">
-            <span class="no" aria-hidden="true">01</span>
-            <span class="txt"><span class="nm">Clayton Phillips Jiu Jitsu</span><span class="loc">Jiu Jitsu · Norfolk, VA</span></span>
-            <span class="go" aria-hidden="true"><span class="vibe-eq"><i></i><i></i><i></i></span><span class="g-watch">Watch</span><span class="g-now">Playing</span><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
+            <span class="vc-meta" aria-hidden="true"><span class="no">01</span><span class="ln"></span><span class="vc-tag">Jiu Jitsu</span></span>
+            <span class="nm">Clayton Phillips Jiu Jitsu</span>
+            <span class="loc"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>Norfolk, VA</span>
+            <span class="go" aria-hidden="true"><span class="g-ico"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg><span class="vibe-eq"><i></i><i></i><i></i></span></span><span class="g-watch">Watch walkthrough</span><span class="g-now">Now playing</span><svg class="g-arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
           </span>
         </button>
-        <button class="vibe-card reveal" type="button" aria-pressed="false" style="transition-delay:0.07s" data-name="Renzo Gracie Des Moines" data-sector="Brazilian Jiu-Jitsu · Des Moines, IA" data-slug="renzo-gracie-des-moines" data-dur="27.26" data-src="renzo-gracie-des-moines.mp4" data-poster="renzo-gracie-des-moines.webp" aria-label="Play the Renzo Gracie Des Moines walkthrough on the big screen, 0:27">
-          <span class="vibe-thumb">
-            <video muted playsinline loop preload="none" tabindex="-1" aria-hidden="true" data-src="renzo-gracie-des-moines.mp4"></video>
-            <span class="vibe-badge"><span class="dur">0:27</span></span>
-            <span class="vibe-watch"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Play on big screen</span>
-            <span class="bar"></span>
+        <button class="vibe-card reveal" type="button" aria-pressed="false" style="transition-delay:0.07s; --acc:#b0825f" data-name="Espiritu Jiu-Jitsu" data-sector="Brazilian Jiu-Jitsu · Oxnard, CA" data-slug="espiritu-jiu-jitsu" data-dur="21.42" data-src="espiritu-jiu-jitsu.mp4" data-poster="espiritu-jiu-jitsu.webp" aria-label="Play the Espiritu Jiu-Jitsu walkthrough on the big screen, 0:21">
+          <span class="vc-frame">
+            <span class="vc-chrome" aria-hidden="true"><i></i><i></i><i></i><span class="vc-url"></span><span class="dur">0:21</span></span>
+            <span class="vibe-thumb">
+              <video muted playsinline loop preload="none" tabindex="-1" aria-hidden="true" data-src="espiritu-jiu-jitsu.mp4"></video>
+              <span class="vibe-watch"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Play on big screen</span>
+              <span class="bar"></span>
+            </span>
           </span>
           <span class="vibe-card-body">
-            <span class="no" aria-hidden="true">02</span>
-            <span class="txt"><span class="nm">Renzo Gracie Des Moines</span><span class="loc">Brazilian Jiu-Jitsu · Des Moines, IA</span></span>
-            <span class="go" aria-hidden="true"><span class="vibe-eq"><i></i><i></i><i></i></span><span class="g-watch">Watch</span><span class="g-now">Playing</span><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
+            <span class="vc-meta" aria-hidden="true"><span class="no">02</span><span class="ln"></span><span class="vc-tag">Brazilian Jiu-Jitsu</span></span>
+            <span class="nm">Espiritu Jiu-Jitsu</span>
+            <span class="loc"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>Oxnard, CA</span>
+            <span class="go" aria-hidden="true"><span class="g-ico"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg><span class="vibe-eq"><i></i><i></i><i></i></span></span><span class="g-watch">Watch walkthrough</span><span class="g-now">Now playing</span><svg class="g-arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
           </span>
         </button>
-        <button class="vibe-card reveal" type="button" aria-pressed="false" style="transition-delay:0.14s" data-name="American Top Team Winter Garden" data-sector="BJJ, Muay Thai &amp; MMA · Winter Garden, FL" data-slug="american-top-team-winter-garden" data-dur="20.69" data-src="american-top-team-winter-garden.mp4" data-poster="american-top-team-winter-garden.webp" aria-label="Play the American Top Team Winter Garden walkthrough on the big screen, 0:21">
-          <span class="vibe-thumb">
-            <video muted playsinline loop preload="none" tabindex="-1" aria-hidden="true" data-src="american-top-team-winter-garden.mp4"></video>
-            <span class="vibe-badge"><span class="dur">0:21</span></span>
-            <span class="vibe-watch"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Play on big screen</span>
-            <span class="bar"></span>
+        <button class="vibe-card reveal" type="button" aria-pressed="false" style="transition-delay:0.14s; --acc:#e8622a" data-name="Sentry Jiu-Jitsu" data-sector="Brazilian Jiu-Jitsu · Gilbertsville, PA" data-slug="sentry-jiu-jitsu" data-dur="21.22" data-src="sentry-jiu-jitsu.mp4" data-poster="sentry-jiu-jitsu.webp" aria-label="Play the Sentry Jiu-Jitsu walkthrough on the big screen, 0:21">
+          <span class="vc-frame">
+            <span class="vc-chrome" aria-hidden="true"><i></i><i></i><i></i><span class="vc-url"></span><span class="dur">0:21</span></span>
+            <span class="vibe-thumb">
+              <video muted playsinline loop preload="none" tabindex="-1" aria-hidden="true" data-src="sentry-jiu-jitsu.mp4"></video>
+              <span class="vibe-watch"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Play on big screen</span>
+              <span class="bar"></span>
+            </span>
           </span>
           <span class="vibe-card-body">
-            <span class="no" aria-hidden="true">03</span>
-            <span class="txt"><span class="nm">American Top Team Winter Garden</span><span class="loc">BJJ, Muay Thai &amp; MMA · Winter Garden, FL</span></span>
-            <span class="go" aria-hidden="true"><span class="vibe-eq"><i></i><i></i><i></i></span><span class="g-watch">Watch</span><span class="g-now">Playing</span><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
+            <span class="vc-meta" aria-hidden="true"><span class="no">03</span><span class="ln"></span><span class="vc-tag">Brazilian Jiu-Jitsu</span></span>
+            <span class="nm">Sentry Jiu-Jitsu</span>
+            <span class="loc"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>Gilbertsville, PA</span>
+            <span class="go" aria-hidden="true"><span class="g-ico"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg><span class="vibe-eq"><i></i><i></i><i></i></span></span><span class="g-watch">Watch walkthrough</span><span class="g-now">Now playing</span><svg class="g-arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
           </span>
         </button>
-        <button class="vibe-card reveal" type="button" aria-pressed="false" style="transition-delay:0.00s" data-name="Espiritu Jiu-Jitsu" data-sector="Brazilian Jiu-Jitsu · Oxnard, CA" data-slug="espiritu-jiu-jitsu" data-dur="21.42" data-src="espiritu-jiu-jitsu.mp4" data-poster="espiritu-jiu-jitsu.webp" aria-label="Play the Espiritu Jiu-Jitsu walkthrough on the big screen, 0:21">
-          <span class="vibe-thumb">
-            <video muted playsinline loop preload="none" tabindex="-1" aria-hidden="true" data-src="espiritu-jiu-jitsu.mp4"></video>
-            <span class="vibe-badge"><span class="dur">0:21</span></span>
-            <span class="vibe-watch"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Play on big screen</span>
-            <span class="bar"></span>
+        <button class="vibe-card reveal" type="button" aria-pressed="false" style="transition-delay:0.00s; --acc:#8a4fae" data-name="Palm Yoga" data-sector="Yoga Studio · Carrollwood, Tampa, FL" data-slug="palm-yoga" data-dur="25.76" data-src="palm-yoga.mp4" data-poster="palm-yoga.webp" aria-label="Play the Palm Yoga walkthrough on the big screen, 0:26">
+          <span class="vc-frame">
+            <span class="vc-chrome" aria-hidden="true"><i></i><i></i><i></i><span class="vc-url"></span><span class="dur">0:26</span></span>
+            <span class="vibe-thumb">
+              <video muted playsinline loop preload="none" tabindex="-1" aria-hidden="true" data-src="palm-yoga.mp4"></video>
+              <span class="vibe-watch"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Play on big screen</span>
+              <span class="bar"></span>
+            </span>
           </span>
           <span class="vibe-card-body">
-            <span class="no" aria-hidden="true">04</span>
-            <span class="txt"><span class="nm">Espiritu Jiu-Jitsu</span><span class="loc">Brazilian Jiu-Jitsu · Oxnard, CA</span></span>
-            <span class="go" aria-hidden="true"><span class="vibe-eq"><i></i><i></i><i></i></span><span class="g-watch">Watch</span><span class="g-now">Playing</span><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
+            <span class="vc-meta" aria-hidden="true"><span class="no">04</span><span class="ln"></span><span class="vc-tag">Yoga Studio</span></span>
+            <span class="nm">Palm Yoga</span>
+            <span class="loc"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>Carrollwood, Tampa, FL</span>
+            <span class="go" aria-hidden="true"><span class="g-ico"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg><span class="vibe-eq"><i></i><i></i><i></i></span></span><span class="g-watch">Watch walkthrough</span><span class="g-now">Now playing</span><svg class="g-arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
           </span>
         </button>
-        <button class="vibe-card reveal" type="button" aria-pressed="false" style="transition-delay:0.07s" data-name="Sentry Jiu-Jitsu" data-sector="Brazilian Jiu-Jitsu · Gilbertsville, PA" data-slug="sentry-jiu-jitsu" data-dur="21.22" data-src="sentry-jiu-jitsu.mp4" data-poster="sentry-jiu-jitsu.webp" aria-label="Play the Sentry Jiu-Jitsu walkthrough on the big screen, 0:21">
-          <span class="vibe-thumb">
-            <video muted playsinline loop preload="none" tabindex="-1" aria-hidden="true" data-src="sentry-jiu-jitsu.mp4"></video>
-            <span class="vibe-badge"><span class="dur">0:21</span></span>
-            <span class="vibe-watch"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Play on big screen</span>
-            <span class="bar"></span>
+        <button class="vibe-card reveal" type="button" aria-pressed="false" style="transition-delay:0.07s; --acc:#d8b13c" data-name="True Believer Jiu-Jitsu" data-sector="Brazilian Jiu-Jitsu · Pittsburgh, PA" data-slug="true-believer-jiu-jitsu" data-dur="17.3" data-src="true-believer-jiu-jitsu.mp4" data-poster="true-believer-jiu-jitsu.webp" aria-label="Play the True Believer Jiu-Jitsu walkthrough on the big screen, 0:17">
+          <span class="vc-frame">
+            <span class="vc-chrome" aria-hidden="true"><i></i><i></i><i></i><span class="vc-url"></span><span class="dur">0:17</span></span>
+            <span class="vibe-thumb">
+              <video muted playsinline loop preload="none" tabindex="-1" aria-hidden="true" data-src="true-believer-jiu-jitsu.mp4"></video>
+              <span class="vibe-watch"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Play on big screen</span>
+              <span class="bar"></span>
+            </span>
           </span>
           <span class="vibe-card-body">
-            <span class="no" aria-hidden="true">05</span>
-            <span class="txt"><span class="nm">Sentry Jiu-Jitsu</span><span class="loc">Brazilian Jiu-Jitsu · Gilbertsville, PA</span></span>
-            <span class="go" aria-hidden="true"><span class="vibe-eq"><i></i><i></i><i></i></span><span class="g-watch">Watch</span><span class="g-now">Playing</span><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
+            <span class="vc-meta" aria-hidden="true"><span class="no">05</span><span class="ln"></span><span class="vc-tag">Brazilian Jiu-Jitsu</span></span>
+            <span class="nm">True Believer Jiu-Jitsu</span>
+            <span class="loc"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>Pittsburgh, PA</span>
+            <span class="go" aria-hidden="true"><span class="g-ico"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg><span class="vibe-eq"><i></i><i></i><i></i></span></span><span class="g-watch">Watch walkthrough</span><span class="g-now">Now playing</span><svg class="g-arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
           </span>
         </button>
-        <button class="vibe-card reveal" type="button" aria-pressed="false" style="transition-delay:0.14s" data-name="Palm Yoga" data-sector="Yoga Studio · Carrollwood, Tampa, FL" data-slug="palm-yoga" data-dur="25.76" data-src="palm-yoga.mp4" data-poster="palm-yoga.webp" aria-label="Play the Palm Yoga walkthrough on the big screen, 0:26">
-          <span class="vibe-thumb">
-            <video muted playsinline loop preload="none" tabindex="-1" aria-hidden="true" data-src="palm-yoga.mp4"></video>
-            <span class="vibe-badge"><span class="dur">0:26</span></span>
-            <span class="vibe-watch"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Play on big screen</span>
-            <span class="bar"></span>
+        <button class="vibe-card reveal" type="button" aria-pressed="false" style="transition-delay:0.14s; --acc:#3cc3c9" data-name="Phenom BJJ" data-sector="Brazilian Jiu-Jitsu · Irvine, CA" data-slug="phenom-bjj" data-dur="21.63" data-src="phenom-bjj.mp4" data-poster="phenom-bjj.webp" aria-label="Play the Phenom BJJ walkthrough on the big screen, 0:22">
+          <span class="vc-frame">
+            <span class="vc-chrome" aria-hidden="true"><i></i><i></i><i></i><span class="vc-url"></span><span class="dur">0:22</span></span>
+            <span class="vibe-thumb">
+              <video muted playsinline loop preload="none" tabindex="-1" aria-hidden="true" data-src="phenom-bjj.mp4"></video>
+              <span class="vibe-watch"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Play on big screen</span>
+              <span class="bar"></span>
+            </span>
           </span>
           <span class="vibe-card-body">
-            <span class="no" aria-hidden="true">06</span>
-            <span class="txt"><span class="nm">Palm Yoga</span><span class="loc">Yoga Studio · Carrollwood, Tampa, FL</span></span>
-            <span class="go" aria-hidden="true"><span class="vibe-eq"><i></i><i></i><i></i></span><span class="g-watch">Watch</span><span class="g-now">Playing</span><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
+            <span class="vc-meta" aria-hidden="true"><span class="no">06</span><span class="ln"></span><span class="vc-tag">Brazilian Jiu-Jitsu</span></span>
+            <span class="nm">Phenom BJJ</span>
+            <span class="loc"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>Irvine, CA</span>
+            <span class="go" aria-hidden="true"><span class="g-ico"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg><span class="vibe-eq"><i></i><i></i><i></i></span></span><span class="g-watch">Watch walkthrough</span><span class="g-now">Now playing</span><svg class="g-arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
           </span>
         </button>
       </div>
@@ -1940,6 +2373,7 @@
   <div class="wrap">
     <div class="footer-top">
       <div class="footer-brand">
+        <img class="f-mark" src="logo.webp" alt="" width="216" height="159" loading="lazy" decoding="async">
         <span class="f-logo">Carl Madelo</span>
         <p>Conversion-focused Duda websites and custom AI-assisted web development that elevate your brand and turn attention into real business. Selective by design — one project at a time.</p>
         <span class="footer-avail"><span class="dot"></span> Available for select projects</span>
@@ -2289,6 +2723,51 @@
     if (inView) { if (current < 0) load(0); else tryPlay(); }
     else if (!video.paused) video.pause();
   }, { threshold: 0.35 }).observe(screen);
+})();
+</script>
+
+<script>
+/* case studies: stack on scroll (the panel underneath shrinks and dims as the next one covers it) */
+(() => {
+  const wrap = document.querySelector('.cases');
+  if (!wrap) return;
+  const cards = Array.from(wrap.querySelectorAll('.featured'));
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let ticking = false;
+  // a panel taller than the screen (phones) scrolls fully into view first, then sticks by its
+  // bottom edge while the next one slides over it, so the stack works everywhere and nothing is hidden
+  let lastW = 0;
+  const fit = () => {
+    lastW = window.innerWidth;
+    const vh = window.innerHeight;
+    cards.forEach((c) => {
+      c.classList.remove('no-stick');
+      c.style.top = '';
+      const top = parseFloat(getComputedStyle(c).top) || 0;
+      const room = vh - 12 - c.offsetHeight;
+      if (room < top) c.style.top = Math.round(room) + 'px';
+    });
+  };
+  const update = () => {
+    ticking = false;
+    if (reduce) return;
+    cards.forEach((c, i) => {
+      const next = cards[i + 1];
+      let p = 0;
+      if (next) {
+        const r = c.getBoundingClientRect(), n = next.getBoundingClientRect();
+        p = Math.min(Math.max((r.bottom - n.top) / r.height, 0), 1);
+      }
+      c.style.setProperty('--stack', p.toFixed(3));
+    });
+  };
+  const onScroll = () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } };
+  fit(); update();
+  window.addEventListener('scroll', onScroll, { passive: true });
+  // phone toolbars change the height while scrolling; only re-measure when the width changes
+  window.addEventListener('resize', () => { if (window.innerWidth !== lastW) fit(); update(); });
+  window.addEventListener('load', () => { fit(); update(); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { fit(); update(); });
 })();
 </script>
 
