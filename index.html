@@ -94,13 +94,17 @@
       ],
       "hasOfferCatalog": {
         "@type": "OfferCatalog",
-        "name": "Duda web design services",
+        "name": "Web design services",
         "itemListElement": [
           { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Duda website design & build", "serviceType": "Website design and development" } },
           { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Duda website redesign & revamp", "serviceType": "Website redesign" } },
           { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Platform migration to Duda", "serviceType": "Website migration" } },
           { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "SEO-ready & scalable site structure", "serviceType": "Technical SEO" } },
-          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Performance & UX improvements", "serviceType": "Conversion rate optimization" } }
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Performance & UX improvements", "serviceType": "Conversion rate optimization" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Custom website built from scratch with Claude Code", "serviceType": "Custom website development" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Website rebuild with Claude Code", "serviceType": "Website rebuild" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Website redesign with Claude Code", "serviceType": "Website redesign" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "SEO-ready website with Claude Code", "serviceType": "Technical SEO" } }
         ]
       }
     },
@@ -383,6 +387,31 @@
   }
   .nav-links a.is-lit{color:#0c130d; font-weight:600;}
   .nav-links a.is-lit .mi-idx{background:#0c130d; border-color:#0c130d; color:var(--sage-light);}
+  /* Work dropdown */
+  .nav-drop{position:relative; display:flex;}
+  .nav-caret{width:10px; height:10px; margin-left:-3px; opacity:.75; transition:transform .3s ease;}
+  .nav-drop:hover .nav-caret, .nav-drop:has(:focus-visible) .nav-caret{transform:rotate(180deg);}
+  .nav-sub{
+    position:absolute; top:calc(100% + 16px); left:50%; z-index:5; width:300px; padding:8px;
+    display:flex; flex-direction:column; gap:2px; border-radius:20px;
+    background:rgba(14,15,12,.97); border:1px solid rgba(243,237,228,.14);
+    box-shadow:0 30px 60px -24px rgba(0,0,0,.7), inset 0 1px 0 rgba(255,255,255,.06);
+    opacity:0; visibility:hidden; transform:translate(-50%,8px);
+    transition:opacity .25s ease, transform .3s cubic-bezier(.2,.7,.3,1), visibility 0s linear .3s;
+  }
+  .nav-sub::before{content:""; position:absolute; left:0; right:0; top:-18px; height:18px;}
+  .nav-drop:hover .nav-sub, .nav-drop:has(:focus-visible) .nav-sub{opacity:1; visibility:visible; transform:translate(-50%,0); transition:opacity .25s ease, transform .3s cubic-bezier(.2,.7,.3,1), visibility 0s;}
+  .nav-drop.is-closed .nav-sub{opacity:0; visibility:hidden; transform:translate(-50%,8px); transition:opacity .2s ease, transform .2s ease, visibility 0s linear .2s;}
+  .nav-drop.is-closed .nav-caret{transform:none;}
+  .nav-links .nav-sub a{display:flex; align-items:center; gap:13px; padding:10px 12px; border-radius:14px; color:var(--cream); font-size:13px; transition:background .2s ease;}
+  .nav-links .nav-sub a:hover, .nav-links .nav-sub a:focus-visible{background:rgba(243,237,228,.07);}
+  .nav-links .nav-sub a::after{content:"\2192"; margin-left:auto; color:var(--sage-light); opacity:0; transform:translateX(-6px); transition:opacity .25s ease, transform .25s ease;}
+  .nav-links .nav-sub a:hover::after, .nav-links .nav-sub a:focus-visible::after{opacity:1; transform:none;}
+  .ns-ico{display:grid; place-items:center; flex:none; width:36px; height:36px; border-radius:11px; background:rgba(168,196,172,.12); border:1px solid rgba(168,196,172,.18); color:var(--sage-light);}
+  .ns-ico svg{width:17px; height:17px;}
+  .ns-txt{display:flex; flex-direction:column; gap:3px; line-height:1.25;}
+  .ns-txt b{font-size:13.5px; font-weight:600; color:var(--cream);}
+  .ns-txt small{font-size:11.5px; color:var(--paper-muted);}
 
   .nav-right{display:flex; align-items:center; gap:12px; position:relative; z-index:1;}
   .nav-right::before{
@@ -494,6 +523,9 @@
   .mobile-menu.open .mobile-links a:nth-child(3){transition-delay:.34s;}
   .mobile-menu.open .mobile-links a:nth-child(4){transition-delay:.4s;}
   .mobile-menu.open .mobile-links a:nth-child(5){transition-delay:.46s;}
+  .mobile-menu.open .mobile-links a:nth-child(6){transition-delay:.52s;}
+  .mobile-links a.mm-sub{gap:12px; padding:11px 0 11px 34px; font-size:clamp(19px,5.4vw,25px); color:#d8d1c2;}
+  .mobile-links a.mm-sub .mm-sub-mark{font-family:var(--sans); font-size:16px; color:var(--sage-light);}
   .mm-footer{
     display:flex; flex-direction:column; align-items:flex-start; gap:18px;
     width:100%; margin-top:auto; padding-top:26px; border-top:1px solid var(--line-dark);
@@ -934,7 +966,7 @@
     opacity:0; transform:translate(-50%,-35%); transition:opacity .3s ease, transform .3s ease;
   }
   .vibe-watch svg{width:12px; height:12px;}
-  .vibe-card:hover .vibe-watch, .vibe-card:focus-visible .vibe-watch{opacity:1; transform:translate(-50%,-50%);}
+  .vibe-card:hover .vibe-watch, .vc-hit:focus-visible ~ .vc-frame .vibe-watch{opacity:1; transform:translate(-50%,-50%);}
   .vibe-card.is-active .vibe-watch{display:none;}
   .vibe-thumb .bar{position:absolute; left:0; right:0; bottom:0; z-index:3; height:3px; background:rgba(255,255,255,.2);}
   .vibe-thumb .bar::after{content:""; position:absolute; inset:0; background:var(--acc); transform:scaleX(var(--p,0)); transform-origin:left;}
@@ -947,11 +979,24 @@
   .vibe-card .nm{margin-top:16px; font-family:var(--serif); font-size:23px; line-height:1.12; letter-spacing:-.01em; color:var(--ink); text-wrap:balance;}
   .vibe-card .loc{display:flex; align-items:center; gap:6px; margin:8px 0 20px; font-size:13px; line-height:1.4; color:var(--ink-muted);}
   .vibe-card .loc svg{width:12px; height:12px; flex:none; color:var(--acc);}
+  .vc-hit{position:absolute; inset:0; z-index:1; width:100%; border:0; padding:0; margin:0; border-radius:inherit; background:transparent; cursor:pointer;}
+  .vc-hit:focus-visible{outline:2px solid var(--acc); outline-offset:3px;}
+  .vc-foot{display:flex; align-items:center; gap:12px; margin-top:auto; padding:14px 0 6px; border-top:1px solid var(--line-light);}
   .vibe-card .go{
-    display:flex; align-items:center; gap:12px; margin-top:auto; padding:14px 0 6px;
-    border-top:1px solid var(--line-light); white-space:nowrap; color:var(--ink);
+    display:flex; align-items:center; gap:12px; white-space:nowrap; color:var(--ink);
     font-size:10.5px; font-weight:700; letter-spacing:.14em; text-transform:uppercase;
   }
+  .vc-visit{
+    position:relative; z-index:2; margin-left:auto; display:inline-flex; align-items:center; gap:7px;
+    height:32px; padding:0 13px 0 14px; border-radius:999px; white-space:nowrap;
+    border:1px solid var(--line-light); background:#fff; color:var(--ink); text-decoration:none;
+    font-size:10px; font-weight:700; letter-spacing:.12em; text-transform:uppercase;
+    transition:background .3s ease, border-color .3s ease, color .3s ease;
+  }
+  .vc-visit svg{width:12px; height:12px; color:var(--acc); transition:transform .35s cubic-bezier(.2,.7,.3,1), color .3s ease;}
+  .vc-visit:hover, .vc-visit:focus-visible{background:var(--ink); border-color:var(--ink); color:var(--cream);}
+  .vc-visit:hover svg, .vc-visit:focus-visible svg{transform:translate(2px,-2px);}
+  .vc-visit:focus-visible{outline:2px solid var(--acc); outline-offset:2px;}
   .g-ico{display:grid; place-items:center; flex:none; width:32px; height:32px; border-radius:50%; border:1px solid var(--line-light); color:var(--ink); transition:background .3s ease, border-color .3s ease, color .3s ease, transform .35s cubic-bezier(.2,.7,.3,1);}
   .g-ico svg{width:11px; height:11px; margin-left:1px;}
   .g-arr{width:15px; height:15px; margin-left:auto; color:var(--ink-muted); transition:transform .35s cubic-bezier(.2,.7,.3,1), color .3s ease, opacity .3s ease;}
@@ -1158,6 +1203,23 @@
     background:#050505; opacity:calc(var(--stack,0) * .5);
   }
   .cases .featured.no-stick{position:relative; top:auto;}
+  .case-index{
+    position:fixed; right:18px; top:50%; z-index:60; display:flex; flex-direction:column; align-items:center; gap:9px;
+    padding:12px 8px; border-radius:999px; background:rgba(14,15,12,.6); border:1px solid rgba(243,237,228,.12);
+    -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px);
+    opacity:0; visibility:hidden; transform:translate(10px,-50%);
+    transition:opacity .3s ease, transform .3s ease, visibility 0s linear .3s;
+  }
+  .case-index.show{opacity:1; visibility:visible; transform:translate(0,-50%); transition:opacity .3s ease, transform .3s ease, visibility 0s;}
+  .ci-dot{position:relative; display:block; width:8px; height:8px; padding:0; border:0; border-radius:999px; background:rgba(243,237,228,.32); cursor:pointer; transition:height .35s cubic-bezier(.2,.7,.3,1), background .3s ease;}
+  .ci-dot::before{content:""; position:absolute; inset:-5px -8px;}
+  .ci-dot:hover{background:var(--acc);}
+  .ci-dot.is-on{height:26px; background:var(--acc);}
+  .ci-dot:focus-visible{outline:2px solid var(--acc); outline-offset:4px;}
+  .ci-name{position:absolute; right:calc(100% + 18px); top:50%; transform:translate(6px,-50%); white-space:nowrap; padding:7px 12px; border-radius:8px; background:rgba(14,15,12,.94); color:var(--cream); font-size:12px; font-weight:600; letter-spacing:.01em; opacity:0; pointer-events:none; transition:opacity .2s ease, transform .2s ease;}
+  .ci-name b{margin-right:8px; font-family:'Martian Mono', ui-monospace, SFMono-Regular, Menlo, monospace; font-size:10px; font-weight:500; color:var(--acc);}
+  .ci-dot:hover .ci-name, .ci-dot:focus-visible .ci-name{opacity:1; transform:translate(0,-50%);}
+  @media (max-width:1199px){ .case-index{display:none;} }
   @media (max-width:980px){ .cases .featured{top:calc(90px + var(--i,0) * 12px);} }
   /* entrance + hover */
   .featured .fx-laptop{opacity:0; transform:translateY(30px); transition:opacity .8s ease .15s, transform 1s cubic-bezier(.2,.7,.3,1) .15s;}
@@ -1217,6 +1279,17 @@
   }
 
   /* ---------- SERVICES (explorer) ---------- */
+  .svc-switch{display:inline-flex; gap:4px; padding:5px; margin-bottom:20px; border-radius:999px; background:#fff; border:1px solid var(--line-light); box-shadow:0 14px 30px -26px rgba(23,22,15,.4);}
+  .svc-sw{display:inline-flex; align-items:center; justify-content:center; gap:10px; min-height:46px; padding:8px 18px 8px 16px; border:0; border-radius:999px; background:transparent; color:var(--ink-muted); font:inherit; font-size:14px; font-weight:600; line-height:1.2; text-align:center; cursor:pointer; transition:background .3s ease, color .3s ease;}
+  .svc-sw svg{width:17px; height:17px; flex:none;}
+  .svc-sw .sw-count{font-family:'Martian Mono', ui-monospace, SFMono-Regular, Menlo, monospace; font-size:10px; font-weight:500; padding:3px 7px; border-radius:999px; background:var(--cream); color:var(--ink-muted); transition:background .3s ease, color .3s ease;}
+  .svc-sw:hover{color:var(--ink);}
+  .svc-sw[aria-selected="true"]{background:var(--dark); color:var(--cream);}
+  .svc-sw[aria-selected="true"] svg{color:var(--sage-light);}
+  .svc-sw[aria-selected="true"] .sw-count{background:var(--sage); color:#0c130d;}
+  .svc-sw:focus-visible{outline:2px solid var(--sage); outline-offset:2px;}
+  .svc-group-note{font-size:14px; line-height:1.6; color:var(--ink-muted); max-width:62ch; margin:0 0 30px;}
+  .svc-group:not([hidden]){animation:svcFade .45s ease both;}
   .svc-explorer{
     display:grid; grid-template-columns:.82fr 1.18fr; gap:36px; align-items:start;
   }
@@ -1468,6 +1541,7 @@
   .cases .featured.reveal{opacity:1;}
   .cases .featured.reveal > *{opacity:0; transition:opacity .7s ease .1s;}
   .cases .featured.reveal.in > *{opacity:1;}
+
   @media (prefers-reduced-motion:reduce){ .cases .featured.reveal > *{opacity:1; transition:none;} }
 
   a:focus-visible, button:focus-visible{outline:2px solid var(--sage); outline-offset:3px; border-radius:2px;}
@@ -1496,6 +1570,9 @@
     .svc-tab{font-size:20px; padding:20px 10px 20px 18px;}
     .svc-panel{padding:38px 28px;}
     .svc-ghost{font-size:110px; top:4px; right:16px;}
+    .svc-switch{display:flex; width:100%;}
+    .svc-sw{flex:1; padding:8px 10px; font-size:13px; gap:8px;}
+    .svc-sw .sw-count, .svc-sw .sw-w{display:none;}
     .work-grid{grid-template-columns:1fr; gap:26px;}
     .work-thumb{aspect-ratio:16/10;}
     .work-view{opacity:1; background:linear-gradient(180deg, rgba(11,11,10,0) 55%, rgba(11,11,10,.6));}
@@ -1743,7 +1820,13 @@
       <a href="#home" data-section="home"><span class="mi-idx">01</span>Home</a>
       <a href="#about" data-section="about"><span class="mi-idx">02</span>About</a>
       <a href="#services" data-section="services"><span class="mi-idx">03</span>Services</a>
-      <a href="#work" data-section="work"><span class="mi-idx">04</span>Work</a>
+      <div class="nav-drop">
+        <a href="#work" data-section="work" data-also="vibe-coding vibe-builds"><span class="mi-idx">04</span>Work<svg class="nav-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></a>
+        <div class="nav-sub">
+          <a href="#work"><span class="ns-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M9 9v11"/></svg></span><span class="ns-txt"><b>Duda websites</b><small>Case studies &amp; live client sites</small></span></a>
+          <a href="#vibe-coding"><span class="ns-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 8-4 4 4 4M16 8l4 4-4 4M13.5 5l-3 14"/></svg></span><span class="ns-txt"><b>Vibe websites</b><small>Built skillfully with AI, finished by hand</small></span></a>
+        </div>
+      </div>
       <a href="#how" data-section="how"><span class="mi-idx">05</span>Process</a>
     </div>
     <div class="nav-right">
@@ -1767,6 +1850,7 @@
         <a href="#about"><span class="mi-idx">02</span>About</a>
         <a href="#services"><span class="mi-idx">03</span>Services</a>
         <a href="#work"><span class="mi-idx">04</span>Work</a>
+        <a href="#vibe-coding" class="mm-sub"><span class="mm-sub-mark" aria-hidden="true">&#8627;</span>Vibe websites</a>
         <a href="#how"><span class="mi-idx">05</span>Process</a>
       </nav>
     </div>
@@ -1839,7 +1923,7 @@
           <p class="eyebrow">Selected Work</p>
           <h2>Duda websites,<br><em>built to convert.</em></h2>
         </div>
-        <p class="note">Live client projects across construction, home services and property — every one designed and built on Duda.</p>
+        <p class="note">Live client projects across construction, trades, automotive and fitness — every one designed and built on Duda.</p>
       </div>
 
       <div class="cases">
@@ -1909,13 +1993,78 @@
           </div>
         </div>
       </article>
+      <article class="featured reveal" style="--i:4; --acc:#6f9be8" aria-labelledby="fxTitle5">
+        <span class="fx-num" aria-hidden="true">05</span>
+        <div class="fx-copy">
+          <p class="eyebrow light">Case study &#8212; 05</p>
+          <h3 class="fx-title" id="fxTitle5">Warrington Breakdown Services</h3>
+          <p class="fx-lede">A Duda website for a 24-hour breakdown, recovery and mobile tyre fitting service, built so stranded drivers can find the right help and call in seconds.</p>
+          <ul class="fx-meta"><li>Duda website</li><li>Breakdown &amp; recovery</li><li>Warrington, UK</li></ul>
+          <a href="https://www.warringtonbreakdownservices.co.uk/" class="btn btn-solid fx-cta" target="_blank" rel="noopener">View live site <span class="arrow" aria-hidden="true">&#8594;</span><span class="sr-only"> (opens in a new tab)</span></a>
+        </div>
+        <div class="fx-devices">
+          <div class="fx-laptop">
+            <div class="fx-lid"><span class="fx-cam" aria-hidden="true"></span><div class="fx-screen" style="--ar:960 / 600"><img src="warrington-breakdown.webp" alt="Warrington Breakdown Services Duda website homepage" width="960" height="600" loading="lazy" decoding="async"></div></div>
+            <div class="fx-base"></div>
+          </div>
+        </div>
+      </article>
+      <article class="featured is-flip reveal" style="--i:5; --acc:#f0464b" aria-labelledby="fxTitle6">
+        <span class="fx-num" aria-hidden="true">06</span>
+        <div class="fx-copy">
+          <p class="eyebrow light">Case study &#8212; 06</p>
+          <h3 class="fx-title" id="fxTitle6">Track Works</h3>
+          <p class="fx-lede">A Duda website for a rubber and steel track specialist, organising a deep catalogue of rubber tracks, undercarriage, ag track and attachment parts so contractors and farmers can find their machine and request pricing fast.</p>
+          <ul class="fx-meta"><li>Duda website</li><li>Rubber tracks &amp; parts</li><li>USA</li></ul>
+          <a href="https://www.trackworks1.com/" class="btn btn-solid fx-cta" target="_blank" rel="noopener">View live site <span class="arrow" aria-hidden="true">&#8594;</span><span class="sr-only"> (opens in a new tab)</span></a>
+        </div>
+        <div class="fx-devices">
+          <div class="fx-laptop">
+            <div class="fx-lid"><span class="fx-cam" aria-hidden="true"></span><div class="fx-screen" style="--ar:960 / 600"><img src="trackworks.webp" alt="Track Works Duda website homepage" width="960" height="600" loading="lazy" decoding="async"></div></div>
+            <div class="fx-base"></div>
+          </div>
+        </div>
+      </article>
+      <article class="featured reveal" style="--i:6; --acc:#3fa7c9" aria-labelledby="fxTitle7">
+        <span class="fx-num" aria-hidden="true">07</span>
+        <div class="fx-copy">
+          <p class="eyebrow light">Case study &#8212; 07</p>
+          <h3 class="fx-title" id="fxTitle7">Skyline Roofing &amp; Solar</h3>
+          <p class="fx-lede">A Duda website for a roofing and solar contractor serving Greater St. Louis, leading with 35+ years of experience and a clear path for homeowners to request a quote or inspection.</p>
+          <ul class="fx-meta"><li>Duda website</li><li>Roofing &amp; solar</li><li>Oakville, MO</li></ul>
+          <a href="https://www.skylineroofsolar.com/" class="btn btn-solid fx-cta" target="_blank" rel="noopener">View live site <span class="arrow" aria-hidden="true">&#8594;</span><span class="sr-only"> (opens in a new tab)</span></a>
+        </div>
+        <div class="fx-devices">
+          <div class="fx-laptop">
+            <div class="fx-lid"><span class="fx-cam" aria-hidden="true"></span><div class="fx-screen" style="--ar:960 / 490"><img src="skyline-roofing.webp" alt="Skyline Roofing & Solar Duda website homepage" width="960" height="490" loading="lazy" decoding="async"></div></div>
+            <div class="fx-base"></div>
+          </div>
+        </div>
+      </article>
+      <article class="featured is-flip reveal" style="--i:7; --acc:#c8b9a3" aria-labelledby="fxTitle8">
+        <span class="fx-num" aria-hidden="true">08</span>
+        <div class="fx-copy">
+          <p class="eyebrow light">Case study &#8212; 08</p>
+          <h3 class="fx-title" id="fxTitle8">Canfield Construction Management</h3>
+          <p class="fx-lede">A clean, upscale Duda website for a construction company covering new builds, renovation and remodeling, with two clear next steps: a free estimate or a call.</p>
+          <ul class="fx-meta"><li>Duda website</li><li>Construction &amp; remodeling</li><li>Tyler, TX</li></ul>
+          <a href="https://www.canfieldconstructionmanagement.com/" class="btn btn-solid fx-cta" target="_blank" rel="noopener">View live site <span class="arrow" aria-hidden="true">&#8594;</span><span class="sr-only"> (opens in a new tab)</span></a>
+        </div>
+        <div class="fx-devices">
+          <div class="fx-laptop">
+            <div class="fx-lid"><span class="fx-cam" aria-hidden="true"></span><div class="fx-screen" style="--ar:960 / 514"><img src="canfield-construction.webp" alt="Canfield Construction Management Duda website homepage" width="960" height="514" loading="lazy" decoding="async"></div></div>
+            <div class="fx-base"></div>
+          </div>
+        </div>
+      </article>
       </div>
+
 
       <div class="work-stats reveal">
         <div class="work-stat"><span class="num">12+</span><span class="lbl">Duda projects delivered</span></div>
         <div class="work-stat"><span class="num">100%</span><span class="lbl">Built &amp; launched on Duda</span></div>
         <div class="work-stat"><span class="num">40%</span><span class="lbl">Avg. increase in lead requests</span></div>
-        <div class="work-stat"><span class="num">3</span><span class="lbl">Industries served, and growing</span></div>
+        <div class="work-stat"><span class="num">7+</span><span class="lbl">Industries served, and growing</span></div>
       </div>
 
       <div class="work-certs reveal" aria-labelledby="certsTitle">
@@ -2015,7 +2164,8 @@
         <p class="vibe-grid-hint">Built for jiu-jitsu academies and a yoga studio. Click any card to play it on the big screen.</p>
       </div>
       <div class="vibe-grid" id="vibeGrid">
-        <button class="vibe-card reveal" type="button" aria-pressed="true" style="transition-delay:0.00s; --acc:#e5398f" data-name="Clayton Phillips Jiu Jitsu" data-sector="Jiu Jitsu · Norfolk, VA" data-slug="clayton-phillips-jiu-jitsu" data-dur="34.97" data-src="clayton-phillips-jiu-jitsu.mp4" data-poster="clayton-phillips-jiu-jitsu.webp" aria-label="Play the Clayton Phillips Jiu Jitsu walkthrough on the big screen, 0:35">
+        <div class="vibe-card reveal" style="transition-delay:0.00s; --acc:#e5398f" data-name="Clayton Phillips Jiu Jitsu" data-sector="Jiu Jitsu · Norfolk, VA" data-slug="clayton-phillips-jiu-jitsu" data-dur="34.97" data-src="clayton-phillips-jiu-jitsu.mp4" data-poster="clayton-phillips-jiu-jitsu.webp">
+          <button class="vc-hit" type="button" aria-pressed="true" aria-label="Play the Clayton Phillips Jiu Jitsu walkthrough on the big screen, 0:35"></button>
           <span class="vc-frame">
             <span class="vc-chrome" aria-hidden="true"><i></i><i></i><i></i><span class="vc-url"></span><span class="dur">0:35</span></span>
             <span class="vibe-thumb">
@@ -2028,10 +2178,11 @@
             <span class="vc-meta" aria-hidden="true"><span class="no">01</span><span class="ln"></span><span class="vc-tag">Jiu Jitsu</span></span>
             <span class="nm">Clayton Phillips Jiu Jitsu</span>
             <span class="loc"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>Norfolk, VA</span>
-            <span class="go" aria-hidden="true"><span class="g-ico"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg><span class="vibe-eq"><i></i><i></i><i></i></span></span><span class="g-watch">Watch walkthrough</span><span class="g-now">Now playing</span><svg class="g-arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            <span class="vc-foot"><span class="go" aria-hidden="true"><span class="g-ico"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg><span class="vibe-eq"><i></i><i></i><i></i></span></span><span class="g-watch">Watch walkthrough</span><span class="g-now">Now playing</span></span><svg class="g-arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
           </span>
-        </button>
-        <button class="vibe-card reveal" type="button" aria-pressed="false" style="transition-delay:0.07s; --acc:#b0825f" data-name="Espiritu Jiu-Jitsu" data-sector="Brazilian Jiu-Jitsu · Oxnard, CA" data-slug="espiritu-jiu-jitsu" data-dur="21.42" data-src="espiritu-jiu-jitsu.mp4" data-poster="espiritu-jiu-jitsu.webp" aria-label="Play the Espiritu Jiu-Jitsu walkthrough on the big screen, 0:21">
+        </div>
+        <div class="vibe-card reveal" style="transition-delay:0.07s; --acc:#b0825f" data-name="Espiritu Jiu-Jitsu" data-sector="Brazilian Jiu-Jitsu · Oxnard, CA" data-slug="espiritu-jiu-jitsu" data-dur="21.42" data-src="espiritu-jiu-jitsu.mp4" data-poster="espiritu-jiu-jitsu.webp">
+          <button class="vc-hit" type="button" aria-pressed="false" aria-label="Play the Espiritu Jiu-Jitsu walkthrough on the big screen, 0:21"></button>
           <span class="vc-frame">
             <span class="vc-chrome" aria-hidden="true"><i></i><i></i><i></i><span class="vc-url"></span><span class="dur">0:21</span></span>
             <span class="vibe-thumb">
@@ -2044,10 +2195,11 @@
             <span class="vc-meta" aria-hidden="true"><span class="no">02</span><span class="ln"></span><span class="vc-tag">Brazilian Jiu-Jitsu</span></span>
             <span class="nm">Espiritu Jiu-Jitsu</span>
             <span class="loc"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>Oxnard, CA</span>
-            <span class="go" aria-hidden="true"><span class="g-ico"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg><span class="vibe-eq"><i></i><i></i><i></i></span></span><span class="g-watch">Watch walkthrough</span><span class="g-now">Now playing</span><svg class="g-arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            <span class="vc-foot"><span class="go" aria-hidden="true"><span class="g-ico"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg><span class="vibe-eq"><i></i><i></i><i></i></span></span><span class="g-watch">Watch walkthrough</span><span class="g-now">Now playing</span></span><svg class="g-arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
           </span>
-        </button>
-        <button class="vibe-card reveal" type="button" aria-pressed="false" style="transition-delay:0.14s; --acc:#e8622a" data-name="Sentry Jiu-Jitsu" data-sector="Brazilian Jiu-Jitsu · Gilbertsville, PA" data-slug="sentry-jiu-jitsu" data-dur="21.22" data-src="sentry-jiu-jitsu.mp4" data-poster="sentry-jiu-jitsu.webp" aria-label="Play the Sentry Jiu-Jitsu walkthrough on the big screen, 0:21">
+        </div>
+        <div class="vibe-card reveal" style="transition-delay:0.14s; --acc:#e8622a" data-name="Sentry Jiu-Jitsu" data-sector="Brazilian Jiu-Jitsu · Gilbertsville, PA" data-slug="sentry-jiu-jitsu" data-dur="21.22" data-src="sentry-jiu-jitsu.mp4" data-poster="sentry-jiu-jitsu.webp">
+          <button class="vc-hit" type="button" aria-pressed="false" aria-label="Play the Sentry Jiu-Jitsu walkthrough on the big screen, 0:21"></button>
           <span class="vc-frame">
             <span class="vc-chrome" aria-hidden="true"><i></i><i></i><i></i><span class="vc-url"></span><span class="dur">0:21</span></span>
             <span class="vibe-thumb">
@@ -2060,10 +2212,11 @@
             <span class="vc-meta" aria-hidden="true"><span class="no">03</span><span class="ln"></span><span class="vc-tag">Brazilian Jiu-Jitsu</span></span>
             <span class="nm">Sentry Jiu-Jitsu</span>
             <span class="loc"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>Gilbertsville, PA</span>
-            <span class="go" aria-hidden="true"><span class="g-ico"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg><span class="vibe-eq"><i></i><i></i><i></i></span></span><span class="g-watch">Watch walkthrough</span><span class="g-now">Now playing</span><svg class="g-arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            <span class="vc-foot"><span class="go" aria-hidden="true"><span class="g-ico"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg><span class="vibe-eq"><i></i><i></i><i></i></span></span><span class="g-watch">Watch walkthrough</span><span class="g-now">Now playing</span></span><svg class="g-arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
           </span>
-        </button>
-        <button class="vibe-card reveal" type="button" aria-pressed="false" style="transition-delay:0.00s; --acc:#8a4fae" data-name="Palm Yoga" data-sector="Yoga Studio · Carrollwood, Tampa, FL" data-slug="palm-yoga" data-dur="25.76" data-src="palm-yoga.mp4" data-poster="palm-yoga.webp" aria-label="Play the Palm Yoga walkthrough on the big screen, 0:26">
+        </div>
+        <div class="vibe-card reveal" style="transition-delay:0.00s; --acc:#8a4fae" data-name="Palm Yoga" data-sector="Yoga Studio · Carrollwood, Tampa, FL" data-slug="palm-yoga" data-dur="25.76" data-src="palm-yoga.mp4" data-poster="palm-yoga.webp">
+          <button class="vc-hit" type="button" aria-pressed="false" aria-label="Play the Palm Yoga walkthrough on the big screen, 0:26"></button>
           <span class="vc-frame">
             <span class="vc-chrome" aria-hidden="true"><i></i><i></i><i></i><span class="vc-url"></span><span class="dur">0:26</span></span>
             <span class="vibe-thumb">
@@ -2076,10 +2229,11 @@
             <span class="vc-meta" aria-hidden="true"><span class="no">04</span><span class="ln"></span><span class="vc-tag">Yoga Studio</span></span>
             <span class="nm">Palm Yoga</span>
             <span class="loc"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>Carrollwood, Tampa, FL</span>
-            <span class="go" aria-hidden="true"><span class="g-ico"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg><span class="vibe-eq"><i></i><i></i><i></i></span></span><span class="g-watch">Watch walkthrough</span><span class="g-now">Now playing</span><svg class="g-arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            <span class="vc-foot"><span class="go" aria-hidden="true"><span class="g-ico"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg><span class="vibe-eq"><i></i><i></i><i></i></span></span><span class="g-watch">Watch walkthrough</span><span class="g-now">Now playing</span></span><svg class="g-arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
           </span>
-        </button>
-        <button class="vibe-card reveal" type="button" aria-pressed="false" style="transition-delay:0.07s; --acc:#d8b13c" data-name="True Believer Jiu-Jitsu" data-sector="Brazilian Jiu-Jitsu · Pittsburgh, PA" data-slug="true-believer-jiu-jitsu" data-dur="17.3" data-src="true-believer-jiu-jitsu.mp4" data-poster="true-believer-jiu-jitsu.webp" aria-label="Play the True Believer Jiu-Jitsu walkthrough on the big screen, 0:17">
+        </div>
+        <div class="vibe-card reveal" style="transition-delay:0.07s; --acc:#d8b13c" data-name="True Believer Jiu-Jitsu" data-sector="Brazilian Jiu-Jitsu · Pittsburgh, PA" data-slug="true-believer-jiu-jitsu" data-dur="17.3" data-src="true-believer-jiu-jitsu.mp4" data-poster="true-believer-jiu-jitsu.webp">
+          <button class="vc-hit" type="button" aria-pressed="false" aria-label="Play the True Believer Jiu-Jitsu walkthrough on the big screen, 0:17"></button>
           <span class="vc-frame">
             <span class="vc-chrome" aria-hidden="true"><i></i><i></i><i></i><span class="vc-url"></span><span class="dur">0:17</span></span>
             <span class="vibe-thumb">
@@ -2092,10 +2246,11 @@
             <span class="vc-meta" aria-hidden="true"><span class="no">05</span><span class="ln"></span><span class="vc-tag">Brazilian Jiu-Jitsu</span></span>
             <span class="nm">True Believer Jiu-Jitsu</span>
             <span class="loc"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>Pittsburgh, PA</span>
-            <span class="go" aria-hidden="true"><span class="g-ico"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg><span class="vibe-eq"><i></i><i></i><i></i></span></span><span class="g-watch">Watch walkthrough</span><span class="g-now">Now playing</span><svg class="g-arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            <span class="vc-foot"><span class="go" aria-hidden="true"><span class="g-ico"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg><span class="vibe-eq"><i></i><i></i><i></i></span></span><span class="g-watch">Watch walkthrough</span><span class="g-now">Now playing</span></span><a class="vc-visit" href="https://truebelieverjiujitsu.com/" target="_blank" rel="noopener">Visit site<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg><span class="sr-only"> of True Believer Jiu-Jitsu (opens in a new tab)</span></a></span>
           </span>
-        </button>
-        <button class="vibe-card reveal" type="button" aria-pressed="false" style="transition-delay:0.14s; --acc:#3cc3c9" data-name="Phenom BJJ" data-sector="Brazilian Jiu-Jitsu · Irvine, CA" data-slug="phenom-bjj" data-dur="21.63" data-src="phenom-bjj.mp4" data-poster="phenom-bjj.webp" aria-label="Play the Phenom BJJ walkthrough on the big screen, 0:22">
+        </div>
+        <div class="vibe-card reveal" style="transition-delay:0.14s; --acc:#3cc3c9" data-name="Phenom BJJ" data-sector="Brazilian Jiu-Jitsu · Irvine, CA" data-slug="phenom-bjj" data-dur="21.63" data-src="phenom-bjj.mp4" data-poster="phenom-bjj.webp">
+          <button class="vc-hit" type="button" aria-pressed="false" aria-label="Play the Phenom BJJ walkthrough on the big screen, 0:22"></button>
           <span class="vc-frame">
             <span class="vc-chrome" aria-hidden="true"><i></i><i></i><i></i><span class="vc-url"></span><span class="dur">0:22</span></span>
             <span class="vibe-thumb">
@@ -2108,9 +2263,9 @@
             <span class="vc-meta" aria-hidden="true"><span class="no">06</span><span class="ln"></span><span class="vc-tag">Brazilian Jiu-Jitsu</span></span>
             <span class="nm">Phenom BJJ</span>
             <span class="loc"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>Irvine, CA</span>
-            <span class="go" aria-hidden="true"><span class="g-ico"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg><span class="vibe-eq"><i></i><i></i><i></i></span></span><span class="g-watch">Watch walkthrough</span><span class="g-now">Now playing</span><svg class="g-arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            <span class="vc-foot"><span class="go" aria-hidden="true"><span class="g-ico"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg><span class="vibe-eq"><i></i><i></i><i></i></span></span><span class="g-watch">Watch walkthrough</span><span class="g-now">Now playing</span></span><a class="vc-visit" href="https://www.phenomjiujitsu.com/" target="_blank" rel="noopener">Visit site<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg><span class="sr-only"> of Phenom BJJ (opens in a new tab)</span></a></span>
           </span>
-        </button>
+        </div>
       </div>
 
       <div class="vibe-cta reveal">
@@ -2132,7 +2287,7 @@
         </div>
       </div>
       <div class="about-copy reveal">
-        <p><strong>Carl Madelo</strong> is a <strong>Certified Duda Professional</strong> with 1.5+ years in web and design, specializing in <strong>Duda Flex and Duda 2.0</strong>. I design and build high&#8209;performing, conversion&#8209;focused websites aligned with both agency and client expectations.</p>
+        <p><strong>Carl Madelo</strong> is a <strong>Certified Duda Professional</strong> with 15+ years in web and design, specializing in <strong>Duda Flex and Duda 2.0</strong>. I design and build high&#8209;performing, conversion&#8209;focused websites aligned with both agency and client expectations.</p>
         <p>I've delivered projects end&#8209;to&#8209;end, from <strong>full builds</strong> to <strong>platform migrations</strong> off WordPress, Wix and Squarespace, creating scalable, responsive experiences across desktop, tablet, and mobile. Each project is grounded in <strong>clean design, optimized performance,</strong> and long&#8209;term user experience.</p>
         <p>Beyond design, I focus on speed, <strong>SEO&#8209;ready structure,</strong> and long&#8209;term scalability, ensuring intuitive layouts built to convert. I bring clear communication, fast turnaround, and meticulous attention to detail, supporting agencies with reliable, high&#8209;quality execution.</p>
         <hr>
@@ -2157,21 +2312,29 @@
       <div class="section-head reveal">
         <div>
           <p class="eyebrow">Services</p>
-          <h2>Duda web design<br><em>services.</em></h2>
+          <h2>Web design<br><em>services.</em></h2>
         </div>
         <p class="note">Available for select projects. Inquire to confirm current availability.</p>
       </div>
 
-      <div class="svc-explorer reveal">
-        <div class="svc-menu" role="tablist" aria-label="Duda web design services">
-          <button class="svc-tab" role="tab" id="stab-1" aria-controls="spanel-1" aria-selected="true"><span class="idx">01</span>Duda Website Design &amp; Build</button>
-          <button class="svc-tab" role="tab" id="stab-2" aria-controls="spanel-2" aria-selected="false" tabindex="-1"><span class="idx">02</span>Duda Redesign &amp; Revamp</button>
-          <button class="svc-tab" role="tab" id="stab-3" aria-controls="spanel-3" aria-selected="false" tabindex="-1"><span class="idx">03</span>Platform Migration to Duda</button>
-          <button class="svc-tab" role="tab" id="stab-4" aria-controls="spanel-4" aria-selected="false" tabindex="-1"><span class="idx">04</span>SEO&#8209;Ready Structure</button>
-          <button class="svc-tab" role="tab" id="stab-5" aria-controls="spanel-5" aria-selected="false" tabindex="-1"><span class="idx">05</span>Performance &amp; UX</button>
+      <div class="svc-groups reveal">
+        <div class="svc-switch" role="tablist" aria-label="Choose a service type">
+          <button class="svc-sw" role="tab" id="sgrp-duda" aria-controls="sgroup-duda" aria-selected="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M9 9v11"/></svg><span>Duda <span class="sw-w">websites</span></span><span class="sw-count">05</span></button>
+          <button class="svc-sw" role="tab" id="sgrp-code" aria-controls="sgroup-code" aria-selected="false" tabindex="-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 8-4 4 4 4M16 8l4 4-4 4M13.5 5l-3 14"/></svg><span>Claude Code <span class="sw-w">websites</span></span><span class="sw-count">04</span></button>
         </div>
 
-        <div class="svc-stage">
+        <div class="svc-group" id="sgroup-duda" role="tabpanel" aria-labelledby="sgrp-duda">
+          <p class="svc-group-note">Built on Duda&#8217;s platform, so your team can update content easily after launch.</p>
+        <div class="svc-explorer">
+          <div class="svc-menu" role="tablist" aria-label="Duda website services">
+            <button class="svc-tab" role="tab" id="stab-1" aria-controls="spanel-1" aria-selected="true"><span class="idx">01</span>Duda Website Design &amp; Build</button>
+            <button class="svc-tab" role="tab" id="stab-2" aria-controls="spanel-2" aria-selected="false" tabindex="-1"><span class="idx">02</span>Duda Redesign &amp; Revamp</button>
+            <button class="svc-tab" role="tab" id="stab-3" aria-controls="spanel-3" aria-selected="false" tabindex="-1"><span class="idx">03</span>Platform Migration to Duda</button>
+            <button class="svc-tab" role="tab" id="stab-4" aria-controls="spanel-4" aria-selected="false" tabindex="-1"><span class="idx">04</span>SEO&#8209;Ready Structure</button>
+            <button class="svc-tab" role="tab" id="stab-5" aria-controls="spanel-5" aria-selected="false" tabindex="-1"><span class="idx">05</span>Performance &amp; UX</button>
+          </div>
+
+          <div class="svc-stage">
           <div class="svc-panel active" role="tabpanel" id="spanel-1" aria-labelledby="stab-1">
             <span class="svc-ghost" aria-hidden="true">01</span>
             <span class="cat">Design &amp; Build</span>
@@ -2218,7 +2381,58 @@
             <span class="svc-inc-label">What's included</span>
             <div class="svc-tags"><span>Core Web Vitals</span><span>User-flow refinement</span><span>Friction removal</span><span>Cross-device QA</span></div>
           </div>
+          </div>
+        </div>
+        </div>
 
+        <div class="svc-group" id="sgroup-code" role="tabpanel" aria-labelledby="sgrp-code" hidden>
+          <p class="svc-group-note">Fully custom code, directed with Claude Code and finished by hand &#8212; yours to own and host anywhere.</p>
+        <div class="svc-explorer">
+          <div class="svc-menu" role="tablist" aria-label="Claude Code website services">
+            <button class="svc-tab" role="tab" id="stab-6" aria-controls="spanel-6" aria-selected="true"><span class="idx">01</span>Custom Build from Scratch</button>
+            <button class="svc-tab" role="tab" id="stab-7" aria-controls="spanel-7" aria-selected="false" tabindex="-1"><span class="idx">02</span>Website Rebuild</button>
+            <button class="svc-tab" role="tab" id="stab-8" aria-controls="spanel-8" aria-selected="false" tabindex="-1"><span class="idx">03</span>Website Redesign</button>
+            <button class="svc-tab" role="tab" id="stab-9" aria-controls="spanel-9" aria-selected="false" tabindex="-1"><span class="idx">04</span>SEO&#8209;Ready Website</button>
+          </div>
+
+          <div class="svc-stage">
+          <div class="svc-panel active" role="tabpanel" id="spanel-6" aria-labelledby="stab-6">
+            <span class="svc-ghost" aria-hidden="true">01</span>
+            <span class="cat">Claude Code &middot; Build</span>
+            <h3>Website Built from Scratch with Claude Code</h3>
+            <p>A fully custom website coded from a blank file — no templates and no page-builder limits. I direct Claude Code section by section, then review, refine and hand-tune every line so the finished site is fast, accessible and unmistakably yours. You get clean HTML, CSS and JavaScript that you own outright and can host anywhere.</p>
+            <span class="svc-inc-label">What's included</span>
+            <div class="svc-tags"><span>Custom design direction</span><span>AI-assisted coding</span><span>Hand-reviewed code</span><span>Responsive &amp; accessible</span><span>Deploy to Vercel or Netlify</span></div>
+          </div>
+
+          <div class="svc-panel" role="tabpanel" id="spanel-7" aria-labelledby="stab-7" hidden>
+            <span class="svc-ghost" aria-hidden="true">02</span>
+            <span class="cat">Claude Code &middot; Rebuild</span>
+            <h3>Website Rebuild with Claude Code</h3>
+            <p>Your existing site, rebuilt on a clean modern codebase. Ideal for slow, outdated or platform-locked websites: I use Claude Code to rewrite the whole site as lightweight custom code, keeping your content, URLs and search rankings intact while load speed and maintainability jump.</p>
+            <span class="svc-inc-label">What's included</span>
+            <div class="svc-tags"><span>Full code rewrite</span><span>Content &amp; URLs kept</span><span>SEO equity preserved</span><span>Core Web Vitals tuning</span><span>No platform lock-in</span></div>
+          </div>
+
+          <div class="svc-panel" role="tabpanel" id="spanel-8" aria-labelledby="stab-8" hidden>
+            <span class="svc-ghost" aria-hidden="true">03</span>
+            <span class="cat">Claude Code &middot; Redesign</span>
+            <h3>Website Redesign with Claude Code</h3>
+            <p>A fresh look and a sharper user journey for a site that has outgrown its design. I rethink the layout, typography and flow around what converts, build it with Claude Code, then finish the details by hand — custom animations, polished micro-interactions and responsive behaviour that page builders struggle to match.</p>
+            <span class="svc-inc-label">What's included</span>
+            <div class="svc-tags"><span>New visual direction</span><span>Conversion-led layout</span><span>Custom animations</span><span>Hand-finished details</span><span>Cross-device QA</span></div>
+          </div>
+
+          <div class="svc-panel" role="tabpanel" id="spanel-9" aria-labelledby="stab-9" hidden>
+            <span class="svc-ghost" aria-hidden="true">04</span>
+            <span class="cat">Claude Code &middot; SEO</span>
+            <h3>SEO&#8209;Ready Website with Claude Code</h3>
+            <p>A custom-coded site engineered to rank from day one. Semantic HTML, a clean heading hierarchy, schema markup, fast load times and a crawl-friendly structure are written into the code itself — not bolted on with plugins — so search engines and AI answer engines understand your business straight away.</p>
+            <span class="svc-inc-label">What's included</span>
+            <div class="svc-tags"><span>Semantic HTML</span><span>Schema &amp; JSON&#8209;LD</span><span>Meta &amp; Open Graph</span><span>Sitemap &amp; robots.txt</span><span>Core Web Vitals</span></div>
+          </div>
+          </div>
+        </div>
         </div>
       </div>
     </div>
@@ -2494,7 +2708,7 @@
   // scrollspy + liquid sliding highlight
   const navLinksWrap = document.getElementById('navLinks');
   const navLiquid = document.getElementById('navLiquid');
-  const navLinks = Array.from(document.querySelectorAll('.nav-links a'));
+  const navLinks = Array.from(document.querySelectorAll('.nav-links a[data-section]'));
   let activeLink = navLinks[0];
 
   function moveLiquid(target){
@@ -2511,13 +2725,22 @@
     a.addEventListener('mouseenter', () => moveLiquid(a));
   });
   navLinksWrap.addEventListener('mouseleave', () => moveLiquid(activeLink));
+  // close the Work dropdown once a link in it is clicked (it reopens on the next hover)
+  document.querySelectorAll('.nav-drop').forEach(d => {
+    d.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { d.classList.add('is-closed'); a.blur(); }));
+    d.addEventListener('mouseleave', () => d.classList.remove('is-closed'));
+  });
 
-  const spySections = navLinks
-    .map(a => document.getElementById(a.dataset.section))
-    .filter(Boolean);
+  // each nav link watches its own section plus any extra ones listed in data-also (Work also covers the AI-coded sections)
+  const spyMap = [];
+  navLinks.forEach(a => [a.dataset.section].concat((a.dataset.also || '').split(' ')).forEach(id => {
+    const el = id && document.getElementById(id);
+    if (el) spyMap.push([el, a]);
+  }));
+  const spySections = spyMap.map(x => x[0]);
   const spy = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-      const link = navLinks.find(a => a.dataset.section === entry.target.id);
+      const hit = spyMap.find(x => x[0] === entry.target), link = hit && hit[1];
       if (!link) return;
       if (entry.isIntersecting) {
         navLinks.forEach(a => a.classList.remove('active'));
@@ -2551,31 +2774,36 @@
     });
   });
 
-  // service explorer (tabs)
-  const svcTabs = Array.from(document.querySelectorAll('.svc-tab'));
-  const svcPanels = Array.from(document.querySelectorAll('.svc-panel'));
-  function selectSvc(i){
-    svcTabs.forEach((t, k) => {
-      const on = k === i;
-      t.setAttribute('aria-selected', on);
-      t.tabIndex = on ? 0 : -1;
+  // service explorer: each group has its own tab list; a switch on top flips between Duda and Claude Code
+  const arrowNav = (list, i, e, pick) => {
+    let next = null;
+    if (e.key === 'ArrowDown' || e.key === 'ArrowRight') next = (i + 1) % list.length;
+    if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') next = (i - 1 + list.length) % list.length;
+    if (e.key === 'Home') next = 0;
+    if (e.key === 'End') next = list.length - 1;
+    if (next !== null) { e.preventDefault(); pick(next); list[next].focus(); }
+  };
+  document.querySelectorAll('.svc-explorer').forEach(ex => {
+    const tabs = Array.from(ex.querySelectorAll('.svc-tab'));
+    const panels = Array.from(ex.querySelectorAll('.svc-panel'));
+    const pick = (i) => {
+      tabs.forEach((t, k) => { t.setAttribute('aria-selected', k === i); t.tabIndex = k === i ? 0 : -1; });
+      panels.forEach((p, k) => { p.classList.toggle('active', k === i); p.hidden = k !== i; });
+    };
+    tabs.forEach((tab, i) => {
+      tab.addEventListener('click', () => pick(i));
+      tab.addEventListener('keydown', (e) => arrowNav(tabs, i, e, pick));
     });
-    svcPanels.forEach((p, k) => {
-      const on = k === i;
-      p.classList.toggle('active', on);
-      p.hidden = !on;
-    });
-  }
-  svcTabs.forEach((tab, i) => {
-    tab.addEventListener('click', () => selectSvc(i));
-    tab.addEventListener('keydown', (e) => {
-      let next = null;
-      if (e.key === 'ArrowDown' || e.key === 'ArrowRight') next = (i + 1) % svcTabs.length;
-      if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') next = (i - 1 + svcTabs.length) % svcTabs.length;
-      if (e.key === 'Home') next = 0;
-      if (e.key === 'End') next = svcTabs.length - 1;
-      if (next !== null) { e.preventDefault(); selectSvc(next); svcTabs[next].focus(); }
-    });
+  });
+  const svcSw = Array.from(document.querySelectorAll('.svc-sw'));
+  const svcGroups = svcSw.map(b => document.getElementById(b.getAttribute('aria-controls')));
+  const pickGroup = (i) => {
+    svcSw.forEach((b, k) => { b.setAttribute('aria-selected', k === i); b.tabIndex = k === i ? 0 : -1; });
+    svcGroups.forEach((g, k) => { if (g) g.hidden = k !== i; });
+  };
+  svcSw.forEach((b, i) => {
+    b.addEventListener('click', () => pickGroup(i));
+    b.addEventListener('keydown', (e) => arrowNav(svcSw, i, e, pickGroup));
   });
 
   // stack cards (tap / keyboard to pin open; hover handled by CSS)
@@ -2640,7 +2868,7 @@
 
   const load = (i) => {
     i = (i + n) % n;
-    cards.forEach((c, k) => { c.classList.toggle('is-active', k === i); c.setAttribute('aria-pressed', k === i ? 'true' : 'false'); c.style.setProperty('--p', 0); });
+    cards.forEach((c, k) => { c.classList.toggle('is-active', k === i); c.querySelector('.vc-hit').setAttribute('aria-pressed', k === i ? 'true' : 'false'); c.style.setProperty('--p', 0); });
     stopPreview(i);
     current = i;
     const c = cards[i];
@@ -2693,7 +2921,8 @@
   });
 
   cards.forEach((c, i) => {
-    c.addEventListener('click', () => {
+    c.addEventListener('click', (e) => {
+      if (e.target.closest('.vc-visit')) return;
       clearTimeout(hoverT); stopPreview(i);
       if (i === current) { userPaused = false; inView = true; tryPlay(); }
       else go(i);
@@ -2761,8 +2990,42 @@
       c.style.setProperty('--stack', p.toFixed(3));
     });
   };
-  const onScroll = () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } };
-  fit(); update();
+  // side index (desktop): one dot per case study, shows where you are and jumps to any panel
+  const pad2 = (n) => (n < 10 ? '0' : '') + n;
+  const idx = document.createElement('nav');
+  idx.className = 'case-index';
+  idx.setAttribute('aria-label', 'Jump to a case study');
+  const dots = cards.map((c, i) => {
+    const b = document.createElement('button');
+    const name = (c.querySelector('.fx-title') || {}).textContent || '';
+    b.type = 'button';
+    b.className = 'ci-dot';
+    b.style.setProperty('--acc', getComputedStyle(c).getPropertyValue('--acc'));
+    b.setAttribute('aria-label', 'Case study ' + pad2(i + 1) + ': ' + name);
+    const label = document.createElement('span'), num = document.createElement('b');
+    label.className = 'ci-name'; num.textContent = pad2(i + 1);
+    label.appendChild(num); label.appendChild(document.createTextNode(name));
+    b.appendChild(label);
+    b.addEventListener('click', () => {
+      // natural (un-stuck) position of panel i, then scroll so it lands at its sticky top
+      let y = wrap.getBoundingClientRect().top + window.scrollY;
+      for (let k = 0; k < i; k++) y += cards[k].offsetHeight + (parseFloat(getComputedStyle(cards[k]).marginBottom) || 0);
+      const top = parseFloat(getComputedStyle(c).top) || 0;
+      window.scrollTo({ top: Math.max(0, y - top + 2), behavior: reduce ? 'auto' : 'smooth' });
+    });
+    idx.appendChild(b);
+    return b;
+  });
+  document.body.appendChild(idx);
+  const syncIndex = () => {
+    const vh = window.innerHeight, w = wrap.getBoundingClientRect();
+    idx.classList.toggle('show', w.top < vh * 0.55 && w.bottom > vh * 0.45);
+    let on = 0;
+    cards.forEach((c, i) => { if (c.getBoundingClientRect().top <= vh * 0.45) on = i; });
+    dots.forEach((d, i) => d.classList.toggle('is-on', i === on));
+  };
+  const onScroll = () => { if (!ticking) { ticking = true; requestAnimationFrame(() => { update(); syncIndex(); }); } };
+  fit(); update(); syncIndex();
   window.addEventListener('scroll', onScroll, { passive: true });
   // phone toolbars change the height while scrolling; only re-measure when the width changes
   window.addEventListener('resize', () => { if (window.innerWidth !== lastW) fit(); update(); });
