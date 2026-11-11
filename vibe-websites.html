@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vibe-Coded Website Portfolio | Carl Madelo</title>
+<meta name="description" content="Custom websites built skillfully with AI using Claude Code and finished by hand. Watch six full website walkthroughs.">
+<meta name="author" content="Carl Madelo">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://cportfolio2.vercel.app/vibe-websites.html">
+<meta name="theme-color" content="#0b0b0a">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Vibe-Coded Website Portfolio | Carl Madelo">
+<meta property="og:description" content="Custom websites built skillfully with AI using Claude Code and finished by hand. Watch six full website walkthroughs.">
+<meta property="og:url" content="https://cportfolio2.vercel.app/vibe-websites.html">
+<meta property="og:site_name" content="Carl Madelo">
+<meta property="og:image" content="https://cportfolio2.vercel.app/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Vibe-Coded Website Portfolio | Carl Madelo">
+<meta name="twitter:description" content="Custom websites built skillfully with AI using Claude Code and finished by hand. Watch six full website walkthroughs.">
+<meta name="twitter:image" content="https://cportfolio2.vercel.app/og-image.jpg">
+<link rel="icon" href="favicon.png" type="image/png" sizes="64x64">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preload" href="fonts/fraunces-latin-opsz-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="site.css">
+</head>
+<body data-page="work">
+
+<a href="#main" class="skip-link">Skip to content</a>
+
+<div class="progress-bar" id="progressBar" aria-hidden="true"></div>
+
+<header id="siteHeader">
+  <nav class="navbar" aria-label="Primary">
+    <a href="/" class="brand">
+      <img class="brand-logo" src="logo.webp" alt="" width="216" height="159" aria-hidden="true" decoding="async">
+      <span class="logo">Carl Madelo</span>
+    </a>
+    <div class="nav-links" id="navLinks">
+      <span class="nav-liquid" id="navLiquid" aria-hidden="true"></span>
+      <a href="index.html#home" data-section="home"><span class="mi-idx">01</span>Home</a>
+      <a href="index.html#about" data-section="about"><span class="mi-idx">02</span>About</a>
+      <a href="index.html#services" data-section="services"><span class="mi-idx">03</span>Services</a>
+      <div class="nav-drop">
+        <a href="index.html#work" data-section="work" data-also="vibe-coding vibe-builds"><span class="mi-idx">04</span>Work<svg class="nav-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></a>
+        <div class="nav-sub">
+          <a href="duda-websites.html"><span class="ns-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M9 9v11"/></svg></span><span class="ns-txt"><b>Duda websites</b><small>Case studies &amp; live client sites</small></span></a>
+          <a href="vibe-websites.html"><span class="ns-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 8-4 4 4 4M16 8l4 4-4 4M13.5 5l-3 14"/></svg></span><span class="ns-txt"><b>Vibe websites</b><small>Built skillfully with AI, finished by hand</small></span></a>
+        </div>
+      </div>
+      <a href="index.html#how" data-section="how"><span class="mi-idx">05</span>Process</a>
+    </div>
+    <div class="nav-right">
+      <a href="#contact" class="btn nav-cta">Start a Project <span class="arrow">→</span></a>
+      <button class="burger" id="burger" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobileMenu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <div class="mm-main">
+      <div class="mm-top">
+        <span class="mm-eyebrow">Menu</span>
+        <button class="mm-back" id="mmBack" type="button" aria-label="Close menu">
+          <span class="mm-back-arrow" aria-hidden="true">&#8592;</span> Back
+        </button>
+      </div>
+      <nav class="mobile-links" aria-label="Mobile">
+        <a href="index.html#home"><span class="mi-idx">01</span>Home</a>
+        <a href="index.html#about"><span class="mi-idx">02</span>About</a>
+        <a href="index.html#services"><span class="mi-idx">03</span>Services</a>
+        <a href="index.html#work"><span class="mi-idx">04</span>Work</a>
+        <a href="duda-websites.html" class="mm-sub"><span class="mm-sub-mark" aria-hidden="true">&#8627;</span>Duda websites</a>
+        <a href="vibe-websites.html" class="mm-sub"><span class="mm-sub-mark" aria-hidden="true">&#8627;</span>Vibe websites</a>
+        <a href="index.html#how"><span class="mi-idx">05</span>Process</a>
+      </nav>
+    </div>
+    <div class="mm-footer">
+      <span class="mm-avail"><span class="dot"></span>Available for select projects</span>
+      <div class="mm-contact">
+        <span class="mm-label">Get in touch</span>
+        <a href="mailto:carlflorencemadelo@gmail.com" class="mm-email">carlflorencemadelo@gmail.com</a>
+      </div>
+      <a href="#contact" class="btn btn-solid mm-cta">Start a Project</a>
+      <div class="mm-social">
+        <a href="mailto:carlflorencemadelo@gmail.com" aria-label="Email Carl Madelo">&#9993;</a>
+        <a href="https://www.linkedin.com/in/carlmadelo/" target="_blank" rel="noopener" aria-label="Carl Madelo on LinkedIn">in</a>
+      </div>
+      <span class="mm-meta">&copy; 2026 Carl Madelo &middot; Duda Web Designer &amp; Developer</span>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <div class="page-top">
+    <div class="wrap pt-grid">
+      <div class="pt-left">
+        <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a><span class="sep" aria-hidden="true">/</span><a href="index.html#work">Work</a><span class="sep" aria-hidden="true">/</span><span aria-current="page">Vibe websites</span></nav>
+        <p class="pt-word" aria-hidden="true">Work<em>.</em><sup>14</sup></p>
+        <p class="pt-sub">Two ways I build websites: on Duda for teams who want to edit their own site, or custom-coded with Claude Code and finished by hand.</p>
+      </div>
+      <nav class="pt-index" aria-label="Work type">
+        <a href="duda-websites.html"><span class="pi-no">01</span><span class="pi-name">Duda websites</span><span class="pi-line" aria-hidden="true"></span><span class="pi-count">08</span><span class="pi-go" aria-hidden="true">&#8594;</span></a>
+        <a aria-current="page" href="vibe-websites.html"><span class="pi-no">02</span><span class="pi-name">Vibe websites</span><span class="pi-line" aria-hidden="true"></span><span class="pi-count">06</span><span class="pi-go" aria-hidden="true">&#8595;</span><span class="pi-here">You&#8217;re viewing this</span></a>
+      </nav>
+    </div>
+  </div>
+
+  <section class="vibe vx-sec" id="vibe-coding" aria-labelledby="vibeTitle">
+    <span class="vibe-ghost" aria-hidden="true">vibe</span>
+    <div class="wrap">
+      <div class="vibe-head">
+        <div class="reveal">
+          <p class="eyebrow light">Selected Work — Vibe Coding</p>
+          <h1 class="vibe-title" id="vibeTitle">Coded with AI.<em>Finished by hand.</em></h1>
+        </div>
+        <div class="vibe-intro reveal" style="transition-delay:.12s">
+          <p><b>Vibe coding</b> means directing AI to write a site&#8217;s code, then reviewing and polishing every page by hand. No page builder and no template, just custom code. Scroll through the builds below: each one plays a real screen recording of the finished site.</p>
+          <div class="vibe-facts">
+            <div><b>06</b><span>Websites</span></div>
+            <div><b>02:22</b><span>Total watch time</span></div>
+            <div><b>0</b><span>Templates used</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="vx-show is-paused" style="--vx-acc:#e5398f">
+        <div class="vx-media">
+          <div class="vx-window">
+            <div class="vx-bar"><span class="vx-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="vx-tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 8-4 4 4 4M16 8l4 4-4 4"/></svg><span class="vx-tab-name">clayton-phillips-jiu-jitsu</span><span class="vx-tab-ext">/index.html</span></span><span class="vx-live" aria-hidden="true"><i></i>Live build</span></div>
+            <button class="vx-screen" type="button" aria-label="Play or pause the walkthrough">
+              <video class="vx-video" muted playsinline preload="none" poster="clayton-phillips-jiu-jitsu.webp" aria-label="Clayton Phillips Jiu Jitsu website screen recording"></video>
+              <span class="vx-state" aria-hidden="true"><svg class="i-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg><svg class="i-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg></span>
+            </button>
+            <div class="vx-term" aria-hidden="true"><span class="vx-prompt">$</span><span class="vx-cmd">ship clayton-phillips-jiu-jitsu</span><span class="vx-caret"></span><span class="vx-time">0:00 / 0:35</span></div>
+            <span class="vx-progress" aria-hidden="true"><span class="vx-fill"></span></span>
+          </div>
+          <div class="vx-meta">
+            <span class="vx-count" aria-hidden="true"><b>01</b> / 06</span>
+            <nav class="vx-segs" aria-label="Jump to a website"><button class="vx-seg" type="button" style="--acc:#e5398f" aria-label="Play website 01: Clayton Phillips Jiu Jitsu"></button><button class="vx-seg" type="button" style="--acc:#b0825f" aria-label="Play website 02: Espiritu Jiu-Jitsu"></button><button class="vx-seg" type="button" style="--acc:#e8622a" aria-label="Play website 03: Sentry Jiu-Jitsu"></button><button class="vx-seg" type="button" style="--acc:#8a4fae" aria-label="Play website 04: Palm Yoga"></button><button class="vx-seg" type="button" style="--acc:#d8b13c" aria-label="Play website 05: True Believer Jiu-Jitsu"></button><button class="vx-seg" type="button" style="--acc:#3cc3c9" aria-label="Play website 06: Phenom BJJ"></button></nav>
+          </div>
+        </div>
+        <ol class="vx-list">
+          <li class="vx-item" style="--acc:#e5398f" data-name="Clayton Phillips Jiu Jitsu" data-slug="clayton-phillips-jiu-jitsu" data-dur="34.97" data-src="clayton-phillips-jiu-jitsu.mp4" data-poster="clayton-phillips-jiu-jitsu.webp">
+            <span class="vx-thumb" aria-hidden="true"><span class="vx-mbar"><i></i><i></i><i></i><span>clayton-phillips-jiu-jitsu</span></span><video muted playsinline loop preload="none" poster="clayton-phillips-jiu-jitsu.webp" data-src="clayton-phillips-jiu-jitsu.mp4"></video></span>
+            <div class="vx-card">
+              <div class="vx-head"><span class="vx-num" aria-hidden="true">01</span><span class="vx-type">Jiu Jitsu</span></div>
+              <h2 class="vx-title">Clayton Phillips Jiu Jitsu</h2>
+              <p class="vx-loc"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>Norfolk, VA</p>
+              <div class="vx-foot"><span class="vx-dur"><span class="vibe-eq" aria-hidden="true"><i></i><i></i><i></i></span>0:35 walkthrough</span></div>
+            </div>
+          </li>
+          <li class="vx-item" style="--acc:#b0825f" data-name="Espiritu Jiu-Jitsu" data-slug="espiritu-jiu-jitsu" data-dur="21.42" data-src="espiritu-jiu-jitsu.mp4" data-poster="espiritu-jiu-jitsu.webp">
+            <span class="vx-thumb" aria-hidden="true"><span class="vx-mbar"><i></i><i></i><i></i><span>espiritu-jiu-jitsu</span></span><video muted playsinline loop preload="none" poster="espiritu-jiu-jitsu.webp" data-src="espiritu-jiu-jitsu.mp4"></video></span>
+            <div class="vx-card">
+              <div class="vx-head"><span class="vx-num" aria-hidden="true">02</span><span class="vx-type">Brazilian Jiu-Jitsu</span></div>
+              <h2 class="vx-title">Espiritu Jiu-Jitsu</h2>
+              <p class="vx-loc"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>Oxnard, CA</p>
+              <div class="vx-foot"><span class="vx-dur"><span class="vibe-eq" aria-hidden="true"><i></i><i></i><i></i></span>0:21 walkthrough</span></div>
+            </div>
+          </li>
+          <li class="vx-item" style="--acc:#e8622a" data-name="Sentry Jiu-Jitsu" data-slug="sentry-jiu-jitsu" data-dur="21.22" data-src="sentry-jiu-jitsu.mp4" data-poster="sentry-jiu-jitsu.webp">
+            <span class="vx-thumb" aria-hidden="true"><span class="vx-mbar"><i></i><i></i><i></i><span>sentry-jiu-jitsu</span></span><video muted playsinline loop preload="none" poster="sentry-jiu-jitsu.webp" data-src="sentry-jiu-jitsu.mp4"></video></span>
+            <div class="vx-card">
+              <div class="vx-head"><span class="vx-num" aria-hidden="true">03</span><span class="vx-type">Brazilian Jiu-Jitsu</span></div>
+              <h2 class="vx-title">Sentry Jiu-Jitsu</h2>
+              <p class="vx-loc"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>Gilbertsville, PA</p>
+              <div class="vx-foot"><span class="vx-dur"><span class="vibe-eq" aria-hidden="true"><i></i><i></i><i></i></span>0:21 walkthrough</span></div>
+            </div>
+          </li>
+          <li class="vx-item" style="--acc:#8a4fae" data-name="Palm Yoga" data-slug="palm-yoga" data-dur="25.76" data-src="palm-yoga.mp4" data-poster="palm-yoga.webp">
+            <span class="vx-thumb" aria-hidden="true"><span class="vx-mbar"><i></i><i></i><i></i><span>palm-yoga</span></span><video muted playsinline loop preload="none" poster="palm-yoga.webp" data-src="palm-yoga.mp4"></video></span>
+            <div class="vx-card">
+              <div class="vx-head"><span class="vx-num" aria-hidden="true">04</span><span class="vx-type">Yoga Studio</span></div>
+              <h2 class="vx-title">Palm Yoga</h2>
+              <p class="vx-loc"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>Carrollwood, Tampa, FL</p>
+              <div class="vx-foot"><span class="vx-dur"><span class="vibe-eq" aria-hidden="true"><i></i><i></i><i></i></span>0:26 walkthrough</span></div>
+            </div>
+          </li>
+          <li class="vx-item" style="--acc:#d8b13c" data-name="True Believer Jiu-Jitsu" data-slug="true-believer-jiu-jitsu" data-dur="17.3" data-src="true-believer-jiu-jitsu.mp4" data-poster="true-believer-jiu-jitsu.webp">
+            <span class="vx-thumb" aria-hidden="true"><span class="vx-mbar"><i></i><i></i><i></i><span>true-believer-jiu-jitsu</span></span><video muted playsinline loop preload="none" poster="true-believer-jiu-jitsu.webp" data-src="true-believer-jiu-jitsu.mp4"></video></span>
+            <div class="vx-card">
+              <div class="vx-head"><span class="vx-num" aria-hidden="true">05</span><span class="vx-type">Brazilian Jiu-Jitsu</span></div>
+              <h2 class="vx-title">True Believer Jiu-Jitsu</h2>
+              <p class="vx-loc"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>Pittsburgh, PA</p>
+              <div class="vx-foot"><span class="vx-dur"><span class="vibe-eq" aria-hidden="true"><i></i><i></i><i></i></span>0:17 walkthrough</span><a class="vx-visit" href="https://truebelieverjiujitsu.com/" target="_blank" rel="noopener">Visit site<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg><span class="sr-only"> of True Believer Jiu-Jitsu (opens in a new tab)</span></a></div>
+            </div>
+          </li>
+          <li class="vx-item" style="--acc:#3cc3c9" data-name="Phenom BJJ" data-slug="phenom-bjj" data-dur="21.63" data-src="phenom-bjj.mp4" data-poster="phenom-bjj.webp">
+            <span class="vx-thumb" aria-hidden="true"><span class="vx-mbar"><i></i><i></i><i></i><span>phenom-bjj</span></span><video muted playsinline loop preload="none" poster="phenom-bjj.webp" data-src="phenom-bjj.mp4"></video></span>
+            <div class="vx-card">
+              <div class="vx-head"><span class="vx-num" aria-hidden="true">06</span><span class="vx-type">Brazilian Jiu-Jitsu</span></div>
+              <h2 class="vx-title">Phenom BJJ</h2>
+              <p class="vx-loc"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>Irvine, CA</p>
+              <div class="vx-foot"><span class="vx-dur"><span class="vibe-eq" aria-hidden="true"><i></i><i></i><i></i></span>0:22 walkthrough</span><a class="vx-visit" href="https://www.phenomjiujitsu.com/" target="_blank" rel="noopener">Visit site<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg><span class="sr-only"> of Phenom BJJ (opens in a new tab)</span></a></div>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="page-next">
+    <div class="wrap">
+      <a class="next-card reveal" href="duda-websites.html">
+        <span><span class="eyebrow light">Next</span><span class="next-title">Duda websites, <em>built to convert.</em></span><span class="next-sub">Eight live client websites on Duda, from custom home builders to roofing, recovery and fitness.</span></span>
+        <span class="next-arrow" aria-hidden="true">&#8594;</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="cta" id="contact">
+    <div class="wrap cta-grid">
+      <div class="reveal">
+        <p class="eyebrow light"><span class="badge-avail" style="position:static; display:inline-flex;"><span class="dot"></span>Available for select projects</span></p>
+        <h2>Hire a Duda designer<br><em>who ships.</em></h2>
+        <p class="lede">One project at a time. Selective by design. Email <a href="mailto:carlflorencemadelo@gmail.com" style="color:var(--sage-light); text-decoration:underline; text-underline-offset:4px;">carlflorencemadelo@gmail.com</a> with your brief and I'll come back with scope, timeline and a fixed price.</p>
+        <div class="cta-actions">
+          <a href="mailto:carlflorencemadelo@gmail.com?subject=Duda%20project%20enquiry" class="btn btn-solid">Start the Conversation</a>
+          <a href="index.html#work" class="btn-ghost">View My Work</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img class="f-mark" src="logo.webp" alt="" width="216" height="159" loading="lazy" decoding="async">
+        <span class="f-logo">Carl Madelo</span>
+        <p>Conversion-focused Duda websites and custom AI-assisted web development that elevate your brand and turn attention into real business. Selective by design — one project at a time.</p>
+        <span class="footer-avail"><span class="dot"></span> Available for select projects</span>
+      </div>
+      <nav class="footer-col" aria-label="Explore">
+        <h2>Explore</h2>
+        <ul>
+          <li><a href="index.html#home">Home</a></li>
+          <li><a href="index.html#work">Work</a></li>
+          <li><a href="index.html#about">About</a></li>
+          <li><a href="index.html#services">Services</a></li>
+          <li><a href="index.html#how">Process</a></li>
+        </ul>
+      </nav>
+      <nav class="footer-col" aria-label="Guides">
+        <h2>Guides</h2>
+        <ul>
+          <li><a href="/duda-vs/">Duda vs other platforms</a></li>
+          <li><a href="/migrate-to-duda/">Migrating to Duda</a></li>
+          <li><a href="/duda-web-design/">Duda by industry</a></li>
+          <li><a href="index.html#faq">FAQ</a></li>
+        </ul>
+      </nav>
+      <nav class="footer-col" aria-label="Connect">
+        <h2>Connect</h2>
+        <ul>
+          <li><a href="mailto:carlflorencemadelo@gmail.com">Email</a></li>
+          <li><a href="https://www.linkedin.com/in/carlmadelo/" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li><a href="#contact">Start a Project</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Carl Madelo &middot; Duda Web Designer &amp; Developer</span>
+      <div class="socials">
+        <a href="mailto:carlflorencemadelo@gmail.com" aria-label="Email Carl Madelo">&#9993;</a>
+        <a href="https://www.linkedin.com/in/carlmadelo/" target="_blank" rel="noopener" aria-label="Carl Madelo on LinkedIn">in</a>
+      </div>
+      <a href="index.html#home" class="to-top">Back to top &#8593;</a>
+    </div>
+  </div>
+  <span class="footer-ghost" aria-hidden="true">Carl Madelo</span>
+</footer>
+
+<script src="site.js"></script>
+</body>
+</html>
